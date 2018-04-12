@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/absoluteLayoutRecipes">
+    <ListView
+        p1:layout_height="485dp"
+        p1:layout_width="match_parent"
+        p1:id="@+id/listViewRecipes" />
+    <Button
+        p1:text="@string/btn_newRecipe_recipes"
+        p1:id="@+id/btnNewRecipe"
+        p1:layout_height="50dp"
+        p1:layout_width="150dp"
+        p1:layout_x="112dp"
+        p1:layout_y="495dp" />
+</AbsoluteLayout>

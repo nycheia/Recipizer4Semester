@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Recipizer</string>
+  <string name="btn_recipeNav_main">Recipes</string>
+  <string name="btn_mealPlanNav_main">Meal Plans</string>
+  <string name="btn_shopListNav_main">Shopping List</string>
+  <string name="btn_settingsNav_main">Settings</string>
+  <string name="btn_newRecipe_recipes">New Recipe</string>
+  <string name="btn_edit">Edit</string>
+  <string name="btn_save">Save</string>
+  <string name="btn_create">Create</string>
+  <string name="btn_add">Add</string>
+  <string name="btn_clear">Clear</string>
 </resources>

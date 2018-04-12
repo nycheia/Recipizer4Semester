@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:id="@+id/listViewShoppingList" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutShopList">
+        <Button
+            android:text="@string/btn_add"
+            android:id="@+id/btnAddShopIngredient"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5" />
+        <Button
+            android:text="@string/btn_clear"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btnClearShopList"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="45dp" />
+    </LinearLayout>
+</LinearLayout>
