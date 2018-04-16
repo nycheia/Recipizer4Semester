@@ -7,7 +7,7 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="410dp"
         android:id="@+id/expandableListMealPlan" />
     <LinearLayout
         android:orientation="horizontal"

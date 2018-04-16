@@ -10,7 +10,7 @@
         android:id="@+id/btnRecipeNav"
         android:layout_height="100dp"
         android:layout_width="100dp"
-        android:layout_x="75dp"
+        android:layout_x="60dp"
         android:layout_y="125dp" />
     <Button
         android:id="@+id/btnMealPlanNav"
@@ -25,7 +25,7 @@
         android:height="30dp"
         android:layout_height="100dp"
         android:layout_width="100dp"
-        android:layout_x="75dp"
+        android:layout_x="60dp"
         android:layout_y="250dp" />
     <Button
         android:text="@string/btn_settingsNav_main"
@@ -33,5 +33,6 @@
         android:layout_width="100dp"
         android:layout_x="200dp"
         android:layout_y="250dp"
-        android:id="@+id/btnSettingsNav" />
+        android:id="@+id/btnSettingsNav"
+        android:enabled="false" />
 </AbsoluteLayout>

@@ -7,7 +7,7 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="410dp"
         android:id="@+id/listViewShoppingList" />
     <LinearLayout
         android:orientation="horizontal"
@@ -21,7 +21,7 @@
             android:id="@+id/btnAddShopIngredient"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5" />
+            android:layout_marginLeft="5dp" />
         <Button
             android:text="@string/btn_clear"
             android:layout_width="150dp"
