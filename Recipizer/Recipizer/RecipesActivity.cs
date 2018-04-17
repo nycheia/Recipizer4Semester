@@ -21,6 +21,16 @@ namespace Recipizer
 
             SetContentView(Resource.Layout.Recipes);
             // Create your application here
+
+            //Initialize UI components
+            Button btnNewRecipe = FindViewById<Button>(Resource.Id.btnNewRecipe);
+
+            //UI interaction
+            btnNewRecipe.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(CreateRecipeActivity));
+                StartActivity(intent);
+            };
         }
     }
 }

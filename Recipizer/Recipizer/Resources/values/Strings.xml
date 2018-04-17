@@ -11,4 +11,15 @@
   <string name="btn_create">Create</string>
   <string name="btn_add">Add</string>
   <string name="btn_clear">Clear</string>
+
+  <string-array name ="unit_array">
+    <item>g</item>
+    <item>kg</item>
+    <item>l</item>
+    <item>dl</item>
+    <item>ml</item>
+    <item>teaspoon</item>
+    <item>tablespoon</item>
+    <item>cup</item>
+  </string-array>
 </resources>

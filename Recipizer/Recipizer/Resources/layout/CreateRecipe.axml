@@ -3,40 +3,40 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextIngredientName"
+        android:hint="Insert ingredient name"
+        android:editable="true" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:id="@+id/linearLayoutIngredient">
-        <TextView
-            android:id="@+id/textIngredientName"
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:hint="Ingredient Name"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp" />
-        <TextView
-            android:id="@+id/textIngredientAmount"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:hint="Amount"
-            android:layout_marginLeft="20dp"
-            android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/editTextIngredientAmount"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:editable="true"
+            android:hint="Amount" />
         <Spinner
             android:id="@+id/spinnerUnits"
-            android:layout_width="75dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp" />
         <Button
             android:text="+"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/btnAddIngredient"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
     <ListView
         android:minWidth="25px"
@@ -49,11 +49,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnEditList"
         android:hint="Kunne slette i listen" />
-    <TextView
+    <EditText
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/textRecipeDescription"
-        android:hint="Recipe Description" />
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextRecipeDescription"
+        android:editable="true" />
     <Button
         android:text="@string/btn_create"
         android:layout_width="150dp"

@@ -15,10 +15,13 @@ namespace Recipizer
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
+            //Initialize UI Components
             Button btnRecipeNav = FindViewById<Button>(Resource.Id.btnRecipeNav);
             Button btnMealPlanNav = FindViewById<Button>(Resource.Id.btnMealPlanNav);
             Button btnShopListNav = FindViewById<Button>(Resource.Id.btnShopListNav);
 
+
+            //UI interaction
             btnRecipeNav.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(RecipesActivity));
