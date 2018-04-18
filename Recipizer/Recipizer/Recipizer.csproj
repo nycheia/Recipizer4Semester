@@ -57,6 +57,11 @@
     <Compile Include="CreateRecipeActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MealPlanActivity.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\MealDay.cs" />
+    <Compile Include="Models\MealPlan.cs" />
+    <Compile Include="Models\Recipe.cs" />
+    <Compile Include="Models\ShoppingList.cs" />
     <Compile Include="RecipesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
