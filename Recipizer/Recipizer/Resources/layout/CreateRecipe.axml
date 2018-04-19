@@ -1,65 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextIngredientName"
-        android:hint="Insert ingredient name"
-        android:editable="true" />
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollViewCreateRecipe">
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:id="@+id/linearLayoutIngredient">
+        android:layout_height="match_parent">
         <EditText
-            android:id="@+id/editTextIngredientAmount"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextIngredientName"
+            android:hint="Insert ingredient name"
             android:editable="true"
-            android:hint="Amount" />
-        <Spinner
-            android:id="@+id/spinnerUnits"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp" />
+            android:maxLength="50"
+            android:inputType="textAutoCorrect" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:id="@+id/linearLayoutIngredient">
+            <EditText
+                android:id="@+id/editTextIngredientAmount"
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="15dp"
+                android:editable="true"
+                android:hint="Amount"
+                android:inputType="numberDecimal"
+                android:maxLength="6" />
+            <Spinner
+                android:id="@+id/spinnerUnits"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp" />
+            <Button
+                android:text="+"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/btnAddIngredient"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
+    <!--
+      <ScrollView
+            android:minWidth="150dp"
+            android:minHeight="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/scrollViewIngredients"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">-->
+        <ListView
+            android:minWidth="150dp"
+            android:minHeight="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/listIngredients" />
+    <!-- </ScrollView>-->
         <Button
-            android:text="+"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/btnAddIngredient"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnEditList"
+            android:hint="Kunne slette i listen" />
+        <ScrollView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollViewRecipeDescription">
+            <EditText
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextRecipeDescription"
+                android:editable="true"
+                android:maxHeight="150dp"
+                android:minHeight="100dp"
+                android:hint="Fill out the recipe description here"
+                android:maxLength="1200" />
+        </ScrollView>
+        <Button
+            android:text="@string/btn_create"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:id="@+id/btnCreateRecipe"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="110dp" />
     </LinearLayout>
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/listIngredients" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnEditList"
-        android:hint="Kunne slette i listen" />
-    <EditText
-        android:inputType="textMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextRecipeDescription"
-        android:editable="true" />
-    <Button
-        android:text="@string/btn_create"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:id="@+id/btnCreateRecipe"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="110dp" />
-</LinearLayout>
+</ScrollView>
