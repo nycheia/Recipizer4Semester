@@ -34,7 +34,7 @@ namespace Recipizer
             Spinner spinnerUnits = FindViewById<Spinner>(Resource.Id.spinnerUnits);
             Button btnAddIngredient = FindViewById<Button>(Resource.Id.btnAddIngredient);
             ListView listIngredients = FindViewById<ListView>(Resource.Id.listIngredients);
-            listIngredients.SetBackgroundColor(Color.CadetBlue);
+            //listIngredients.SetBackgroundColor(Color.CadetBlue);
 
             //Initialize lists
             ingredients = new List<Ingredient>();
@@ -54,7 +54,7 @@ namespace Recipizer
                 Ingredient ingredient = new Ingredient(editTextIngredientName.Text, editTextIngredientAmount.Text, 
                     Ingredient.StringToUnit((String)spinnerUnits.GetItemAtPosition(spinnerUnits.SelectedItemPosition)));
                 ingredients.Add(ingredient);
-                ingredientAdapter.Add(ingredient.name);
+                //ingredientAdapter.Add(ingredient.name);
                 //adapter.Add(ingredient.name);
                 //var ingredientAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, ingredients);
                 ingredientAdapter.NotifyDataSetChanged();

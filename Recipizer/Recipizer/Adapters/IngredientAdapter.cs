@@ -14,31 +14,31 @@ using Recipizer.Models;
 
 namespace Recipizer.Adapters
 {
-    public class IngredientAdapter : ArrayAdapter
+    public class IngredientAdapter : BaseAdapter<Ingredient>
     {
         Activity context;
         List<Ingredient> ingredients;
 
         public IngredientAdapter(Activity context, List<Ingredient> ingredients) 
-            : base(context, 0, ingredients)
+            : base()
         {
             this.context = context;
             this.ingredients = ingredients;
         }
-        /*public override int Count
+        public override int Count
         {
-            get { return ingredients. }
-        }*/
+            get { return ingredients.Count; }
+        }
 
-        /*public override Java.Lang.Object GetItem(int position)
+        public override Ingredient this[int position]
         {
-            return null;
-        }*/
+            get { return ingredients[position]; }
+        }
 
-        /*public override long GetItemId(int position)
+        public override long GetItemId(int position)
         {
             return position;
-        }*/
+        }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
@@ -48,19 +48,22 @@ namespace Recipizer.Adapters
             {
                 view = this.context.LayoutInflater.Inflate(Resource.Layout.item_ingredient, parent, false);
             }
-            Ingredient ingredient = GetItem(position);
+            //Ingredient ingredient = GetItem(position);
 
-            TextView ingName = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName);
-            TextView ingAmount = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount);
+            /*TextView ingName = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName);
+            TextView ingAmount = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount);*/
 
+            view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName).Text = ingredients[position].name;
+            view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount).Text 
+                = ingredients[position].amount + " " + ingredients[position].measuringUnit;
 
-            ingName.Text = ingredient.name;
+            /*ingName.Text = ingredient.name;
             ingAmount.Text = ingredient.amount + " " + ingredient.measuringUnit;
 
             if (ingredient.measuringUnit == Ingredient.Unit.non)
             {
                 ingAmount.Text = ingredient.amount + " ";
-            }
+            }*/
             return view;
         }
     }
