@@ -57,6 +57,17 @@ namespace Recipizer.Adapters
             view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount).Text 
                 = ingredients[position].amount + " " + ingredients[position].measuringUnit;
 
+            void removeListItemsClickEvent(object sender, EventArgs e)
+            {
+                //ingredients.RemoveAt(position);
+                ingredients.Remove(ingredients[position]);
+                NotifyDataSetChanged();
+            };
+
+            Button btnIngredientAdapterDelete = view.FindViewById<Button>(Resource.Id.btnIngredientAdapterDelete);
+            btnIngredientAdapterDelete.Click -= removeListItemsClickEvent;
+            btnIngredientAdapterDelete.Click += removeListItemsClickEvent;
+            
             /*ingName.Text = ingredient.name;
             ingAmount.Text = ingredient.amount + " " + ingredient.measuringUnit;
 
@@ -65,6 +76,9 @@ namespace Recipizer.Adapters
                 ingAmount.Text = ingredient.amount + " ";
             }*/
             return view;
+
+            
         }
+
     }
 }

@@ -15,7 +15,7 @@ using Recipizer.Models;
 
 namespace Recipizer
 {
-    [Activity(Label = "CreateRecipeActivity")]
+    [Activity(Label = "Recipes")]
     public class CreateRecipeActivity : Activity
     {
         List<Ingredient> ingredients;
@@ -63,6 +63,16 @@ namespace Recipizer
                 editTextIngredientAmount.Text = "";
                 spinnerUnits.SetSelection(0);
             };
+
+            ingredients.Add(new Ingredient("Peber", "5", Ingredient.Unit.cup));
+            ingredients.Add(new Ingredient("Salt", "10", Ingredient.Unit.kg));
+            ingredients.Add(new Ingredient("Estragon", "20", Ingredient.Unit.tbsp));
+            ingredients.Add(new Ingredient("Peber1", "5", Ingredient.Unit.cup));
+            ingredients.Add(new Ingredient("Salt1", "10", Ingredient.Unit.kg));
+            ingredients.Add(new Ingredient("Estragon1", "20", Ingredient.Unit.tbsp));
+            ingredients.Add(new Ingredient("Peber2", "5", Ingredient.Unit.cup));
+            ingredients.Add(new Ingredient("Salt2", "10", Ingredient.Unit.kg));
+            ingredients.Add(new Ingredient("Estragon2", "20", Ingredient.Unit.tbsp));
         }
 
         private void spinnerUnits_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)

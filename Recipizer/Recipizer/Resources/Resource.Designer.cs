@@ -78,14 +78,14 @@ namespace Recipizer
 			// aapt resource value: 0x7f06001b
 			public const int btnClearShopList = 2131099675;
 			
-			// aapt resource value: 0x7f06000a
-			public const int btnCreateRecipe = 2131099658;
-			
-			// aapt resource value: 0x7f060007
-			public const int btnEditList = 2131099655;
+			// aapt resource value: 0x7f060009
+			public const int btnCreateRecipe = 2131099657;
 			
 			// aapt resource value: 0x7f060020
 			public const int btnEditRecipe = 2131099680;
+			
+			// aapt resource value: 0x7f06000c
+			public const int btnIngredientAdapterDelete = 2131099660;
 			
 			// aapt resource value: 0x7f06000f
 			public const int btnMealPlanNav = 2131099663;
@@ -111,17 +111,17 @@ namespace Recipizer
 			// aapt resource value: 0x7f060001
 			public const int editTextIngredientName = 2131099649;
 			
-			// aapt resource value: 0x7f060009
-			public const int editTextRecipeDescription = 2131099657;
+			// aapt resource value: 0x7f060008
+			public const int editTextRecipeDescription = 2131099656;
 			
 			// aapt resource value: 0x7f060012
 			public const int expandableListMealPlan = 2131099666;
 			
-			// aapt resource value: 0x7f06000c
-			public const int ingAdapterTextViewIngAmount = 2131099660;
-			
 			// aapt resource value: 0x7f06000b
-			public const int ingAdapterTextViewIngName = 2131099659;
+			public const int ingAdapterTextViewIngAmount = 2131099659;
+			
+			// aapt resource value: 0x7f06000a
+			public const int ingAdapterTextViewIngName = 2131099658;
 			
 			// aapt resource value: 0x7f060002
 			public const int linearLayoutIngredient = 2131099650;
@@ -150,8 +150,8 @@ namespace Recipizer
 			// aapt resource value: 0x7f060000
 			public const int scrollViewCreateRecipe = 2131099648;
 			
-			// aapt resource value: 0x7f060008
-			public const int scrollViewRecipeDescription = 2131099656;
+			// aapt resource value: 0x7f060007
+			public const int scrollViewRecipeDescription = 2131099655;
 			
 			// aapt resource value: 0x7f060004
 			public const int spinnerUnits = 2131099652;

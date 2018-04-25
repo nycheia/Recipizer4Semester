@@ -57,18 +57,14 @@
             android:id="@+id/scrollViewIngredients"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">-->
+    <!-- </ScrollView>-->
         <ListView
             android:minWidth="150dp"
             android:minHeight="150dp"
+            android:id="@+id/listIngredients"
+            android:focusable="true"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/listIngredients" />
-    <!-- </ScrollView>-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnEditList"
-            android:hint="Kunne slette i listen" />
+            android:layout_height="150dp" />
         <ScrollView
             android:minWidth="25px"
             android:minHeight="25px"
