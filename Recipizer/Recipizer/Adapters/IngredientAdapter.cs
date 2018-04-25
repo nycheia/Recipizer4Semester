@@ -54,7 +54,7 @@ namespace Recipizer.Adapters
             TextView ingAmount = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount);*/
 
             view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName).Text = ingredients[position].name;
-            view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmuount).Text 
+            view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount).Text 
                 = ingredients[position].amount + " " + ingredients[position].measuringUnit;
 
             void removeListItemsClickEvent(object sender, EventArgs e)
