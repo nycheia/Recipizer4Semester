@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using SQLite;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -16,6 +16,7 @@ namespace Recipizer.Models
     {
         public List<String> meals { get; set; }
         public List<Recipe> recipes { get; set; }
+        [NotNull]
         public String note { get; set; }
         public int dayID { get; set; }
     }

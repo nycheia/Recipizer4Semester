@@ -15,7 +15,6 @@ namespace Recipizer.Models
     public class ShoppingList
     {
         public List<Ingredient> ingredients;
-
         public ShoppingList()
         {
 

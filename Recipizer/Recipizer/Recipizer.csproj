@@ -17,7 +17,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Adapters\IngredientAdapter.cs" />
     <Compile Include="CreateRecipeActivity.cs" />
+    <Compile Include="DataAccess\DataAccess.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MealPlanActivity.cs" />
     <Compile Include="Models\Ingredient.cs" />
