@@ -10,13 +10,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Recipizer.Models
+namespace Recipizer.Activities
 {
-    public class MealDay
+    public interface IRecipizerView
     {
-        public List<string> meals { get; set; }
-        public List<Recipe> recipes { get; set; }
-        public string note { get; set; }
-        public int dayID { get; set; }
+        void UpdateView();
+        void FinishView(Result result);
+        void Maketoast(string text, ToastLength length);
     }
 }

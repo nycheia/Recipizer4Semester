@@ -17,9 +17,9 @@ namespace Recipizer.Models
         //public List<Days> days;
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
-        public String note { get; set; }
-        public Boolean active { get; set; }
-        public String name { get; set; }
+        public string note { get; set; }
+        public bool active { get; set; }
+        public string name { get; set; }
 
         public MealPlan()
         {

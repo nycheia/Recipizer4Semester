@@ -8,11 +8,28 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextIngredientName"
+            android:id="@+id/editTextRecipeName_CreateRecipe"
+            android:hint="Insert recipe name"
+            android:singleLine="true" />
+        <ListView
+            android:minWidth="20dp"
+            android:maxHeight="180dp"
+            android:minHeight="100dp"
+            android:id="@+id/listIngredients_CreateRecipe"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginRight="0.0dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextIngredientName_CreateRecipe"
             android:hint="Insert ingredient name"
             android:editable="true"
             android:maxLength="50"
@@ -23,7 +40,7 @@
             android:layout_height="75dp"
             android:id="@+id/linearLayoutIngredient">
             <EditText
-                android:id="@+id/editTextIngredientAmount"
+                android:id="@+id/editTextIngredientAmount_CreateRecipe"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
@@ -33,7 +50,7 @@
                 android:inputType="numberDecimal"
                 android:maxLength="6" />
             <Spinner
-                android:id="@+id/spinnerUnits"
+                android:id="@+id/spinnerUnits_CreateRecipe"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
@@ -43,28 +60,11 @@
                 android:text="+"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/btnAddIngredient"
+                android:id="@+id/btnAddIngredient_CreateRecipe"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp" />
         </LinearLayout>
-    <!--
-      <ScrollView
-            android:minWidth="150dp"
-            android:minHeight="150dp"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/scrollViewIngredients"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">-->
-    <!-- </ScrollView>-->
-        <ListView
-            android:minWidth="150dp"
-            android:minHeight="150dp"
-            android:id="@+id/listIngredients"
-            android:focusable="true"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
         <ScrollView
             android:minWidth="25px"
             android:minHeight="25px"
@@ -75,7 +75,7 @@
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTextRecipeDescription"
+                android:id="@+id/editTextRecipeDescription_CreateRecipe"
                 android:editable="true"
                 android:maxHeight="150dp"
                 android:minHeight="100dp"
@@ -86,7 +86,7 @@
             android:text="@string/btn_create"
             android:layout_width="150dp"
             android:layout_height="45dp"
-            android:id="@+id/btnCreateRecipe"
+            android:id="@+id/btnCreateRecipe_CreateRecipe"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="110dp" />
     </LinearLayout>

@@ -54,21 +54,26 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\IRecipizerView.cs" />
     <Compile Include="Adapters\IngredientAdapter.cs" />
-    <Compile Include="CreateRecipeActivity.cs" />
-    <Compile Include="MainActivity.cs" />
-    <Compile Include="MealPlanActivity.cs" />
+    <Compile Include="Activities\CreateRecipeActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\MealPlanActivity.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\MealDay.cs" />
     <Compile Include="Models\MealPlan.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\ShoppingList.cs" />
-    <Compile Include="RecipesActivity.cs" />
+    <Compile Include="Activities\RecipesActivity.cs" />
+    <Compile Include="Presenters\CreateRecipePresenter.cs" />
+    <Compile Include="Presenters\IPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShoppingListActivity.cs" />
+    <Compile Include="Activities\ShoppingListActivity.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="Temp\tempContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

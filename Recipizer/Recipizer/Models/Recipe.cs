@@ -9,22 +9,24 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Java.Util;
 
 namespace Recipizer.Models
 {
     public class Recipe
     {
-        public List<Ingredient> ingredients;
-        public String title { get; set; }
-        public String description { get; set; }
-        public String author { get; set; }
-        public Date dateCreated { get; set; }
-        public String note { get; set; }
+        public List<Ingredient> Ingredients;
+        public string Title { get; set; }
+        public string Description { get; set; }
+        //public String Author { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string Note { get; set; }
 
-        public Recipe()
+        public Recipe(List<Ingredient> _Ingredients, string _Title, string _Description, DateTime _DateCreated)
         {
-            
+            Ingredients = _Ingredients;
+            Title = _Title;
+            Description = _Description;
+            DateCreated = _DateCreated;
         }
     }
 }
