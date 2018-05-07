@@ -19,8 +19,6 @@ namespace Recipizer.Activities
     [Activity(Label = "Recipes")]
     public class CreateRecipeActivity : Activity, IRecipizerView
     {
-        List<Ingredient> ingredients;
-
         //UI components
         EditText editTextIngredientName;
         EditText editTextIngredientAmount;
@@ -32,8 +30,8 @@ namespace Recipizer.Activities
         //Adapters
         IngredientAdapter ingredientAdapter;
 
-        //Variable to connect to relevant presenter
-        CreateRecipePresenter Presenter;
+        //Variable to connect to presenter
+        CreateRecipePresenter presenter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -41,7 +39,7 @@ namespace Recipizer.Activities
             SetContentView(Resource.Layout.CreateRecipe);
 
             //Instantiate the presenter
-            Presenter = new CreateRecipePresenter(this);
+            presenter = new CreateRecipePresenter(this);
 
             //Get UI components for global use.
             editTextIngredientName =    FindViewById<EditText>(Resource.Id.editTextIngredientName_CreateRecipe);
@@ -53,40 +51,28 @@ namespace Recipizer.Activities
 
             //Get UI components for local use.
             Button btnAddIngredient = FindViewById<Button>(Resource.Id.btnAddIngredient_CreateRecipe);
-            Button btnCreateRecipe =  FindViewById<Button>(Resource.Id.btnCreateRecipe_CreateRecipe);
+            Button btnCreateRecipe = FindViewById<Button>(Resource.Id.btnCreateRecipe_CreateRecipe);
 
-            //Initialize lists
-            ingredients = new List<Ingredient>();
-
-            ingredientAdapter = new IngredientAdapter(this, ingredients);
-            listIngredients.Adapter = ingredientAdapter;
-
-            //Instantiate Button Events
-            btnAddIngredient.Click += (object sender, EventArgs e) => { btnAddIngredient_Click(sender, e); };
-            btnCreateRecipe.Click  += (object sender, EventArgs e) => { Presenter.CreateRecipe(ingredients, editTextRecipeName.Text, editTextRecipeDescription.Text); };
-
-            //Instantiate Spinner (Dropdown)
+            //Instantiate Spinner (Dropdown).
             var unitAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.unit_array, Android.Resource.Layout.SimpleSpinnerItem);
-            //unitAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerItem);
             spinnerUnits.Adapter = unitAdapter;
 
+            //Setup lists.
+            ingredientAdapter = new IngredientAdapter(this, presenter.ingredientsList);
+            listIngredients.Adapter = ingredientAdapter;
+
+            //Setup Button Events.
+            btnAddIngredient.Click += (object sender, EventArgs e) => {
+                presenter.AddIngredient(editTextIngredientName.Text, editTextIngredientAmount.Text, Ingredient.StringToUnit((string)spinnerUnits.SelectedItem));
+            };
+
+            btnCreateRecipe.Click += (object sender, EventArgs e) => {
+                presenter.CreateRecipe(presenter.ingredientsList, editTextRecipeName.Text, editTextRecipeDescription.Text);
+            };
+
+            //Call the presenters OnCreate Method.
+            presenter.onCreate();
         }
-
-        public void btnAddIngredient_Click(object sender, EventArgs e)
-        {
-            //Creates the ingredient from the relvant information
-            Ingredient.Unit unit = Ingredient.StringToUnit((string)spinnerUnits.SelectedItem);
-            Ingredient ingredient = new Ingredient(editTextIngredientName.Text, editTextIngredientAmount.Text, unit);
-
-            //Adds the ingredient to the list and updates the listview.
-            ingredients.Add(ingredient);
-            ingredientAdapter.NotifyDataSetChanged();
-
-            //Reset textfields and drop down list.
-            editTextIngredientName.Text = "";
-            editTextIngredientAmount.Text = "";
-            spinnerUnits.SetSelection(0);
-        }        
 
         public void FinishView(Result _result)
         {
@@ -99,8 +85,20 @@ namespace Recipizer.Activities
             Toast.MakeText(this, text, length);
         }
 
-        //Unused methods is placed here.
-        public void UpdateView() { }
+        public void UpdateView()
+        {
+
+            ingredientAdapter.NotifyDataSetChanged();
+        }
+
+        public void ResetText()
+        {
+            //Reset textfields and drop down list.
+            editTextIngredientName.Text = "";
+            editTextIngredientAmount.Text = "";
+            spinnerUnits.SetSelection(0);
+        }
+
         public void Navigate() { }
     }
 }

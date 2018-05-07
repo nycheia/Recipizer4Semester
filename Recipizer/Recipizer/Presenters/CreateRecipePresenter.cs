@@ -18,9 +18,13 @@ namespace Recipizer.Presenters
     {
         private IRecipizerView view;
 
+        public List<Ingredient> ingredientsList;
+
+
         public CreateRecipePresenter(IRecipizerView _view)
         {
             this.view = _view;
+            ingredientsList = new List<Ingredient>();
         }
 
         //Interface Methods
@@ -47,7 +51,15 @@ namespace Recipizer.Presenters
             view.MakeToast(r.Title + " created", Android.Widget.ToastLength.Short);
             view.FinishView(Android.App.Result.Ok);
             
-            //TODO Go back and maybe show the created recipe.
+            //TODO Go back and show the created recipe.
+        }
+
+        public void AddIngredient(string _Name, string _Amount, Ingredient.Unit _Unit)
+        {
+            Ingredient ing = new Ingredient(_Name, _Amount, _Unit);
+            ingredientsList.Add(ing);
+
+            view.UpdateView();
         }
 
 

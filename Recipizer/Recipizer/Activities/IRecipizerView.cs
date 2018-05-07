@@ -14,8 +14,14 @@ namespace Recipizer.Activities
 {
     public interface IRecipizerView
     {
+        //void SetupView();
+
         void UpdateView();
+
+        void ResetText();
+
         void FinishView(Result result);
+
         void MakeToast(string text, ToastLength length);
 
         void Navigate();
