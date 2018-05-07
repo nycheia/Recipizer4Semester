@@ -10,72 +10,89 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Recipizer.Models;
+using Recipizer.Presenters;
 using static Android.Widget.AdapterView;
 
 namespace Recipizer.Activities
 {
     [Activity(Label = "RecipesActivity")]
-    public class RecipesActivity : Activity
+    public class RecipesActivity : Activity, IRecipizerView
     {
-        ArrayAdapter<string> adpt;
+
+        //UI components
         ListView listViewRecipes;
+
+        //Adapters
+        ArrayAdapter<string> RecipeAdapter;
+
+        //Variable to connect to presenter
+        RecipesPresenter presenter;      
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.Recipes);
 
+            //Instantiate the presenter
+            presenter = new RecipesPresenter(this);
 
-
-            //Initialize UI components
-            Button btnNewRecipe = FindViewById<Button>(Resource.Id.btnNewRecipe);
+            //Get UI components for global use.
             listViewRecipes = FindViewById<ListView>(Resource.Id.listViewRecipes);
 
-            //Initialize List
-            //List<Recipe> ingredients = new List<Recipe>();
+            //Get UI components for local use.
+            Button btnNewRecipe = FindViewById<Button>(Resource.Id.btnNewRecipe);
 
-            //initialize adapters
-            adpt = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1);
-            listViewRecipes.Adapter = adpt;
+            //Setup lists.
+            RecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.RecipeList);
+            listViewRecipes.Adapter = RecipeAdapter;
 
-            //UI interaction
-            btnNewRecipe.Click += (sender, e) => { btnNewRecipe_Click(sender, e); }; ;
-            listViewRecipes.ItemClick += (sender, e) => { listViewRecipes_OnITemClick(sender, e); }; ;
+            //Setup Click Events.
+            btnNewRecipe.Click += (sender, e) => {
+                presenter.NewRecipe_Click();
+            };
+
+            listViewRecipes.ItemClick += (sender, e) => {
+                presenter.Recipes_OnItemClick(e.Position);
+            };
+
+            //Call the presenters OnCreate Method.
+            presenter.onCreate();
+
         }
 
         // OnResume is called whenever the user returns to the activity or when the activity is created.
         protected override void OnResume()
         {
             base.OnResume();
-
-            //get all recipes and add to list
-            adpt.Clear();
-            foreach (Recipe item in Temp.tempContainer.instance.RecipieContainer)
-            {
-                adpt.Add(item.Title);
-            }
-        }
-
-        public void listViewRecipes_OnITemClick(object sender, ItemClickEventArgs e)
-        {
-            Toast.MakeText(this, "Navigating to: " + adpt.GetItem(e.Position), ToastLength.Short).Show();
-        }
-
-        public void btnNewRecipe_Click(object sender, EventArgs e)
-        {
-            var intent = new Intent(this, typeof(CreateRecipeActivity));
-            StartActivityForResult(intent, Constants.CREATE_RECIPE);
+            presenter.onResume();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            if (requestCode == Constants.CREATE_RECIPE && resultCode == Result.Ok)
-            {
-                //TODO send the user to show recipe screen with the created recipe
-                Toast.MakeText(this, "Navigating to: Unknown", ToastLength.Short).Show();
-            }
+            presenter.onActivityResult(requestCode, resultCode, data);
+        }
+
+        public void UpdateView()
+        {
+            RecipeAdapter.NotifyDataSetChanged();
+        }
+
+        public void ResetText()
+        {
+            RecipeAdapter.Clear();
+        }
+
+        public void FinishView(Result result) { }
+
+        public void MakeToast(string text, ToastLength length)
+        {
+            Toast.MakeText(this, text, length).Show();
+        }
+
+        public void Navigate()
+        {
+
         }
     }
 }

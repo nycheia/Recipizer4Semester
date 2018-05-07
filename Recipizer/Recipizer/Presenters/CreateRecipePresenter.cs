@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Android.App;
+using Android.Content;
 
 /*using Android.App;
 using Android.Content;
@@ -27,18 +29,6 @@ namespace Recipizer.Presenters
             ingredientsList = new List<Ingredient>();
         }
 
-        //Interface Methods
-        public void onBackPressed() { }
-
-        public void onCreate() { }
-
-        public void onDestroy() { }
-
-        public void onPause() { }
-
-        public void onResume() { }
-
-        //Regular Methods
         public void CreateRecipe(ICollection<Ingredient> _Ingredients, string _Title, string _Description)
         {
             //TODO Validate inputs
@@ -62,7 +52,17 @@ namespace Recipizer.Presenters
             view.UpdateView();
         }
 
+        //Interface Methods
+        public void onBackPressed() { }
 
-        
+        public void onCreate() { }
+
+        public void onDestroy() { }
+
+        public void onPause() { }
+
+        public void onResume() { }
+
+        public void onActivityResult(int requestCode, Result resultCode, Intent data) { }
     }
 }

@@ -14,6 +14,7 @@ namespace Recipizer
 {
     public class Constants
     {
-        public static readonly int CREATE_RECIPE = 1;
+        public const int NEW_RECIPE = 1;
+        public const int SHOW_RECIPE = 2;
     }
 }

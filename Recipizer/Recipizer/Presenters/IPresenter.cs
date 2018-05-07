@@ -19,5 +19,6 @@ namespace Recipizer.Presenters
         void onResume();
         void onDestroy();
         void onBackPressed();
+        void onActivityResult(int requestCode, Result resultCode, Intent data);
     }
 }

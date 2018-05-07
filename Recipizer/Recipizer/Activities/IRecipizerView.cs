@@ -24,6 +24,7 @@ namespace Recipizer.Activities
 
         void MakeToast(string text, ToastLength length);
 
-        void Navigate();
+        //TODO need a better name than code.....
+        void Navigate(int code);
     }
 }
