@@ -10,13 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Recipizer.Models
+namespace Recipizer.Presenters
 {
-    public class MealDay
+    public interface IPresenter
     {
-        public List<string> meals { get; set; }
-        public List<Recipe> recipes { get; set; }
-        public string note { get; set; }
-        public int dayID { get; set; }
+        void onCreate();
+        void onPause();
+        void onResume();
+        void onDestroy();
+        void onBackPressed();
     }
 }

@@ -3,7 +3,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 
-namespace Recipizer
+namespace Recipizer.Activities
 {
     [Activity(Label = "Recipizer", MainLauncher = true)]
     public class MainActivity : Activity
