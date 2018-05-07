@@ -18,8 +18,8 @@
     <item>l</item>
     <item>dl</item>
     <item>ml</item>
-    <item>teaspoon</item>
-    <item>tablespoon</item>
+    <item>tsps</item>
+    <item>tbsp</item>
     <item>cup</item>
   </string-array>
 </resources>

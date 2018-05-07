@@ -12,7 +12,7 @@ using Android.Widget;
 using Recipizer.Models;
 using static Android.Widget.AdapterView;
 
-namespace Recipizer
+namespace Recipizer.Activities
 {
     [Activity(Label = "RecipesActivity")]
     public class RecipesActivity : Activity

@@ -14,7 +14,7 @@ using Recipizer.Models;
 
 namespace Recipizer.Presenters
 {
-    class CreateRecipePresenter : IPresenter
+    public class CreateRecipePresenter : IPresenter
     {
         private IRecipizerView view;
 
@@ -23,6 +23,7 @@ namespace Recipizer.Presenters
             this.view = _view;
         }
 
+        //Interface Methods
         public void onBackPressed() { }
 
         public void onCreate() { }
@@ -33,6 +34,7 @@ namespace Recipizer.Presenters
 
         public void onResume() { }
 
+        //Regular Methods
         public void CreateRecipe(ICollection<Ingredient> _Ingredients, string _Title, string _Description)
         {
             //TODO Validate inputs
@@ -41,11 +43,13 @@ namespace Recipizer.Presenters
             Recipe r = new Recipe(_Ingredients.ToList(), _Title, _Description, DateTime.Now);
             Temp.tempContainer.instance.RecipieContainer.Add(r);
 
-            view.Maketoast(r.Title + " created", Android.Widget.ToastLength.Short);
+            //Calls to the view
+            view.MakeToast(r.Title + " created", Android.Widget.ToastLength.Short);
             view.FinishView(Android.App.Result.Ok);
             
             //TODO Go back and maybe show the created recipe.
         }
+
 
         
     }

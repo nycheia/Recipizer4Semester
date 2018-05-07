@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Recipizer
+namespace Recipizer.Activities
 {
     [Activity(Label = "ShoppingListActivity")]
     public class ShoppingListActivity : Activity

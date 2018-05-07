@@ -16,6 +16,8 @@ namespace Recipizer.Activities
     {
         void UpdateView();
         void FinishView(Result result);
-        void Maketoast(string text, ToastLength length);
+        void MakeToast(string text, ToastLength length);
+
+        void Navigate();
     }
 }

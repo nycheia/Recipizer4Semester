@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Recipizer.Adapters;
 using Recipizer.Models;
+using Recipizer.Presenters;
 
 namespace Recipizer.Activities
 {
@@ -19,20 +20,28 @@ namespace Recipizer.Activities
     public class CreateRecipeActivity : Activity, IRecipizerView
     {
         List<Ingredient> ingredients;
+
+        //UI components
         EditText editTextIngredientName;
         EditText editTextIngredientAmount;
         EditText editTextRecipeDescription;
         EditText editTextRecipeName;
         Spinner spinnerUnits;
         ListView listIngredients;
+
+        //Adapters
         IngredientAdapter ingredientAdapter;
 
-        //List<String> ingredients;
-        //ArrayAdapter<String> ingredientAdapter;
+        //Variable to connect to relevant presenter
+        CreateRecipePresenter Presenter;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateRecipe);
+
+            //Instantiate the presenter
+            Presenter = new CreateRecipePresenter(this);
 
             //Get UI components for global use.
             editTextIngredientName =    FindViewById<EditText>(Resource.Id.editTextIngredientName_CreateRecipe);
@@ -54,37 +63,19 @@ namespace Recipizer.Activities
 
             //Instantiate Button Events
             btnAddIngredient.Click += (object sender, EventArgs e) => { btnAddIngredient_Click(sender, e); };
-            btnCreateRecipe.Click  += (object sender, EventArgs e) => { btnCreateRecipe_Click(sender, e); };
+            btnCreateRecipe.Click  += (object sender, EventArgs e) => { Presenter.CreateRecipe(ingredients, editTextRecipeName.Text, editTextRecipeDescription.Text); };
 
-            //UI interaction
-            spinnerUnits.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinnerUnits_ItemSelected);
+            //Instantiate Spinner (Dropdown)
             var unitAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.unit_array, Android.Resource.Layout.SimpleSpinnerItem);
-            unitAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerItem);
+            //unitAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerItem);
             spinnerUnits.Adapter = unitAdapter;
 
-            
-            // Temp Test data.
-            ingredients.Add(new Ingredient("Peber",     "5",    Ingredient.Unit.cup));
-            ingredients.Add(new Ingredient("Salt", "    10",    Ingredient.Unit.kg));
-            ingredients.Add(new Ingredient("Estragon",  "20",   Ingredient.Unit.tbsp));
-            ingredients.Add(new Ingredient("Peber1",    "5",    Ingredient.Unit.cup));
-            ingredients.Add(new Ingredient("Salt1",     "10",   Ingredient.Unit.kg));
-            ingredients.Add(new Ingredient("Estragon1", "20",   Ingredient.Unit.tbsp));
-            ingredients.Add(new Ingredient("Peber2",    "5",    Ingredient.Unit.cup));
-            ingredients.Add(new Ingredient("Salt2",     "10",   Ingredient.Unit.kg));
-            ingredients.Add(new Ingredient("Estragon2", "20",   Ingredient.Unit.tbsp));
         }
-
-        /*public override void OnBackPressed()
-        {
-
-            Finish();
-        }*/
 
         public void btnAddIngredient_Click(object sender, EventArgs e)
         {
             //Creates the ingredient from the relvant information
-            Ingredient.Unit unit = Ingredient.StringToUnit((String)spinnerUnits.GetItemAtPosition(spinnerUnits.SelectedItemPosition));
+            Ingredient.Unit unit = Ingredient.StringToUnit((string)spinnerUnits.SelectedItem);
             Ingredient ingredient = new Ingredient(editTextIngredientName.Text, editTextIngredientAmount.Text, unit);
 
             //Adds the ingredient to the list and updates the listview.
@@ -95,28 +86,21 @@ namespace Recipizer.Activities
             editTextIngredientName.Text = "";
             editTextIngredientAmount.Text = "";
             spinnerUnits.SetSelection(0);
-        }
+        }        
 
-        public void btnCreateRecipe_Click(object sender, EventArgs e)
+        public void FinishView(Result _result)
         {
-            //TODO Validate inputs
-
-            //TODO Create and save recipe
-            Recipe r = new Recipe(ingredients, editTextRecipeName.Text, editTextRecipeDescription.Text, DateTime.Now);
-            Temp.tempContainer.instance.RecipieContainer.Add(r);
-            Toast.MakeText(this, r.Title + " created", ToastLength.Short).Show();
-  
-            SetResult(Result.Ok);
+            SetResult(_result);
             Finish();
-
-            //TODO Go back and maybe show the created recipe.
         }
 
-        
-
-        private void spinnerUnits_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        public void MakeToast(string text, ToastLength length)
         {
-            Spinner spinnerUnits = (Spinner)sender;
+            Toast.MakeText(this, text, length);
         }
+
+        //Unused methods is placed here.
+        public void UpdateView() { }
+        public void Navigate() { }
     }
 }

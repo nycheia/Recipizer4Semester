@@ -14,6 +14,7 @@ namespace Recipizer.Temp
 {
     public class tempContainer
     {
+        //TODO All of this should be deleted and replaced by database stuff
         private static tempContainer _instance;
 
         public static tempContainer instance
