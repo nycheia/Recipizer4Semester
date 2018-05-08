@@ -35,7 +35,11 @@ namespace Recipizer.Presenters
 
             //TODO Create and save recipe
             Recipe r = new Recipe(_Ingredients.ToList(), _Title, _Description, DateTime.Now);
-            Temp.tempContainer.instance.RecipieContainer.Add(r);
+            Constants.Conn.Insert(r);
+            foreach (Ingredient i in ingredientsList)
+            {
+                i.RecipeId = r.id;
+            }
 
             //Calls to the view
             view.MakeToast(r.Title + " created", Android.Widget.ToastLength.Short);
@@ -48,7 +52,7 @@ namespace Recipizer.Presenters
         {
             Ingredient ing = new Ingredient(_Name, _Amount, _Unit);
             ingredientsList.Add(ing);
-
+            Constants.Conn.Insert(ing); 
             view.UpdateView();
         }
 
