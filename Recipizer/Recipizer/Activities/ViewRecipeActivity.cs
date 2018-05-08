@@ -45,14 +45,10 @@ namespace Recipizer.Activities
             ListView listViewIngredients = FindViewById<ListView>(Resource.Id.listViewIngredients);
 
             //Setup lists.
-            //TODO do better
-            List<string> hej = new List<string>();
-            foreach (Ingredient item in presenter.CurrentRecipe.Ingredients)
-            {
-                hej.Add(item.name);
-            }
+          
+            
 
-            IngredientAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1,hej);
+            IngredientAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1,presenter.hej);
             listViewIngredients.Adapter = IngredientAdapter;
 
             //Setup Click Events.
@@ -74,14 +70,16 @@ namespace Recipizer.Activities
             presenter.onCreate();
         }
 
-        public void FinishView(Result result) { }
+        public void FinishView(Result result, Intent data) { }
 
         public void MakeToast(string text, ToastLength length) { }
 
-        public void Navigate(int code) { }
+        public void Navigate(int code, Intent data) { }
 
         public void ResetText() { }
 
-        public void UpdateView() { }
+        public void UpdateView() {
+            IngredientAdapter.NotifyDataSetChanged();
+        }
     }
 }

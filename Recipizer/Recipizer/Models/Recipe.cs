@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -28,6 +28,16 @@ namespace Recipizer.Models
         public DateTime DateCreated { get; set; }
         [MaxLength(2000)]
         public string Note { get; set; }
+
+        public Recipe()
+        {
+            
+        }
+
+        public void setIngredients()
+        {
+            Ingredients = (from i in Constants.Conn.Table<Ingredient>() where i.RecipeId == id select i).ToList();
+        }
 
         public Recipe(List<Ingredient> _Ingredients, string _Title, string _Description, DateTime _DateCreated)
         {

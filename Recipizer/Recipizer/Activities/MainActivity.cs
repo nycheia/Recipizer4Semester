@@ -11,7 +11,7 @@ namespace Recipizer.Activities
     {
         private MainPresenter presenter;
 
-        public void FinishView(Result result)
+        public void FinishView(Result result, Intent data)
         {
             throw new System.NotImplementedException();
         }
@@ -26,7 +26,7 @@ namespace Recipizer.Activities
             throw new System.NotImplementedException();
         }
 
-        public void Navigate(int code)
+        public void Navigate(int code, Intent data)
         {
             throw new System.NotImplementedException();
         }

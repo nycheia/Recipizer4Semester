@@ -33,26 +33,27 @@ namespace Recipizer.Presenters
         {
             //TODO Validate inputs
 
-            //TODO Create and save recipe
+            
             Recipe r = new Recipe(_Ingredients.ToList(), _Title, _Description, DateTime.Now);
             Constants.Conn.Insert(r);
             foreach (Ingredient i in ingredientsList)
             {
                 i.RecipeId = r.id;
+                Constants.Conn.Insert(i);
             }
 
             //Calls to the view
             view.MakeToast(r.Title + " created", Android.Widget.ToastLength.Short);
-            view.FinishView(Android.App.Result.Ok);
+            view.FinishView(Android.App.Result.Ok, new Intent().PutExtra("recipeId", r.id));
             
             //TODO Go back and show the created recipe.
+
         }
 
         public void AddIngredient(string _Name, string _Amount, Ingredient.Unit _Unit)
         {
             Ingredient ing = new Ingredient(_Name, _Amount, _Unit);
-            ingredientsList.Add(ing);
-            Constants.Conn.Insert(ing); 
+            ingredientsList.Add(ing); 
             view.UpdateView();
         }
 

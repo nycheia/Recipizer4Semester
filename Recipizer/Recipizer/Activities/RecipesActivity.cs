@@ -83,14 +83,14 @@ namespace Recipizer.Activities
             RecipeAdapter.Clear();
         }
 
-        public void FinishView(Result result) { }
+        public void FinishView(Result result, Intent data) { }
 
         public void MakeToast(string text, ToastLength length)
         {
             Toast.MakeText(this, text, length).Show();
         }
 
-        public void Navigate(int code)
+        public void Navigate(int code, Intent data)
         {
             if (code == Constants.NEW_RECIPE)
             {
@@ -102,7 +102,7 @@ namespace Recipizer.Activities
             {
                 //TODO somehow tell it what recipe to show.
                 Intent intent = new Intent(this, typeof(ViewRecipeActivity));
-                intent.PutExtra("RecipeID", 1);
+                intent.PutExtra("RecipeID", data.GetIntExtra("recipeId", 1));
                 StartActivity(intent);
             }
         }

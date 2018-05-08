@@ -19,11 +19,11 @@ namespace Recipizer.Activities
 
         void ResetText();
 
-        void FinishView(Result result);
+        void FinishView(Result result, Intent intent);
 
         void MakeToast(string text, ToastLength length);
 
-        //TODO need a better name than code.....
-        void Navigate(int code);
+        
+        void Navigate(int code, Intent data);
     }
 }

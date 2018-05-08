@@ -28,10 +28,9 @@ namespace Recipizer.Presenters
 
         
         
-        //TODO Sould load from storage and not from temp
         public void LoadRecipesFromStorage()
         {
-            foreach (Recipe item in Temp.tempContainer.instance.RecipieContainer)
+            foreach (Recipe item in Constants.Conn.Table<Recipe>().ToList())
             {
                 RecipeList.Add(item.Title);
             }
@@ -44,7 +43,7 @@ namespace Recipizer.Presenters
 
         public void NewRecipe_Click()
         {
-            view.Navigate(Constants.NEW_RECIPE);
+            view.Navigate(Constants.NEW_RECIPE, null);
         }
 
         public void onBackPressed() { }
@@ -57,7 +56,6 @@ namespace Recipizer.Presenters
 
         public void onResume()
         {
-            view.ResetText();
             LoadRecipesFromStorage();
             view.UpdateView();
         }
@@ -66,7 +64,7 @@ namespace Recipizer.Presenters
         {
             if (requestCode == Constants.NEW_RECIPE && resultCode == Result.Ok)
             {
-                view.Navigate(Constants.SHOW_RECIPE);
+                view.Navigate(Constants.SHOW_RECIPE, data);
             }
         }
     }
