@@ -90,9 +90,21 @@ namespace Recipizer.Activities
             Toast.MakeText(this, text, length).Show();
         }
 
-        public void Navigate()
+        public void Navigate(int code)
         {
+            if (code == Constants.NEW_RECIPE)
+            {
+                Intent intent = new Intent(this, typeof(CreateRecipeActivity));
+                StartActivityForResult(intent, Constants.NEW_RECIPE);
 
+            }
+            else if (code == Constants.SHOW_RECIPE)
+            {
+                //TODO somehow tell it what recipe to show.
+                Intent intent = new Intent(this, typeof(ViewRecipeActivity));
+                intent.PutExtra("RecipeID", 1);
+                StartActivity(intent);
+            }
         }
     }
 }

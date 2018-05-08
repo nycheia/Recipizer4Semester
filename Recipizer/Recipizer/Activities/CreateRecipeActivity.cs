@@ -100,7 +100,7 @@ namespace Recipizer.Activities
         }
 
         public void Navigate(int code) {
-            if (code == Constants.NEW_RECIPE)
+           /* if (code == Constants.NEW_RECIPE)
             {
                 var intent = new Intent(this, typeof(CreateRecipeActivity));
                 StartActivityForResult(intent, Constants.NEW_RECIPE);
@@ -109,7 +109,7 @@ namespace Recipizer.Activities
             {
                 var intent = new Intent(this, typeof(CreateRecipeActivity));
                 StartActivity(intent);
-            }
+            }*/
         }
     }
 }

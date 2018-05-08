@@ -22,7 +22,7 @@
         android:layout_height="200dp"
         android:id="@+id/textEditRecipeDescription"
         android:layout_marginTop="10dp"
-        android:hint="xddxdxdxdxddxddxdxdxdxdxdxdxdxdxdxddxxdxdxdxddxxddxxdxdxdxdxdxdxdxdxdxdxdxdxdxd" />
+        android:hint="Description" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

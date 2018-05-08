@@ -14,7 +14,6 @@ namespace Recipizer.Activities
 {
     public interface IRecipizerView
     {
-        //void SetupView();
 
         void UpdateView();
 

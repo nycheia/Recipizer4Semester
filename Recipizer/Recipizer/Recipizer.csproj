@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\IRecipizerView.cs" />
+    <Compile Include="Activities\ViewRecipeActivity.cs" />
     <Compile Include="Adapters\IngredientAdapter.cs" />
     <Compile Include="Activities\CreateRecipeActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Presenters\CreateRecipePresenter.cs" />
     <Compile Include="Presenters\IPresenter.cs" />
     <Compile Include="Presenters\RecipesPresenter.cs" />
+    <Compile Include="Presenters\ViewRecipePresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\ShoppingListActivity.cs" />
