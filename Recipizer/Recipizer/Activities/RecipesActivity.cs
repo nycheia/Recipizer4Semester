@@ -53,7 +53,7 @@ namespace Recipizer.Activities
             adpt.Clear();
             foreach (Recipe item in Temp.tempContainer.instance.RecipieContainer)
             {
-                adpt.Add(item.Title);
+                adpt.Add(item.id);
             }
         }
 

@@ -13,6 +13,7 @@ using SQLite;
 
 namespace Recipizer.Models
 {
+    [Table("Ingredient")]
     public class Ingredient
     {
         [PrimaryKey, AutoIncrement]
@@ -24,7 +25,11 @@ namespace Recipizer.Models
         [NotNull]
         public Unit measuringUnit { get; set; }
         public enum Unit { non, g, kg, l, dl, ml, tsps, tbsp, cup };
+        public int RecipeId { get; set; }
+        public Ingredient()
+        {
 
+        }
         public Ingredient(string name, string amount, Unit measuringUnit)
         {
             this.name = name;
