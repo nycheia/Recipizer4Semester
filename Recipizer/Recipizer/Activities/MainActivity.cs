@@ -26,6 +26,11 @@ namespace Recipizer.Activities
             throw new System.NotImplementedException();
         }
 
+        public void Navigate(int code)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void ResetText()
         {
             throw new System.NotImplementedException();

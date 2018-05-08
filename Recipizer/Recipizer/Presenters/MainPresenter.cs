@@ -23,6 +23,12 @@ namespace Recipizer.Presenters
             this.view = _view;
 
         }
+
+        public void onActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            throw new NotImplementedException();
+        }
+
         public void onBackPressed()
         {
             throw new NotImplementedException();
