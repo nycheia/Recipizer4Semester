@@ -82,7 +82,7 @@ namespace Recipizer
 			public const int btnCreateRecipe_CreateRecipe = 2131099658;
 			
 			// aapt resource value: 0x7f060021
-			public const int btnEditRecipe = 2131099681;
+			public const int btnEdit = 2131099681;
 			
 			// aapt resource value: 0x7f06000d
 			public const int btnIngredientAdapterDelete = 2131099661;
@@ -96,11 +96,11 @@ namespace Recipizer
 			// aapt resource value: 0x7f06000f
 			public const int btnRecipeNav = 2131099663;
 			
-			// aapt resource value: 0x7f060022
-			public const int btnSaveEdit = 2131099682;
-			
 			// aapt resource value: 0x7f060012
 			public const int btnSettingsNav = 2131099666;
+			
+			// aapt resource value: 0x7f060022
+			public const int btnShare = 2131099682;
 			
 			// aapt resource value: 0x7f060011
 			public const int btnShopListNav = 2131099665;
@@ -236,11 +236,11 @@ namespace Recipizer
 			// aapt resource value: 0x7f030001
 			public const int btn_recipeNav_main = 2130903041;
 			
-			// aapt resource value: 0x7f030007
-			public const int btn_save = 2130903047;
-			
 			// aapt resource value: 0x7f030004
 			public const int btn_settingsNav_main = 2130903044;
+			
+			// aapt resource value: 0x7f030007
+			public const int btn_share = 2130903047;
 			
 			// aapt resource value: 0x7f030003
 			public const int btn_shopListNav_main = 2130903043;
