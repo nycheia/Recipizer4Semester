@@ -5,10 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+
 
 namespace Recipizer.Presenters
 {
@@ -19,5 +16,6 @@ namespace Recipizer.Presenters
         void onResume();
         void onDestroy();
         void onBackPressed();
+        void onActivityResult(int requestCode, Result resultCode, Intent data);
     }
 }
