@@ -30,7 +30,12 @@ namespace Recipizer.Temp
             set { _instance = value; }
         }
 
-        public List<Models.Recipe> RecipieContainer = new List<Models.Recipe>();
+        public List<Models.Recipe> RecipieContainer;
+
+        public tempContainer()
+        {
+            RecipieContainer = new List<Models.Recipe>();
+        }
 
     }
 }

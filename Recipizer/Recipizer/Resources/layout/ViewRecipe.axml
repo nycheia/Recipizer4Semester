@@ -30,17 +30,17 @@
         android:id="@+id/linearLayoutViewRecipe">
         <Button
             android:text="@string/btn_edit"
-            android:id="@+id/btnEditRecipe"
+            android:id="@+id/btnEdit"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp" />
         <Button
-            android:text="@string/btn_save"
+            android:text="@string/btn_share"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:id="@+id/btnSaveEdit"
+            android:id="@+id/btnShare"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"

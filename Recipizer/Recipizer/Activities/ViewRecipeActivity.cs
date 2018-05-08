@@ -21,12 +21,10 @@ namespace Recipizer.Activities
         //UI components
 
         //Adapters
+        ArrayAdapter<string> IngredientAdapter;
 
         //Variable to connect to presenter
         ViewRecipePresenter presenter;
-
-        //Recipe instance
-        Recipe CurrentRecipe;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,20 +32,43 @@ namespace Recipizer.Activities
             SetContentView(Resource.Layout.ViewRecipe);
 
             //Instantiate the presenter
-            presenter = new ViewRecipePresenter(this);
-
-            //Get the Recipe object
-            //TODO get from DB
-            //Temp.tempContainer.instance.RecipieContainer[1];
+            presenter = new ViewRecipePresenter(this, Intent.GetIntExtra("RecipeID", 0));
 
             //Get UI components for global use.
+            TextView textRecipeName = FindViewById<TextView>(Resource.Id.textRecipeName);
+            TextView textEditRecipeDescription = FindViewById<TextView>(Resource.Id.textEditRecipeDescription);
+            
 
             //Get UI components for local use.
+            Button btnShare = FindViewById<Button>(Resource.Id.btnShare);
+            Button btnEdit = FindViewById<Button>(Resource.Id.btnEdit);
+            ListView listViewIngredients = FindViewById<ListView>(Resource.Id.listViewIngredients);
 
             //Setup lists.
+            //TODO do better
+            List<string> hej = new List<string>();
+            foreach (Ingredient item in presenter.CurrentRecipe.Ingredients)
+            {
+                hej.Add(item.name);
+            }
 
+            IngredientAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1,hej);
+            listViewIngredients.Adapter = IngredientAdapter;
 
             //Setup Click Events.
+            btnShare.Click += (sender, e) =>
+            {
+                presenter.Share_Click();
+            };
+
+            btnEdit.Click += (sender, e) =>
+            {
+                presenter.Edit_Click();
+            };
+
+            //Set Text
+            textRecipeName.Text = presenter.CurrentRecipe.Title;
+            textEditRecipeDescription.Text = presenter.CurrentRecipe.Description;
 
             //Call the presenters OnCreate Method.
             presenter.onCreate();
@@ -55,10 +76,7 @@ namespace Recipizer.Activities
 
         public void FinishView(Result result) { }
 
-        public void MakeToast(string text, ToastLength length)
-        {
-            Toast.MakeText(this, text, length).Show();
-        }
+        public void MakeToast(string text, ToastLength length) { }
 
         public void Navigate(int code) { }
 
