@@ -75,6 +75,7 @@
     <Compile Include="Activities\IRecipizerView.cs" />
     <Compile Include="Activities\ViewRecipeActivity.cs" />
     <Compile Include="Adapters\IngredientAdapter.cs" />
+    <Compile Include="Adapters\IngredientButtonAdapter.cs" />
     <Compile Include="Activities\CreateRecipeActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\MealPlanActivity.cs" />
@@ -114,6 +115,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MealPlan.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_ingredient_button.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\item_ingredient.axml">

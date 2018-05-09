@@ -120,11 +120,11 @@ namespace Recipizer
 			// aapt resource value: 0x7f060013
 			public const int expandableListMealPlan = 2131099667;
 			
-			// aapt resource value: 0x7f06000c
-			public const int ingAdapterTextViewIngAmount = 2131099660;
-			
 			// aapt resource value: 0x7f06000b
-			public const int ingAdapterTextViewIngName = 2131099659;
+			public const int ingAdapterTextViewIngAmount = 2131099659;
+			
+			// aapt resource value: 0x7f06000c
+			public const int ingAdapterTextViewIngName = 2131099660;
 			
 			// aapt resource value: 0x7f060004
 			public const int linearLayoutIngredient = 2131099652;
@@ -185,19 +185,22 @@ namespace Recipizer
 			public const int item_ingredient = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Main = 2130837506;
+			public const int item_ingredient_button = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int MealPlan = 2130837507;
+			public const int Main = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int Recipes = 2130837508;
+			public const int MealPlan = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int ShoppingList = 2130837509;
+			public const int Recipes = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int ViewRecipe = 2130837510;
+			public const int ShoppingList = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int ViewRecipe = 2130837511;
 			
 			static Layout()
 			{

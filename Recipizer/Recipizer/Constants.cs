@@ -14,9 +14,13 @@ namespace Recipizer
 {
     public class Constants
     {
-        public static readonly int CREATE_RECIPE = 1;
         public static SQLiteConnection Conn;
+
         public const int NEW_RECIPE = 1;
         public const int SHOW_RECIPE = 2;
+        public const int EDIT_RECIPE = 3;
+
+        public const string RECIPE_ID = "recipeid";
+
     }
 }

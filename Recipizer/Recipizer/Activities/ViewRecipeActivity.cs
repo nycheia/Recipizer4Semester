@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Recipizer.Presenters;
 using Recipizer.Models;
+using Recipizer.Adapters;
 
 namespace Recipizer.Activities
 {
@@ -21,7 +22,7 @@ namespace Recipizer.Activities
         //UI components
 
         //Adapters
-        ArrayAdapter<string> IngredientAdapter;
+        IngredientAdapter ingredientAdapter;
 
         //Variable to connect to presenter
         ViewRecipePresenter presenter;
@@ -32,7 +33,7 @@ namespace Recipizer.Activities
             SetContentView(Resource.Layout.ViewRecipe);
 
             //Instantiate the presenter
-            presenter = new ViewRecipePresenter(this, Intent.GetIntExtra("RecipeID", 0));
+            presenter = new ViewRecipePresenter(this, Intent.GetIntExtra(Constants.RECIPE_ID, 0));
 
             //Get UI components for global use.
             TextView textRecipeName = FindViewById<TextView>(Resource.Id.textRecipeName);
@@ -45,11 +46,8 @@ namespace Recipizer.Activities
             ListView listViewIngredients = FindViewById<ListView>(Resource.Id.listViewIngredients);
 
             //Setup lists.
-          
-            
-
-            IngredientAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1,presenter.hej);
-            listViewIngredients.Adapter = IngredientAdapter;
+            ingredientAdapter = new IngredientAdapter(this, presenter.CurrentRecipe.Ingredients);
+            listViewIngredients.Adapter = ingredientAdapter;
 
             //Setup Click Events.
             btnShare.Click += (sender, e) =>
@@ -74,12 +72,26 @@ namespace Recipizer.Activities
 
         public void MakeToast(string text, ToastLength length) { }
 
-        public void Navigate(int code, Intent data) { }
+        public void Navigate(int code, Intent data)
+        {
+            if (code == Constants.EDIT_RECIPE)
+            {
+                Intent intent = new Intent(this, typeof(CreateRecipeActivity));
+                intent.PutExtras(data);
+                StartActivityForResult(intent, Constants.EDIT_RECIPE);
+            }
+        }
 
         public void ResetText() { }
 
-        public void UpdateView() {
-            IngredientAdapter.NotifyDataSetChanged();
+        public void UpdateView()
+        {
+            ingredientAdapter.NotifyDataSetChanged();
+        }
+
+        public void SetupView()
+        {
+            throw new NotImplementedException();
         }
     }
 }

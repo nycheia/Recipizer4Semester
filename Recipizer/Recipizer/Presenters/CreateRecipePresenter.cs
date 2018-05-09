@@ -5,12 +5,7 @@ using System.Text;
 using Android.App;
 using Android.Content;
 
-/*using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;*/
+
 using Recipizer.Activities;
 using Recipizer.Models;
 
@@ -21,19 +16,21 @@ namespace Recipizer.Presenters
         private IRecipizerView view;
 
         public List<Ingredient> ingredientsList;
+        public int RecipeID;
+        public Recipe CurrentRecipe;
 
 
         public CreateRecipePresenter(IRecipizerView _view)
         {
             this.view = _view;
             ingredientsList = new List<Ingredient>();
+            RecipeID = -1;
         }
 
-        public void CreateRecipe(ICollection<Ingredient> _Ingredients, string _Title, string _Description)
+        public void SaveRecipe(ICollection<Ingredient> _Ingredients, string _Title, string _Description)
         {
             //TODO Validate inputs
 
-            
             Recipe r = new Recipe(_Ingredients.ToList(), _Title, _Description, DateTime.Now);
             Constants.Conn.Insert(r);
             foreach (Ingredient i in ingredientsList)
@@ -44,10 +41,7 @@ namespace Recipizer.Presenters
 
             //Calls to the view
             view.MakeToast(r.Title + " created", Android.Widget.ToastLength.Short);
-            view.FinishView(Android.App.Result.Ok, new Intent().PutExtra("recipeId", r.id));
-            
-            //TODO Go back and show the created recipe.
-
+            view.FinishView(Result.Ok, new Intent().PutExtra(Constants.RECIPE_ID, r.id));
         }
 
         public void AddIngredient(string _Name, string _Amount, Ingredient.Unit _Unit)
@@ -55,12 +49,22 @@ namespace Recipizer.Presenters
             Ingredient ing = new Ingredient(_Name, _Amount, _Unit);
             ingredientsList.Add(ing); 
             view.UpdateView();
+            view.ResetText();
         }
 
         //Interface Methods
         public void onBackPressed() { }
 
-        public void onCreate() { }
+        public void onCreate()
+        {
+            if (RecipeID != -1)
+            {
+                CurrentRecipe = Constants.Conn.Get<Recipe>(RecipeID);
+                ingredientsList.AddRange(CurrentRecipe.Ingredients);
+                view.SetupView();
+                view.UpdateView();
+            }
+        }
 
         public void onDestroy() { }
 

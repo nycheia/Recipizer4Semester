@@ -28,7 +28,7 @@ namespace Recipizer.Activities
         ListView listIngredients;
 
         //Adapters
-        IngredientAdapter ingredientAdapter;
+        IngredientButtonAdapter ingredientAdapter;
 
         //Variable to connect to presenter
         CreateRecipePresenter presenter;
@@ -58,7 +58,7 @@ namespace Recipizer.Activities
             spinnerUnits.Adapter = unitAdapter;
 
             //Setup lists.
-            ingredientAdapter = new IngredientAdapter(this, presenter.ingredientsList);
+            ingredientAdapter = new IngredientButtonAdapter(this, presenter.ingredientsList);
             listIngredients.Adapter = ingredientAdapter;
 
             //Setup Button Events.
@@ -67,8 +67,14 @@ namespace Recipizer.Activities
             };
 
             btnCreateRecipe.Click += (object sender, EventArgs e) => {
-                presenter.CreateRecipe(presenter.ingredientsList, editTextRecipeName.Text, editTextRecipeDescription.Text);
+                presenter.SaveRecipe(presenter.ingredientsList, editTextRecipeName.Text, editTextRecipeDescription.Text);
             };
+
+            int i = Intent.GetIntExtra(Constants.RECIPE_ID, 0);
+            if ( i != 0)
+            {
+                presenter.RecipeID = i;
+            }
 
             //Call the presenters OnCreate Method.
             presenter.onCreate();
@@ -87,7 +93,6 @@ namespace Recipizer.Activities
 
         public void UpdateView()
         {
-
             ingredientAdapter.NotifyDataSetChanged();
         }
 
@@ -99,17 +104,15 @@ namespace Recipizer.Activities
             spinnerUnits.SetSelection(0);
         }
 
-        public void Navigate(int code, Intent data) {
-           /* if (code == Constants.NEW_RECIPE)
+        public void Navigate(int code, Intent data) { }
+
+        public void SetupView()
+        {
+            if (presenter.CurrentRecipe != null)
             {
-                var intent = new Intent(this, typeof(CreateRecipeActivity));
-                StartActivityForResult(intent, Constants.NEW_RECIPE);
+                editTextRecipeName.Text = presenter.CurrentRecipe.Title;
+                editTextRecipeDescription.Text = presenter.CurrentRecipe.Description;
             }
-            else if (code == Constants.NEW_RECIPE)
-            {
-                var intent = new Intent(this, typeof(CreateRecipeActivity));
-                StartActivity(intent);
-            }*/
         }
     }
 }

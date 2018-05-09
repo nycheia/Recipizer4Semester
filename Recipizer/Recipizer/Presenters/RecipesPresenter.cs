@@ -5,10 +5,6 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Recipizer.Activities;
 using Recipizer.Models;
 
@@ -17,6 +13,7 @@ namespace Recipizer.Presenters
     class RecipesPresenter : IPresenter
     {
         public List<string> RecipeList;
+
         IRecipizerView view;
 
         public RecipesPresenter(IRecipizerView _view)
@@ -25,8 +22,6 @@ namespace Recipizer.Presenters
             RecipeList = new List<string>();
             LoadRecipesFromStorage();
         }
-
-        
         
         public void LoadRecipesFromStorage()
         {
@@ -38,7 +33,10 @@ namespace Recipizer.Presenters
 
         public void Recipes_OnItemClick(int position)
         {
-            view.MakeToast("Navigating to: " + RecipeList[position], ToastLength.Short);
+            //gets the id of the recipe.
+            int id = (Constants.Conn.Table<Recipe>().Skip(position).Take(1)).First().id;
+
+            view.Navigate(Constants.SHOW_RECIPE, new Intent().PutExtra(Constants.RECIPE_ID, id));
         }
 
         public void NewRecipe_Click()

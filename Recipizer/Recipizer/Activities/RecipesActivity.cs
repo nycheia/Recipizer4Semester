@@ -18,7 +18,6 @@ namespace Recipizer.Activities
     [Activity(Label = "RecipesActivity")]
     public class RecipesActivity : Activity, IRecipizerView
     {
-
         //UI components
         ListView listViewRecipes;
 
@@ -100,9 +99,8 @@ namespace Recipizer.Activities
             }
             else if (code == Constants.SHOW_RECIPE)
             {
-                //TODO somehow tell it what recipe to show.
                 Intent intent = new Intent(this, typeof(ViewRecipeActivity));
-                intent.PutExtra("RecipeID", data.GetIntExtra("recipeId", 1));
+                intent.PutExtras(data);
                 StartActivity(intent);
             }
         }

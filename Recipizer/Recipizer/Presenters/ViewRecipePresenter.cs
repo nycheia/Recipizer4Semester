@@ -15,7 +15,6 @@ namespace Recipizer.Presenters
 
         //Recipe instance
         public Recipe CurrentRecipe;
-        public List<string> hej = new List<string>();
 
         public ViewRecipePresenter(IRecipizerView _view, int _RecipeID)
         {
@@ -24,11 +23,6 @@ namespace Recipizer.Presenters
             //Get the Recipe object
             CurrentRecipe = Constants.Conn.Get<Recipe>(_RecipeID);
             CurrentRecipe.setIngredients();
-            //TODO do better
-            foreach (Ingredient item in CurrentRecipe.Ingredients)
-            {
-                hej.Add(item.name);
-            }
         }
 
         public void Share_Click()
@@ -38,7 +32,7 @@ namespace Recipizer.Presenters
 
         public void Edit_Click()
         {
-            //TODO Edit Functionality
+            view.Navigate(Constants.EDIT_RECIPE, new Intent().PutExtra(Constants.RECIPE_ID, CurrentRecipe.id));
         }
 
         public void onCreate() { }

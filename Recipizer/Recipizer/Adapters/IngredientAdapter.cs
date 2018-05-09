@@ -48,38 +48,15 @@ namespace Recipizer.Adapters
             {
                 view = this.context.LayoutInflater.Inflate(Resource.Layout.item_ingredient, parent, false);
             }
-            //Ingredient ingredient = GetItem(position);
 
-            /*TextView ingName = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName);
-            TextView ingAmount = view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount);*/
+            view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName).Text = 
+                ingredients[position].name;
 
-            view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngName).Text = ingredients[position].name;
             view.FindViewById<TextView>(Resource.Id.ingAdapterTextViewIngAmount).Text 
                 = ingredients[position].amount + " " + ingredients[position].measuringUnit;
 
-            void removeListItemsClickEvent(object sender, EventArgs e)
-            {
-                
-                //ingredients.RemoveAt(position);
-                ingredients.Remove(ingredients[position]);
-                NotifyDataSetChanged();
-            };
-            
-            Button btnIngredientAdapterDelete = view.FindViewById<Button>(Resource.Id.btnIngredientAdapterDelete);
-            //btnIngredientAdapterDelete.Click -= removeListItemsClickEvent;
-            //It prevents multiple events
-            if (!btnIngredientAdapterDelete.HasOnClickListeners)
-            {
-                btnIngredientAdapterDelete.Click += removeListItemsClickEvent;
-            }
 
-            /*ingName.Text = ingredient.name;
-            ingAmount.Text = ingredient.amount + " " + ingredient.measuringUnit;
 
-            if (ingredient.measuringUnit == Ingredient.Unit.non)
-            {
-                ingAmount.Text = ingredient.amount + " ";
-            }*/
             return view;
 
             
