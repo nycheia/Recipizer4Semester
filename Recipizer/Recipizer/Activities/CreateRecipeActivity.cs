@@ -77,6 +77,7 @@ namespace Recipizer.Activities
         public void FinishView(Result _result)
         {
             SetResult(_result);
+
             Finish();
         }
 

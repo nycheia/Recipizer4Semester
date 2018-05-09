@@ -101,9 +101,9 @@ namespace Recipizer.Activities
             else if (code == Constants.SHOW_RECIPE)
             {
                 //TODO somehow tell it what recipe to show.
-                Intent intent = new Intent(this, typeof(ViewRecipeActivity));
+                /*Intent intent = new Intent(this, typeof(ViewRecipeActivity));
                 intent.PutExtra("RecipeID", 1);
-                StartActivity(intent);
+                StartActivity(intent);*/
             }
         }
     }
