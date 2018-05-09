@@ -83,7 +83,7 @@
                 android:maxLength="1200" />
         </ScrollView>
         <Button
-            android:text="@string/btn_create"
+            android:text="@string/btn_save"
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:id="@+id/btnCreateRecipe_CreateRecipe"

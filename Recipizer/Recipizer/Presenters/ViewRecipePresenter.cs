@@ -35,7 +35,10 @@ namespace Recipizer.Presenters
             view.Navigate(Constants.EDIT_RECIPE, new Intent().PutExtra(Constants.RECIPE_ID, CurrentRecipe.id));
         }
 
-        public void onCreate() { }
+        public void onCreate()
+        {
+            view.UpdateView();
+        }
         
         public void onPause() { }
 
@@ -44,6 +47,14 @@ namespace Recipizer.Presenters
         public void onResume() { }
         public void onBackPressed() { }
 
-        public void onActivityResult(int requestCode, Result resultCode, Intent data) { }
+        public void onActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            if (requestCode == Constants.EDIT_RECIPE && resultCode == Result.Ok)
+            {
+                CurrentRecipe = CurrentRecipe = Constants.Conn.Get<Recipe>(data.GetIntExtra(Constants.RECIPE_ID, 0));
+                CurrentRecipe.setIngredients();
+                view.UpdateView();
+            }
+        }
     }
 }

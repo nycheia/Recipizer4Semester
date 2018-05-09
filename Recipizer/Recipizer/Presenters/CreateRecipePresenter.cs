@@ -31,17 +31,64 @@ namespace Recipizer.Presenters
         {
             //TODO Validate inputs
 
+            int id;
+
+            if (CurrentRecipe != null)
+            {
+                id = UpdateRecipe(_Ingredients, _Title, _Description);
+            }
+            else
+            {
+                id = CreateRecipe(_Ingredients, _Title, _Description);
+            }
+            
+            view.FinishView(Result.Ok, new Intent().PutExtra(Constants.RECIPE_ID, id));
+        }
+
+        private int UpdateRecipe(ICollection<Ingredient> _Ingredients, string _Title, string _Description)
+        {
+            CurrentRecipe.Title = _Title;
+            CurrentRecipe.Description = _Description;
+
+            List<Ingredient> tempList = new List<Ingredient>();
+            tempList.AddRange(CurrentRecipe.Ingredients);
+
+            foreach (Ingredient item in _Ingredients)
+            {
+                if (item.RecipeId != CurrentRecipe.id)
+                {
+                    item.RecipeId = CurrentRecipe.id;
+                    Constants.Conn.Insert(item);
+                }
+                else
+                {
+                    tempList.Remove(item);
+                }
+            }
+
+            foreach (Ingredient item in tempList)
+            {
+                Constants.Conn.Delete<Ingredient>(item.ID);
+            }
+
+            Constants.Conn.Update(CurrentRecipe);
+            view.MakeToast(CurrentRecipe.Title + " updated", Android.Widget.ToastLength.Short);
+            return CurrentRecipe.id;
+        }
+
+        private int CreateRecipe(ICollection<Ingredient> _Ingredients, string _Title, string _Description)
+        {
             Recipe r = new Recipe(_Ingredients.ToList(), _Title, _Description, DateTime.Now);
             Constants.Conn.Insert(r);
+
             foreach (Ingredient i in ingredientsList)
             {
                 i.RecipeId = r.id;
                 Constants.Conn.Insert(i);
             }
 
-            //Calls to the view
             view.MakeToast(r.Title + " created", Android.Widget.ToastLength.Short);
-            view.FinishView(Result.Ok, new Intent().PutExtra(Constants.RECIPE_ID, r.id));
+            return r.id;
         }
 
         public void AddIngredient(string _Name, string _Amount, Ingredient.Unit _Unit)
@@ -60,6 +107,7 @@ namespace Recipizer.Presenters
             if (RecipeID != -1)
             {
                 CurrentRecipe = Constants.Conn.Get<Recipe>(RecipeID);
+                CurrentRecipe.setIngredients();
                 ingredientsList.AddRange(CurrentRecipe.Ingredients);
                 view.SetupView();
                 view.UpdateView();

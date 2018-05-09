@@ -224,9 +224,6 @@ namespace Recipizer
 			// aapt resource value: 0x7f03000a
 			public const int btn_clear = 2130903050;
 			
-			// aapt resource value: 0x7f030008
-			public const int btn_create = 2130903048;
-			
 			// aapt resource value: 0x7f030006
 			public const int btn_edit = 2130903046;
 			
@@ -238,6 +235,9 @@ namespace Recipizer
 			
 			// aapt resource value: 0x7f030001
 			public const int btn_recipeNav_main = 2130903041;
+			
+			// aapt resource value: 0x7f030008
+			public const int btn_save = 2130903048;
 			
 			// aapt resource value: 0x7f030004
 			public const int btn_settingsNav_main = 2130903044;

@@ -36,6 +36,11 @@ namespace Recipizer.Activities
             throw new System.NotImplementedException();
         }
 
+        public void SetupView()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void UpdateView()
         {
             throw new System.NotImplementedException();

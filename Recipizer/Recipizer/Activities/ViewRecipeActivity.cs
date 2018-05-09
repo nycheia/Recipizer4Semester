@@ -20,7 +20,8 @@ namespace Recipizer.Activities
     {
 
         //UI components
-
+        TextView textRecipeName;
+        TextView textEditRecipeDescription;
         //Adapters
         IngredientAdapter ingredientAdapter;
 
@@ -36,8 +37,8 @@ namespace Recipizer.Activities
             presenter = new ViewRecipePresenter(this, Intent.GetIntExtra(Constants.RECIPE_ID, 0));
 
             //Get UI components for global use.
-            TextView textRecipeName = FindViewById<TextView>(Resource.Id.textRecipeName);
-            TextView textEditRecipeDescription = FindViewById<TextView>(Resource.Id.textEditRecipeDescription);
+            textRecipeName = FindViewById<TextView>(Resource.Id.textRecipeName);
+            textEditRecipeDescription = FindViewById<TextView>(Resource.Id.textEditRecipeDescription);
             
 
             //Get UI components for local use.
@@ -60,10 +61,6 @@ namespace Recipizer.Activities
                 presenter.Edit_Click();
             };
 
-            //Set Text
-            textRecipeName.Text = presenter.CurrentRecipe.Title;
-            textEditRecipeDescription.Text = presenter.CurrentRecipe.Description;
-
             //Call the presenters OnCreate Method.
             presenter.onCreate();
         }
@@ -82,10 +79,18 @@ namespace Recipizer.Activities
             }
         }
 
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            presenter.onActivityResult(requestCode, resultCode, data);
+        }
+
         public void ResetText() { }
 
         public void UpdateView()
         {
+            textRecipeName.Text = presenter.CurrentRecipe.Title;
+            textEditRecipeDescription.Text = presenter.CurrentRecipe.Description;
             ingredientAdapter.NotifyDataSetChanged();
         }
 

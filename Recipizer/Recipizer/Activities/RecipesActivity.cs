@@ -104,5 +104,10 @@ namespace Recipizer.Activities
                 StartActivity(intent);
             }
         }
+
+        public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
