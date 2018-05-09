@@ -74,10 +74,9 @@ namespace Recipizer.Activities
             presenter.onCreate();
         }
 
-        public void FinishView(Result _result)
+        public void FinishView(Result _result, Intent intent)
         {
-            SetResult(_result);
-
+            SetResult(_result, intent);
             Finish();
         }
 
@@ -100,7 +99,7 @@ namespace Recipizer.Activities
             spinnerUnits.SetSelection(0);
         }
 
-        public void Navigate(int code) {
+        public void Navigate(int code, Intent data) {
            /* if (code == Constants.NEW_RECIPE)
             {
                 var intent = new Intent(this, typeof(CreateRecipeActivity));

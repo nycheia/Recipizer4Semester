@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using SQLite;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,6 +14,8 @@ namespace Recipizer
 {
     public class Constants
     {
+        public static readonly int CREATE_RECIPE = 1;
+        public static SQLiteConnection Conn;
         public const int NEW_RECIPE = 1;
         public const int SHOW_RECIPE = 2;
     }
