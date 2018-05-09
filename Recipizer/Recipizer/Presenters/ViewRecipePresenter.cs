@@ -23,7 +23,7 @@ namespace Recipizer.Presenters
 
             //Get the Recipe object
             CurrentRecipe = Constants.Conn.Get<Recipe>(_RecipeID);
-            CurrentRecipe.setIngredients();
+            CurrentRecipe.SetIngredients();
             //TODO do better
             foreach (Ingredient item in CurrentRecipe.Ingredients)
             {

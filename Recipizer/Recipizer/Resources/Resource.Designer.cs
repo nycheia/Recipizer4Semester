@@ -60,50 +60,53 @@ namespace Recipizer
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06000e
-			public const int absoluteLayoutMain = 2131099662;
+			// aapt resource value: 0x7f060016
+			public const int ListMealPlan = 2131099670;
+			
+			// aapt resource value: 0x7f060011
+			public const int absoluteLayoutMain = 2131099665;
 			
 			// aapt resource value: 0x7f060007
 			public const int btnAddIngredient_CreateRecipe = 2131099655;
 			
-			// aapt resource value: 0x7f060015
-			public const int btnAddMealList = 2131099669;
+			// aapt resource value: 0x7f060018
+			public const int btnAddMealList = 2131099672;
 			
-			// aapt resource value: 0x7f06001b
-			public const int btnAddShopIngredient = 2131099675;
+			// aapt resource value: 0x7f06001e
+			public const int btnAddShopIngredient = 2131099678;
 			
-			// aapt resource value: 0x7f060016
-			public const int btnClearMealList = 2131099670;
+			// aapt resource value: 0x7f060019
+			public const int btnClearMealList = 2131099673;
 			
-			// aapt resource value: 0x7f06001c
-			public const int btnClearShopList = 2131099676;
+			// aapt resource value: 0x7f06001f
+			public const int btnClearShopList = 2131099679;
 			
 			// aapt resource value: 0x7f06000a
 			public const int btnCreateRecipe_CreateRecipe = 2131099658;
 			
-			// aapt resource value: 0x7f060021
-			public const int btnEdit = 2131099681;
+			// aapt resource value: 0x7f060024
+			public const int btnEdit = 2131099684;
 			
 			// aapt resource value: 0x7f06000d
 			public const int btnIngredientAdapterDelete = 2131099661;
 			
-			// aapt resource value: 0x7f060010
-			public const int btnMealPlanNav = 2131099664;
+			// aapt resource value: 0x7f060013
+			public const int btnMealPlanNav = 2131099667;
 			
-			// aapt resource value: 0x7f060018
-			public const int btnNewRecipe = 2131099672;
-			
-			// aapt resource value: 0x7f06000f
-			public const int btnRecipeNav = 2131099663;
+			// aapt resource value: 0x7f06001b
+			public const int btnNewRecipe = 2131099675;
 			
 			// aapt resource value: 0x7f060012
-			public const int btnSettingsNav = 2131099666;
+			public const int btnRecipeNav = 2131099666;
 			
-			// aapt resource value: 0x7f060022
-			public const int btnShare = 2131099682;
+			// aapt resource value: 0x7f060015
+			public const int btnSettingsNav = 2131099669;
 			
-			// aapt resource value: 0x7f060011
-			public const int btnShopListNav = 2131099665;
+			// aapt resource value: 0x7f060025
+			public const int btnShare = 2131099685;
+			
+			// aapt resource value: 0x7f060014
+			public const int btnShopListNav = 2131099668;
 			
 			// aapt resource value: 0x7f060005
 			public const int editTextIngredientAmount_CreateRecipe = 2131099653;
@@ -117,9 +120,6 @@ namespace Recipizer
 			// aapt resource value: 0x7f060001
 			public const int editTextRecipeName_CreateRecipe = 2131099649;
 			
-			// aapt resource value: 0x7f060013
-			public const int expandableListMealPlan = 2131099667;
-			
 			// aapt resource value: 0x7f06000c
 			public const int ingAdapterTextViewIngAmount = 2131099660;
 			
@@ -129,26 +129,35 @@ namespace Recipizer
 			// aapt resource value: 0x7f060004
 			public const int linearLayoutIngredient = 2131099652;
 			
-			// aapt resource value: 0x7f060014
-			public const int linearLayoutMealPlan = 2131099668;
+			// aapt resource value: 0x7f060017
+			public const int linearLayoutMealPlan = 2131099671;
 			
-			// aapt resource value: 0x7f06001a
-			public const int linearLayoutShopList = 2131099674;
+			// aapt resource value: 0x7f06001d
+			public const int linearLayoutShopList = 2131099677;
 			
-			// aapt resource value: 0x7f060020
-			public const int linearLayoutViewRecipe = 2131099680;
+			// aapt resource value: 0x7f060023
+			public const int linearLayoutViewRecipe = 2131099683;
 			
 			// aapt resource value: 0x7f060002
 			public const int listIngredients_CreateRecipe = 2131099650;
 			
-			// aapt resource value: 0x7f06001e
-			public const int listViewIngredients = 2131099678;
+			// aapt resource value: 0x7f060021
+			public const int listViewIngredients = 2131099681;
 			
-			// aapt resource value: 0x7f060017
-			public const int listViewRecipes = 2131099671;
+			// aapt resource value: 0x7f06001a
+			public const int listViewRecipes = 2131099674;
 			
-			// aapt resource value: 0x7f060019
-			public const int listViewShoppingList = 2131099673;
+			// aapt resource value: 0x7f06001c
+			public const int listViewShoppingList = 2131099676;
+			
+			// aapt resource value: 0x7f06000e
+			public const int mealDayAdapterTextViewMealDayDate = 2131099662;
+			
+			// aapt resource value: 0x7f060010
+			public const int recAdapterTextViewRecDate = 2131099664;
+			
+			// aapt resource value: 0x7f06000f
+			public const int recAdapterTextViewRecTitle = 2131099663;
 			
 			// aapt resource value: 0x7f060000
 			public const int scrollViewCreateRecipe = 2131099648;
@@ -159,11 +168,11 @@ namespace Recipizer
 			// aapt resource value: 0x7f060006
 			public const int spinnerUnits_CreateRecipe = 2131099654;
 			
-			// aapt resource value: 0x7f06001f
-			public const int textEditRecipeDescription = 2131099679;
+			// aapt resource value: 0x7f060022
+			public const int textEditRecipeDescription = 2131099682;
 			
-			// aapt resource value: 0x7f06001d
-			public const int textRecipeName = 2131099677;
+			// aapt resource value: 0x7f060020
+			public const int textRecipeName = 2131099680;
 			
 			static Id()
 			{
@@ -185,19 +194,25 @@ namespace Recipizer
 			public const int item_ingredient = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Main = 2130837506;
+			public const int item_MealDayGroup = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int MealPlan = 2130837507;
+			public const int item_RecipeChild = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int Recipes = 2130837508;
+			public const int Main = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int ShoppingList = 2130837509;
+			public const int MealPlan = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int ViewRecipe = 2130837510;
+			public const int Recipes = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int ShoppingList = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int ViewRecipe = 2130837512;
 			
 			static Layout()
 			{

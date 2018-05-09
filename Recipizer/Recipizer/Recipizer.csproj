@@ -78,6 +78,7 @@
     <Compile Include="Activities\CreateRecipeActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\MealPlanActivity.cs" />
+    <Compile Include="Adapters\MealDayAdapter.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="dbAccess\DatabaseAccess.cs" />
     <Compile Include="Models\Ingredient.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Presenters\CreateRecipePresenter.cs" />
     <Compile Include="Presenters\IPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Presenters\MealPlanPresenter.cs" />
     <Compile Include="Presenters\RecipesPresenter.cs" />
     <Compile Include="Presenters\ViewRecipePresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -117,6 +119,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\item_ingredient.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_RecipeChild.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_MealDayGroup.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

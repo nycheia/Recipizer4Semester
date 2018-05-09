@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -34,7 +33,7 @@ namespace Recipizer.Models
             
         }
 
-        public void setIngredients()
+        public void SetIngredients()
         {
             Ingredients = (from i in Constants.Conn.Table<Ingredient>() where i.RecipeId == id select i).ToList();
         }
