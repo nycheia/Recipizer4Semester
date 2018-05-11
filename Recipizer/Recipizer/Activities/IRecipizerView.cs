@@ -24,7 +24,6 @@ namespace Recipizer.Activities
 
         void MakeToast(string text, ToastLength length);
 
-        
         void Navigate(int code, Intent data);
     }
 }

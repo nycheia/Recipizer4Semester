@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1">
+    <LinearLayout
+        p1:orientation="horizontal"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/linearLayout2">
+        <Button
+            p1:text="@string/btn_connect"
+            p1:layout_width="wrap_content"
+            p1:layout_height="45dp"
+            p1:id="@+id/btnConnect"
+            p1:layout_marginStart="10dp"
+            p1:layout_marginEnd="5dp"
+            p1:layout_marginTop="5dp" />
+        <Spinner
+            p1:layout_width="match_parent"
+            p1:layout_height="45dp"
+            p1:id="@+id/spinnerDevices"
+            p1:layout_marginEnd="10dp"
+            p1:layout_marginStart="5dp"
+            p1:layout_marginTop="5dp" />
+    </LinearLayout>
+    <LinearLayout
+        p1:orientation="horizontal"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/linearLayout3">
+        <ListView
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:layout_width="match_parent"
+            p1:layout_height="300dp"
+            p1:id="@+id/listViewShareItems"
+            p1:layout_margin="10dp" />
+    </LinearLayout>
+    <RelativeLayout
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/relativeLayout1"
+        p1:gravity="center">
+        <Button
+            p1:text="@+string/btn_addmore"
+            p1:id="@+id/btnAddMore"
+            p1:layout_width="wrap_content"
+            p1:layout_height="45dp"
+            p1:layout_marginStart="20dp"
+            p1:layout_marginTop="10dp"
+            p1:layout_marginBottom="10dp"
+            p1:layout_alignParentStart="true" />
+        <Button
+            p1:text="@+string/btn_clear"
+            p1:id="@+id/btnClearItems"
+            p1:layout_width="wrap_content"
+            p1:layout_height="45dp"
+            p1:layout_marginTop="10dp"
+            p1:layout_marginStart="10dp"
+            p1:layout_centerVertical="false"
+            p1:layout_centerHorizontal="true" />
+        <Button
+            p1:text="@+string/btn_share"
+            p1:id="@+id/btnShareItems"
+            p1:layout_width="wrap_content"
+            p1:layout_height="45dp"
+            p1:layout_marginEnd="20dp"
+            p1:layout_marginTop="10dp"
+            p1:layout_marginBottom="10dp"
+            p1:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>

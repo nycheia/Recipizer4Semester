@@ -10,7 +10,9 @@
   <string name="btn_share">Share</string>
   <string name="btn_save">Save</string>
   <string name="btn_add">Add</string>
+  <string name="btn_addmore">Add more</string>
   <string name="btn_clear">Clear</string>
+  <string name="btn_connect">Connect to</string>
 
   <string-array name ="unit_array">
     <item>g</item>

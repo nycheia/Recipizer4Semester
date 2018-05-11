@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\IRecipizerView.cs" />
+    <Compile Include="Activities\ShareBluetoothActivity.cs" />
     <Compile Include="Activities\ViewRecipeActivity.cs" />
     <Compile Include="Adapters\IngredientAdapter.cs" />
     <Compile Include="Adapters\IngredientButtonAdapter.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Presenters\IPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Presenters\RecipesPresenter.cs" />
+    <Compile Include="Presenters\ShareBluetoothPresenter.cs" />
     <Compile Include="Presenters\ViewRecipePresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +123,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\item_ingredient.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ShareBluetooth.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -72,6 +72,7 @@ namespace Recipizer.Presenters
             }
 
             Constants.Conn.Update(CurrentRecipe);
+
             view.MakeToast(CurrentRecipe.Title + " updated", Android.Widget.ToastLength.Short);
             return CurrentRecipe.id;
         }
