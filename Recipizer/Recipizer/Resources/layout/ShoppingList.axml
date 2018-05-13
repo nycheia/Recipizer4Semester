@@ -7,8 +7,14 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="410dp"
+        android:layout_height="375dp"
         android:id="@+id/listViewShoppingList" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_AddToShoppingList"
+        android:maxLength="100"
+        android:hint="Write a shopping list note here to add it to the list" />
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
