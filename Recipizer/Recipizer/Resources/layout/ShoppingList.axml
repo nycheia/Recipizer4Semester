@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants">
     <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="375dp"
         android:id="@+id/listViewShoppingList" />
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:id="@+id/editText_AddToShoppingList"
-        android:maxLength="100"
+        android:maxLength="75"
         android:hint="Write a shopping list note here to add it to the list" />
     <LinearLayout
         android:orientation="horizontal"

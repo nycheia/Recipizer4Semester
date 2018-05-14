@@ -17,17 +17,18 @@ namespace Recipizer.Models
     {
         [PrimaryKey,AutoIncrement]
         public int id { get; set; }
-        public List<Ingredient> Ingredients;
-        public List<string> ShoppingListItems;
+        //public List<Ingredient> Ingredients;
+        //public List<string> ShoppingListItems;
+        public string shoppingListItem;
 
         public ShoppingList()
         {
 
         }
 
-        /*public ShoppingList(List<string> _ShoppingListItems)
+        public ShoppingList(string _shoppingListItem)
         {
-            ShoppingListItems = _ShoppingListItems;
-        }*/
+            this.shoppingListItem = _shoppingListItem;
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace Recipizer.Presenters
 
         public void AddShoppingListItem(string shopListItem)
         {
+            ShoppingList shopList = new ShoppingList();
             shoppingListList.Add(shopListItem);
             view.UpdateView();
             view.ResetText();

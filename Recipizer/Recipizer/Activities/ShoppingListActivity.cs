@@ -92,6 +92,8 @@ namespace Recipizer.Activities
 
         public void UpdateView()
         {
+            shoppingListAdapter.Clear();
+            shoppingListAdapter.AddAll(presenter.shoppingListList);
             shoppingListAdapter.NotifyDataSetChanged();
         }
 
