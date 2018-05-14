@@ -47,13 +47,13 @@ namespace Recipizer.Activities
             //Button Events
             btnAddShopIngredient.Click += (object sender, EventArgs e) =>
             {
-                //presenter.AddShoppingListItem(editTextAddToShoppingList.Text);
+                presenter.AddShoppingListItem(editTextAddToShoppingList.Text);
             };
 
             btnClearShopList.Click += (object sender, EventArgs e) =>
             {
                 //ClearListView
-                //ClearList
+                //presenter.ClearList
             };
 
         }

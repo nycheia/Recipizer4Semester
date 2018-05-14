@@ -30,7 +30,7 @@ namespace Recipizer.Presenters
         {
             shoppingListList.Add(shopListItem);
             view.UpdateView();
-            //view.ResetText();
+            view.ResetText();
 
         }
 
