@@ -72,6 +72,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\DeviceListActivity.cs" />
     <Compile Include="Activities\IRecipizerView.cs" />
     <Compile Include="Activities\ShareBluetoothActivity.cs" />
     <Compile Include="Activities\ViewRecipeActivity.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Activities\MealPlanActivity.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="dbAccess\DatabaseAccess.cs" />
+    <Compile Include="Models\Bluetooth.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\MealDay.cs" />
     <Compile Include="Models\MealPlan.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Models\ShoppingList.cs" />
     <Compile Include="Activities\RecipesActivity.cs" />
     <Compile Include="Presenters\CreateRecipePresenter.cs" />
+    <Compile Include="Presenters\DeviceListPresenter.cs" />
     <Compile Include="Presenters\IPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Presenters\RecipesPresenter.cs" />
@@ -126,6 +129,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ShareBluetooth.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DeviceList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
