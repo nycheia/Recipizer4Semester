@@ -20,11 +20,12 @@ namespace Recipizer.Presenters
         {
             this.view = _view;
             RecipeList = new List<string>();
-            LoadRecipesFromStorage();
+            //LoadRecipesFromStorage();
         }
         
         public void LoadRecipesFromStorage()
         {
+            RecipeList.Clear();
             foreach (Recipe item in Constants.Conn.Table<Recipe>().ToList())
             {
                 RecipeList.Add(item.Title);

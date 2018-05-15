@@ -19,98 +19,86 @@ namespace Recipizer.Activities
     public class DeviceListActivity : Activity, IRecipizerView
     {
         //UI components
-        ListView DeviceList;
 
         //Adapters
-        BluetoothAdapter thisPhone;
-
+        ArrayAdapter<string> DeviceListAdapter;
+        
         //Variable to connect to presenter
         DeviceListPresenter presenter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.CreateRecipe);
+            SetContentView(Resource.Layout.DeviceList);
 
             //Instantiate the presenter
             presenter = new DeviceListPresenter(this);
 
             //Get UI components for global use.
-            DeviceList = FindViewById<ListView>(Resource.Id.listViewDeviceList);
 
             //Get UI components for local use.
+            ListView deviceList = FindViewById<ListView>(Resource.Id.listViewDeviceList);
             Button btnUpdate = FindViewById<Button>(Resource.Id.btnUpdate);
-            Switch switchVisible = FindViewById<Switch>(Resource.Id.switchVisible);
+            //Switch switchVisible = FindViewById<Switch>(Resource.Id.switchVisible);
 
             //Setup lists.
-
+            DeviceListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1);
+            deviceList.Adapter = DeviceListAdapter;
 
             //Setup Button Events.
-            /*btnAddIngredient.Click += (object sender, EventArgs e) => {
+            btnUpdate.Click += ( sender, e) => 
+            {
+                presenter.Update_Click();
             };
 
-            btnCreateRecipe.Click += (object sender, EventArgs e) => {
-            };*/
+            deviceList.ItemClick += (sender, e) => 
+            {
+                presenter.DeviceList_OnItemClick(e.Position);
+            };
+
+            //Bluetooth reciever is in a new class below this class
+            RegisterReceiver(new DeviceListPresenter.BluetoothReciever(this, presenter), new IntentFilter(BluetoothDevice.ActionFound));
+            RegisterReceiver(new DeviceListPresenter.BluetoothReciever(this, presenter), new IntentFilter(BluetoothAdapter.ActionDiscoveryStarted));
+            RegisterReceiver(new DeviceListPresenter.BluetoothReciever(this, presenter), new IntentFilter(BluetoothAdapter.ActionDiscoveryFinished));
 
             //Call the presenters OnCreate Method.
             presenter.onCreate();
-
-
-
-            //TODO Refactor this
-            /*********************************************************************************/
-
-            BluetoothAdapter bluetooth = BluetoothAdapter.DefaultAdapter;
-
-            /*Enabling Bluetooth the nice way*/
-            if (!bluetooth.IsEnabled)
-            {
-                String enableBT = BluetoothAdapter.ActionRequestEnable;
-
-                StartActivityForResult(new Intent(enableBT), Constants.ENABLE_BLUETOOTH);
-            }
-            else
-            {
-                //TODO if you get here we don goofed
-            }
-
-            thisPhone = bluetooth;
         }
 
         public void FinishView(Result result, Intent intent)
         {
-            throw new NotImplementedException();
+            SetResult(result, intent);
         }
 
         public void MakeToast(string text, ToastLength length)
         {
-            throw new NotImplementedException();
+            Toast.MakeText(this, text, length);
         }
 
         public void Navigate(int code, Intent data)
         {
-            throw new NotImplementedException();
+            if (code == Constants.ENABLE_BLUETOOTH)
+            {
+                StartActivityForResult(data, Constants.ENABLE_BLUETOOTH);
+            }
         }
 
-        public void ResetText()
-        {
-            throw new NotImplementedException();
-        }
+        public void ResetText() { }
 
-        public void SetupView()
-        {
-            throw new NotImplementedException();
-        }
+        public void SetupView() { }
 
         public void UpdateView()
         {
-            throw new NotImplementedException();
+            DeviceListAdapter.Clear();
+            DeviceListAdapter.AddAll(presenter.DeviceDict.Keys);
+
+            DeviceListAdapter.NotifyDataSetChanged();
         }
 
         public void RequestPermission()
         {
-            /* Remember to change magic int */
-            //RequestPermissions(new string[] { Manifest.Permission.AccessCoarseLocation}, 1);
+            //TODO Remember to change magic int
+            RequestPermissions(new string[] { Manifest.Permission.Bluetooth}, 1);
         }
     }
 }

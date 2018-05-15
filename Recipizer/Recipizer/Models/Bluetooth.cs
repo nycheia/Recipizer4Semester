@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
+/*
 namespace Recipizer.Models
 {
     class Bluetooth { 
@@ -20,7 +20,7 @@ namespace Recipizer.Models
 
             BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
 
-            /*Enabling Bluetooth the nice way*/
+            //Enabling Bluetooth the nice way
             if (!bluetooth.isEnabled())
             {
                 String enableBT = BluetoothAdapter.ACTION_REQUEST_ENABLE;
@@ -104,43 +104,6 @@ namespace Recipizer.Models
             ct.start();
         }
 
-        BroadcastReceiver handleDiscoveryResult = new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context context, Intent intent)
-        {
-            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(intent.getAction()))
-            {
-                //discovery started
-                discoverStatus = status.STARTED;
-                (Toast.makeText(context, "Discovery started", Toast.LENGTH_SHORT)).show();
-            }
-            else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(intent.getAction()))
-            {
-                //discovery finished
-                discoverStatus = status.STOPPED;
-                (Toast.makeText(context, "Discovery finished", Toast.LENGTH_SHORT)).show();
-                //startSocketConnection(); //connects to a specific device
-            }
-            else if (BluetoothDevice.ACTION_FOUND.equals(intent.getAction()))
-            {
-                //first lets get the name of the device
-                String remoteDeviceName = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-                BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-                if (remoteDevice != null)
-                {
-                    if (remoteDeviceName == null)
-                    {
-                        remoteDeviceName = "Undefined";
-                    }
-
-                    btList.put(remoteDeviceName, remoteDevice);
-                    Log.d("TAG", "Discovered: " + remoteDeviceName);
-
-                    discoverStatus = status.FOUND;
-                }
-            }
-        }
     };
 
     public void manageMyConnectedSocket(BluetoothSocket socket)
@@ -386,4 +349,4 @@ public void cancel()
 }
     }
     }
-}
+}*/
