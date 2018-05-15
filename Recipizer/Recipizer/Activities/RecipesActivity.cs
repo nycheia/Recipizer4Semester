@@ -42,6 +42,7 @@ namespace Recipizer.Activities
             Button btnNewRecipe = FindViewById<Button>(Resource.Id.btnNewRecipe);
 
             //Setup lists.
+            //If it shows double look at UpdateView()
             RecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.RecipeList);
             listViewRecipes.Adapter = RecipeAdapter;
 
@@ -74,6 +75,10 @@ namespace Recipizer.Activities
 
         public void UpdateView()
         {
+            //If the list adds double outcomment the below 2 lines
+            RecipeAdapter.Clear();
+            RecipeAdapter.AddAll(presenter.RecipeList);
+
             RecipeAdapter.NotifyDataSetChanged();
         }
 
