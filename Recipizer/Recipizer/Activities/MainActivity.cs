@@ -31,6 +31,11 @@ namespace Recipizer.Activities
             throw new System.NotImplementedException();
         }
 
+        public void RequestPermission()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void ResetText()
         {
             throw new System.NotImplementedException();

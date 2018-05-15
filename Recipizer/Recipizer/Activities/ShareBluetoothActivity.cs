@@ -102,5 +102,10 @@ namespace Recipizer.Activities
         {
             throw new NotImplementedException();
         }
+
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

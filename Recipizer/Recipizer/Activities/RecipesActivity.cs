@@ -78,7 +78,7 @@ namespace Recipizer.Activities
             //If the list adds double outcomment the below 2 lines
             RecipeAdapter.Clear();
             RecipeAdapter.AddAll(presenter.RecipeList);
-
+            
             RecipeAdapter.NotifyDataSetChanged();
         }
 
@@ -111,6 +111,11 @@ namespace Recipizer.Activities
         }
 
         public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestPermission()
         {
             throw new NotImplementedException();
         }

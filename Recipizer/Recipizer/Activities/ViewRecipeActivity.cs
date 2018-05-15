@@ -77,6 +77,13 @@ namespace Recipizer.Activities
                 intent.PutExtras(data);
                 StartActivityForResult(intent, Constants.EDIT_RECIPE);
             }
+            else if (code == Constants.SHARE)
+            {
+                Intent intent = new Intent(this, typeof(DeviceListActivity));
+                intent.PutExtras(data);
+                //TODO might not need to be ForResult
+                StartActivityForResult(intent, Constants.SHARE);
+            }
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -95,6 +102,11 @@ namespace Recipizer.Activities
         }
 
         public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestPermission()
         {
             throw new NotImplementedException();
         }

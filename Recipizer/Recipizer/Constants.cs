@@ -19,9 +19,11 @@ namespace Recipizer
         public const int NEW_RECIPE = 1;
         public const int SHOW_RECIPE = 2;
         public const int EDIT_RECIPE = 3;
-        public const int ENABLE_BLUETOOTH = 4;
+        public const int SHARE = 4;
+        public const int ENABLE_BLUETOOTH = 5;
 
         public const string RECIPE_ID = "recipeid";
+        public const string POSITION = "position";
 
     }
 }

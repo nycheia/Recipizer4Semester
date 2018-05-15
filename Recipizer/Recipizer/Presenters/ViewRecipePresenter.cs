@@ -27,7 +27,7 @@ namespace Recipizer.Presenters
 
         public void Share_Click()
         {
-            //TODO Share functionality
+            view.Navigate(Constants.SHARE, new Intent().PutExtra(Constants.RECIPE_ID, CurrentRecipe.id));
         }
 
         public void Edit_Click()

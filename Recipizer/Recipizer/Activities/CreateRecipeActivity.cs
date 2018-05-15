@@ -114,5 +114,10 @@ namespace Recipizer.Activities
                 editTextRecipeDescription.Text = presenter.CurrentRecipe.Description;
             }
         }
+
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
