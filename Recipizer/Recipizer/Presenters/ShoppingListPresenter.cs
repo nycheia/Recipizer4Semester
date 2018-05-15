@@ -24,21 +24,33 @@ namespace Recipizer.Presenters
         {
             this.view = _view;
             shoppingListList = new List<string>();
+            LoadShoppingListFromDatabase();
         }
 
         public void AddShoppingListItem(string shopListItem)
         {
-            ShoppingList shopList = new ShoppingList();
+            ShoppingItem shopItem = new ShoppingItem(shopListItem);
             shoppingListList.Add(shopListItem);
             view.UpdateView();
             view.ResetText();
 
+            Constants.Conn.Insert(shopItem);
         }
 
         public void ClearList()
         {
             //somethingsomethingdatabasedatabase det her er bare for at minde mig om det
             shoppingListList.Clear();
+            Constants.Conn.DeleteAll<ShoppingItem>();
+            view.UpdateView();
+        }
+
+        public void LoadShoppingListFromDatabase()
+        {
+            foreach(ShoppingItem shopItem in Constants.Conn.Table<ShoppingItem>())
+            {
+                shoppingListList.Add(shopItem.ShoppingListItem);
+            }
         }
         public void onActivityResult(int requestCode, Result resultCode, Intent data)
         {

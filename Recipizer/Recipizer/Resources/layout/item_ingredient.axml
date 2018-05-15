@@ -10,7 +10,7 @@
         android:id="@+id/ingAdapterTextViewIngAmount"
         android:minHeight="30dp"
         android:gravity="center_vertical"
-        android:textSize="22dp" />
+        android:textSize="17dp" />
     <TextView
         android:text="Text"
         android:layout_width="270dp"
@@ -18,6 +18,6 @@
         android:id="@+id/ingAdapterTextViewIngName"
         android:minHeight="30dp"
         android:gravity="center_vertical"
-        android:textSize="22dp"
+        android:textSize="17dp"
         android:layout_marginRight="9.5dp" />
 </LinearLayout>

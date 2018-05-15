@@ -86,7 +86,7 @@
     <Compile Include="Models\MealDay.cs" />
     <Compile Include="Models\MealPlan.cs" />
     <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\ShoppingList.cs" />
+    <Compile Include="Models\ShoppingItem.cs" />
     <Compile Include="Activities\RecipesActivity.cs" />
     <Compile Include="Presenters\CreateRecipePresenter.cs" />
     <Compile Include="Presenters\IPresenter.cs" />

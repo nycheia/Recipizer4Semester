@@ -13,22 +13,22 @@ using Android.Widget;
 namespace Recipizer.Models
 {
     [Table("ShoppingList")]
-    public class ShoppingList
+    public class ShoppingItem
     {
         [PrimaryKey,AutoIncrement]
-        public int id { get; set; }
+        public int Id { get; set; }
         //public List<Ingredient> Ingredients;
         //public List<string> ShoppingListItems;
-        public string shoppingListItem;
+        public string ShoppingListItem { get; set; }
 
-        public ShoppingList()
+        public ShoppingItem()
         {
 
         }
 
-        public ShoppingList(string _shoppingListItem)
+        public ShoppingItem(string _ShoppingListItem)
         {
-            this.shoppingListItem = _shoppingListItem;
+            this.ShoppingListItem = _ShoppingListItem;
         }
     }
 }

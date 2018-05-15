@@ -52,8 +52,8 @@ namespace Recipizer.Activities
 
             btnClearShopList.Click += (object sender, EventArgs e) =>
             {
-                //ClearListView
-                //presenter.ClearList
+                ClearListView();
+                presenter.ClearList();
             };
 
         }
@@ -62,8 +62,7 @@ namespace Recipizer.Activities
         {
             shoppingListAdapter.Clear();
             
-            //clear list in database too
-            //UpdateView();
+            //aUpdateView();
         }
         public void FinishView(Result result, Intent intent)
         {

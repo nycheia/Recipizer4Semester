@@ -40,7 +40,7 @@ namespace Recipizer.Presenters
             Constants.Conn = new SQLiteConnection(DbPath);
             Constants.Conn.CreateTable<Recipe>();
             Constants.Conn.CreateTable<Ingredient>();
-            Constants.Conn.CreateTable<ShoppingList>();
+            Constants.Conn.CreateTable<ShoppingItem>();
         }
 
         public void onDestroy()
