@@ -118,7 +118,7 @@ namespace Recipizer
 			public const int btnShopListNav = 2131099670;
 			
 			// aapt resource value: 0x7f06000f
-			public const int button1 = 2131099663;
+			public const int btnUpdate = 2131099663;
 			
 			// aapt resource value: 0x7f060005
 			public const int editTextIngredientAmount_CreateRecipe = 2131099653;
@@ -166,7 +166,7 @@ namespace Recipizer
 			public const int listIngredients_CreateRecipe = 2131099650;
 			
 			// aapt resource value: 0x7f06000c
-			public const int listView1 = 2131099660;
+			public const int listViewDeviceList = 2131099660;
 			
 			// aapt resource value: 0x7f06002c
 			public const int listViewIngredients = 2131099692;
@@ -196,7 +196,7 @@ namespace Recipizer
 			public const int spinnerUnits_CreateRecipe = 2131099654;
 			
 			// aapt resource value: 0x7f06000e
-			public const int switch1 = 2131099662;
+			public const int switchVisible = 2131099662;
 			
 			// aapt resource value: 0x7f06002d
 			public const int textEditRecipeDescription = 2131099693;

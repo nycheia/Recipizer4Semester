@@ -12,24 +12,16 @@ using Android.Widget;
 
 namespace Recipizer.Models
 {
-    class Bluetooth
-    { }
-}
-       /* public Bluetooth(Activity ac)
+    class Bluetooth { 
+        public Bluetooth(Activity ac)
         {
             activity = ac;
 
-            btList = new HashMap<>();
-
-            activity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, 1);
-            //TODO do something if we dont get or have permission.
-
-        
 
             BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
 
             /*Enabling Bluetooth the nice way*/
-            /*if (!bluetooth.isEnabled())
+            if (!bluetooth.isEnabled())
             {
                 String enableBT = BluetoothAdapter.ACTION_REQUEST_ENABLE;
                 activity.startActivityForResult(new Intent(enableBT), ENABLE_BLUETOOTH);
@@ -394,4 +386,4 @@ public void cancel()
 }
     }
     }
-}*/
+}
