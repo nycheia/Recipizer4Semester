@@ -25,26 +25,30 @@ namespace Recipizer.Presenters
             DeviceDict = new Dictionary<string, BluetoothDevice>();
 
             view.RequestPermission();
-            BluetoothAdapter bluetooth = BluetoothAdapter.DefaultAdapter;
 
-            /*Enabling Bluetooth the nice way*/
-            if (!bluetooth.IsEnabled)
-            {
-                String enableBT = BluetoothAdapter.ActionRequestEnable;
-
-                view.Navigate(Constants.ENABLE_BLUETOOTH, new Intent(enableBT));
-            }
-
-            thisPhone = bluetooth;
+            thisPhone = BluetoothAdapter.DefaultAdapter;
 
             StartDiscoveryProcess();
         }
 
         public Object StartDiscoveryProcess()
         {
-            if (!IsDiscovering)
+            /*Enabling Bluetooth the nice way*/
+            if (!thisPhone.IsEnabled)
             {
-                thisPhone.StartDiscovery();
+                String enableBT = BluetoothAdapter.ActionRequestEnable;
+
+                view.Navigate(Constants.ENABLE_BLUETOOTH, new Intent(enableBT));
+            }
+
+            if (thisPhone.IsEnabled)
+            {
+                if (!IsDiscovering)
+                {
+                    thisPhone.StartDiscovery();
+                }
+
+                StartDiscoveryProcess();
             }
 
             return true;
