@@ -16,6 +16,7 @@ namespace Recipizer
     {
         public static SQLiteConnection Conn;
 
+        public const int TMP = 0;
         public const int NEW_RECIPE = 1;
         public const int SHOW_RECIPE = 2;
         public const int EDIT_RECIPE = 3;

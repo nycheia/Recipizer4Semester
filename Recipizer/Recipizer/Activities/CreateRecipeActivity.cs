@@ -119,5 +119,15 @@ namespace Recipizer.Activities
         {
             throw new NotImplementedException();
         }
+
+        public void MakeOKButtonDialog()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

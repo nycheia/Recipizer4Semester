@@ -65,9 +65,12 @@ namespace Recipizer.Activities
             presenter.onCreate();
         }
 
+
+
         public void FinishView(Result result, Intent intent)
         {
             SetResult(result, intent);
+            Finish();
         }
 
         public void MakeToast(string text, ToastLength length)
@@ -81,6 +84,12 @@ namespace Recipizer.Activities
             {
                 StartActivityForResult(data, Constants.ENABLE_BLUETOOTH);
             }
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            presenter.onActivityResult(requestCode, resultCode, data);
         }
 
         public void ResetText() { }
@@ -100,5 +109,17 @@ namespace Recipizer.Activities
             //TODO Remember to change magic int
             RequestPermissions(new string[] { Manifest.Permission.Bluetooth}, 1);
         }
+
+        public void MakeDialog(int code)
+        {
+            //TODO Remove magic strings (Move them to strings XML)
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Notice:")
+                .SetMessage("Bluetooth is required to share items. \n Activate bluetooth?")
+                .SetNegativeButton("No",  (sender, e) => { })
+                .SetPositiveButton("Yes", (sender, e) => { presenter.StartDiscoveryProcess(); });
+            builder.Show();
+        }
+        
     }
 }

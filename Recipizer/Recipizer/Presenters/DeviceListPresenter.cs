@@ -40,15 +40,9 @@ namespace Recipizer.Presenters
 
                 view.Navigate(Constants.ENABLE_BLUETOOTH, new Intent(enableBT));
             }
-
-            if (thisPhone.IsEnabled)
+            else if (!IsDiscovering)
             {
-                if (!IsDiscovering)
-                {
-                    thisPhone.StartDiscovery();
-                }
-
-                StartDiscoveryProcess();
+                thisPhone.StartDiscovery();
             }
 
             return true;
@@ -56,7 +50,6 @@ namespace Recipizer.Presenters
 
         public void Update_Click()
         {
-            view.UpdateView();
             StartDiscoveryProcess();
         }
 
@@ -65,7 +58,16 @@ namespace Recipizer.Presenters
             view.FinishView(Result.Ok, new Intent().PutExtra(Constants.POSITION, position));
         }
 
-        public void onActivityResult(int requestCode, Result resultCode, Intent data) { }
+        public void onActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            if (requestCode == Constants.ENABLE_BLUETOOTH)
+            {
+                if (resultCode != Result.Ok)
+                {
+                    view.MakeDialog(Constants.TMP);
+                }
+            }
+        }
 
         public void onBackPressed() { }
 

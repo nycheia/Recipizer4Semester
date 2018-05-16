@@ -27,5 +27,7 @@ namespace Recipizer.Activities
         void Navigate(int code, Intent data);
 
         void RequestPermission();
+
+        void MakeDialog(int code);
     }
 }
