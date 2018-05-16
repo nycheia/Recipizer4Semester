@@ -43,14 +43,15 @@ namespace Recipizer.Presenters
             //TODO DELETE DROP
             Constants.Conn.DropTable<MealPlan>();
             Constants.Conn.CreateTable<MealPlan>();
+            Constants.Conn.CreateTable<MealDay>();
 
             //TODO DELETE THIS FOR TESTING
             MealPlan mp1 = new MealPlan();
             mp1.name = "1";
             MealPlan mp2 = new MealPlan();
-            mp1.name = "2";
+            mp2.name = "2";
             MealPlan mp3 = new MealPlan();
-            mp1.name = "3";
+            mp3.name = "3";
 
             Constants.Conn.Insert(mp1);
             Constants.Conn.Insert(mp2);

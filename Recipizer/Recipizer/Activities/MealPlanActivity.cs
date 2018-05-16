@@ -22,6 +22,8 @@ namespace Recipizer.Activities
 
         MealPlanPresenter presenter;
 
+        Button createBtn;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -30,9 +32,24 @@ namespace Recipizer.Activities
             presenter = new MealPlanPresenter(this);
             // setting up UI components
             listViewMealPlan = FindViewById<ListView>(Resource.Id.ListMealPlan);
+            createBtn = FindViewById<Button>(Resource.Id.btnAddMealList);
+
             //setting up adapter
-            mealPlanAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1); //presenter.mealPlanList);
+            mealPlanAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.mealPlanList);
             listViewMealPlan.Adapter = mealPlanAdapter;
+
+            listViewMealPlan.ItemClick += (sender, e) => {
+                presenter.mealPlan_OnClick(e.Position);
+            };
+
+            createBtn.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(CreateMealPlanActivity));
+                StartActivity(intent);
+            };
+
+
+
             //presenter.onCreate();
         }
 
@@ -43,12 +60,17 @@ namespace Recipizer.Activities
 
         public void MakeToast(string text, ToastLength length)
         {
-            throw new NotImplementedException();
+            Toast.MakeText(this, text, length).Show();
         }
 
         public void Navigate(int code, Intent data)
         {
-            throw new NotImplementedException();
+            if(code == 1)
+            {
+                Intent intent = new Intent(this, typeof(ViewMealPlanActivity));
+                intent.PutExtras(data);
+                StartActivityForResult(intent, 1);
+            }
         }
 
         public void ResetText()

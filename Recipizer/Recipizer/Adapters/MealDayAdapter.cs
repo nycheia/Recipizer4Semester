@@ -18,23 +18,27 @@ namespace Recipizer.Adapters
     {
         private readonly Context context;
 
-        private List<Recipe> recipesList;
+        private Dictionary<string, List<string>> recipes;
 
-        private List<MealDay> mealDaysList;
+        private List<string> mealDaysList;
 
-        public MealDayAdapter(Context context, List<Recipe> list)
+        public MealDayAdapter(Context context, Dictionary<string, List<string>> recipes, List<string> mealDays)
         {
             this.context = context;
-            this.recipesList = list;
+            this.recipes = recipes;
+            this.mealDaysList = mealDays;
         }
 
-        public override int GroupCount => throw new NotImplementedException();
+        public override int GroupCount
+        {
+            get { return mealDaysList.Count(); }
+        }
 
-        public override bool HasStableIds => throw new NotImplementedException();
+        public override bool HasStableIds => false;
 
         public override Java.Lang.Object GetChild(int groupPosition, int childPosition)
         {
-            return null;
+            return this.recipes[mealDaysList[groupPosition]][childPosition];
         }
 
         public override long GetChildId(int groupPosition, int childPosition)
@@ -44,8 +48,7 @@ namespace Recipizer.Adapters
 
         public override int GetChildrenCount(int groupPosition)
         {
-            // TODO noget med count fra child list.
-            return groupPosition;
+            return recipes.Count();
         }
 
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
@@ -58,13 +61,13 @@ namespace Recipizer.Adapters
                 view = inflater.Inflate(Resource.Layout.item_RecipeChild, null);
             }
 
-            view.FindViewById<TextView>(Resource.Id.recAdapterTextViewRecTitle).Text = recipesList[childPosition].Title;
+            view.FindViewById<TextView>(Resource.Id.recAdapterTextViewRecTitle).Text = this.recipes[this.mealDaysList[groupPosition]][childPosition];
             return view;
         }
 
         public override Java.Lang.Object GetGroup(int groupPosition)
         {
-            return null;
+            return mealDaysList[groupPosition];
         }
 
         public override long GetGroupId(int groupPosition)
@@ -82,7 +85,7 @@ namespace Recipizer.Adapters
                 view = inflater.Inflate(Resource.Layout.item_MealDayGroup, null);
             }
 
-            view.FindViewById<TextView>(Resource.Id.recAdapterTextViewRecTitle).Text = mealDaysList[groupPosition].dayID.ToString();
+            view.FindViewById<TextView>(Resource.Id.recAdapterTextViewRecTitle).Text = mealDaysList[groupPosition];
             return view;
         }
 

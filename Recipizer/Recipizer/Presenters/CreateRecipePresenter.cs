@@ -22,6 +22,8 @@ namespace Recipizer.Presenters
 
         public List<Ingredient> ingredientsList;
 
+        
+
 
         public CreateRecipePresenter(IRecipizerView _view)
         {
