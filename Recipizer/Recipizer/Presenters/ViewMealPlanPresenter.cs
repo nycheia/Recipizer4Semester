@@ -51,7 +51,7 @@ namespace Recipizer.Presenters
             var query = from md in Constants.Conn.Table<MealDay>() where md.mealPlanId == mealPlanId select md;
             foreach (MealDay item in query)
             {
-                mealDays.Add(item.dayId.ToString());
+                mealDays.Add(item.day.ToString());
                 //var recipeQuery = from r in Constants.Conn.Table<Recipe>() where r.
             }
 

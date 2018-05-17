@@ -18,7 +18,7 @@ namespace Recipizer.Models
         public List<Ingredient> Ingredients;
         [PrimaryKey, AutoIncrement]
         public int id { get; set; }
-        [MaxLength(100)]
+        [MaxLength(100), Unique]
         public string Title { get; set; }
         [MaxLength(2000)]
         public string Description { get; set; }

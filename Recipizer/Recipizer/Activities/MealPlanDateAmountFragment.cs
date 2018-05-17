@@ -19,6 +19,8 @@ namespace Recipizer.Activities
         private readonly int days;
         private readonly string title;
         public static int current;
+        public delegate void clickedOK(int days);
+        public clickedOK clicked;
 
         public MealPlanDateAmountFragment(Context context, string title)
         {
@@ -43,6 +45,7 @@ namespace Recipizer.Activities
                 {
                     current = 1;
                 };
+                clicked(current);
             });
             return dialog.Create();
 

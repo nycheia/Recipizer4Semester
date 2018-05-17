@@ -17,10 +17,10 @@ namespace Recipizer.Models
     {
         [PrimaryKey, AutoIncrement]
         public int id { get; set; }
-        public List<string> meals;
+        //public List<string> meals;
         public List<Recipe> recipes; 
         public int mealPlanId { get; set; }
-        public string note { get; set; }
-        public int dayId { get; set; }
+        //public string note { get; set; }
+        public int day { get; set; }
     }
 }

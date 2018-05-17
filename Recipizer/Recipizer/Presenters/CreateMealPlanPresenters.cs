@@ -16,15 +16,18 @@ namespace Recipizer.Presenters
 {
     public class CreateMealPlanPresenters : IPresenter
     {
-        public List<string> RecipeList;
+
+        public Dictionary<string, Recipe> recipeDictionary;
         IRecipizerView view;
-        public List<string> pickedRecipes;
+        public Dictionary<string, Recipe> pickedRecipeDictionary;
+        public MealPlan mp;
+        public int counter = 1;
 
         public CreateMealPlanPresenters(IRecipizerView _view)
         {
             this.view = _view;
-            RecipeList = new List<string>();
-            pickedRecipes = new List<string>();
+            recipeDictionary = new Dictionary<string, Recipe>();
+            pickedRecipeDictionary = new Dictionary<string, Recipe>();
             loadRecipesFromStorage();
         }
 
@@ -40,7 +43,7 @@ namespace Recipizer.Presenters
 
         public void onCreate()
         {
-            throw new NotImplementedException();
+            mp = new MealPlan();
         }
 
         public void onDestroy()
@@ -62,15 +65,41 @@ namespace Recipizer.Presenters
         {
             foreach (Recipe item in Constants.Conn.Table<Recipe>().ToList())
             {
-                RecipeList.Add(item.Title);
+                recipeDictionary.Add(item.Title, item);
             }
         }
 
-
-
-        public void ChooseRecipe_OnList(int position)
+        public void MealPlanAmountOfDays(int days)
         {
-            pickedRecipes.Add(RecipeList[position]);
+            mp.amountOfDays = days;
+            view.UpdateView();
+
+        }
+
+        public void ChooseRecipe_OnList(string key)
+        {
+            pickedRecipeDictionary.Add(key, recipeDictionary.GetValueOrDefault(key));
+            view.UpdateView();
+        }
+
+        public void OnClickAddMealDay()
+        {
+            if(counter != mp.amountOfDays)
+            {
+                MealDay md = new MealDay();
+                md.day = counter;
+                md.recipes = pickedRecipeDictionary.Values.ToList();
+                //md.mealPlanId = 0;
+                //md.id = 0;
+                mp.mealDays.Add(md);
+                pickedRecipeDictionary.Clear();
+                counter++;
+                view.UpdateView();
+            }
+            else
+            {
+
+            }
             view.UpdateView();
         }
     }

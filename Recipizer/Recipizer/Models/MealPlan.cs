@@ -16,17 +16,17 @@ namespace Recipizer.Models
     public class MealPlan
     {
         //public List<Days> days;
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public int amountOfDays { get; set; }
         public string note { get; set; }
         public bool active { get; set; }
         public string name { get; set; }
-
+        public List<MealDay> mealDays;
         public MealPlan()
         {
-
+            mealDays = new List<MealDay>();
         }
     }
 }

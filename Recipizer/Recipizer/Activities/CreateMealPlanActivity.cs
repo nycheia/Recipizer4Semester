@@ -40,22 +40,28 @@ namespace Recipizer.Activities
             amountOfDaysTextView    = FindViewById<TextView>(Resource.Id.dayAmountTextView);
             startDateEditText       = FindViewById<TextView>(Resource.Id.StartDateText);
             addMealDayBtn           = FindViewById<Button>(Resource.Id.AddMealDayBtn);
-            
+
             //TODO lav adapters til lister
-            RecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.RecipeList);
+            RecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.recipeDictionary.Keys.ToList());
             recipeList.Adapter = RecipeAdapter;
 
-            pickedRecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.pickedRecipes);
+            pickedRecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.pickedRecipeDictionary.Keys.ToList());
             pickedRecipeList.Adapter = pickedRecipeAdapter;
 
 
             //TODO lav button press metoder til to knapper, husk at tjekke alt er fyldt ud, top dollar brutha (Y)
             recipeList.ItemClick += (sender, e) => {
-                presenter.ChooseRecipe_OnList(e.Position);
+                string dictionaryKey = RecipeAdapter.GetItem(e.Position);
+                presenter.ChooseRecipe_OnList(dictionaryKey);
             };
 
             startDateEditText.Click += PickDate_OnClick;
-            
+
+            addMealDayBtn.Click += (sender, e) => {
+                presenter.OnClickAddMealDay();
+            };
+
+            presenter.onCreate();
             
         }
         public void FinishView(Result result, Intent intent)
@@ -81,11 +87,13 @@ namespace Recipizer.Activities
         public void UpdateView()
         {
             RecipeAdapter.Clear();
-            RecipeAdapter.AddAll(presenter.RecipeList);
+            RecipeAdapter.AddAll(presenter.recipeDictionary.Keys);
             RecipeAdapter.NotifyDataSetChanged();
             pickedRecipeAdapter.Clear();
-            pickedRecipeAdapter.AddAll(presenter.pickedRecipes);
+            pickedRecipeAdapter.AddAll(presenter.pickedRecipeDictionary.Keys);
             pickedRecipeAdapter.NotifyDataSetChanged();
+            amountOfDaysTextView.Text = presenter.counter + "/" + presenter.mp.amountOfDays;
+
         }
 
         public void PickDate_OnClick(object sender, EventArgs eventArgs)
@@ -93,14 +101,20 @@ namespace Recipizer.Activities
 
             MealPlanDateAmountFragment dialog = new MealPlanDateAmountFragment(this, "Number of days in mealplan:");
             dialog.Show(FragmentManager, "hej");
-
+            dialog.clicked = SetNumberOfDays;
             DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
             {
                 startDateEditText.Text = time.ToLongDateString();
             });
             frag.Show(FragmentManager, DatePickerFragment.TAG);
 
-            amountOfDaysTextView.Text = "" + MealPlanDateAmountFragment.current;
+            //amountOfDaysTextView.Text = "" + MealPlanDateAmountFragment.current;
+        }
+
+        public void SetNumberOfDays(int days)
+        {
+            //amountOfDaysTextView.Text = days.ToString();
+            presenter.MealPlanAmountOfDays(days);
         }
     }
 }
