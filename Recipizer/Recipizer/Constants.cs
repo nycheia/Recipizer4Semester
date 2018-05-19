@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.Util;
 
 namespace Recipizer
 {
@@ -22,9 +23,15 @@ namespace Recipizer
         public const int EDIT_RECIPE = 3;
         public const int SHARE = 4;
         public const int ENABLE_BLUETOOTH = 5;
+        public const int DISCOVERY_REQUEST = 6;
 
         public const string RECIPE_ID = "recipeid";
         public const string POSITION = "position";
+        public const string APP_NAME = "Recipizer";
+        
+        //TODO add our own UUID
+        public static UUID APP_UUID = UUID.FromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+
 
     }
 }
