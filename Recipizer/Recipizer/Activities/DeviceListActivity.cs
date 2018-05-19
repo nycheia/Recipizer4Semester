@@ -27,6 +27,7 @@ namespace Recipizer.Activities
     {
         //UI components
         Button btnUpdate;
+        ProgressBar loadDiscovering;
 
         //Adapters
         BTDeviceAdapter deviceListAdapter;
@@ -45,6 +46,7 @@ namespace Recipizer.Activities
 
             //Get UI components for global use.
             btnUpdate = FindViewById<Button>(Resource.Id.btnUpdate);
+            loadDiscovering = FindViewById<ProgressBar>(Resource.Id.progressCircleDiscovering);
 
             //Get UI components for local use.
             ListView deviceList = FindViewById<ListView>(Resource.Id.listViewDeviceList);
@@ -54,7 +56,7 @@ namespace Recipizer.Activities
 
             //Setup lists.
             //DeviceListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1);
-            deviceListAdapter = new BTDeviceAdapter(this, presenter.DeviceDict);
+            deviceListAdapter = new BTDeviceAdapter(this, presenter.devices);
             deviceList.Adapter = deviceListAdapter;
 
             //Setup Button Events.
@@ -131,9 +133,15 @@ namespace Recipizer.Activities
         public void UpdateView()
         {
             if (presenter.IsDiscovering)
+            {
                 btnUpdate.Enabled = false;
+                loadDiscovering.Visibility = ViewStates.Visible;
+            }
             else
+            {
                 btnUpdate.Enabled = true;
+                loadDiscovering.Visibility = ViewStates.Invisible;
+            }
 
 
             deviceListAdapter.NotifyDataSetChanged();

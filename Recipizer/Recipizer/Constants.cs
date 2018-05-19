@@ -24,6 +24,8 @@ namespace Recipizer
         public const int SHARE = 4;
         public const int ENABLE_BLUETOOTH = 5;
         public const int DISCOVERY_REQUEST = 6;
+        public const int MESSAGE_READ = 7;
+        public const int MESSAGE_WRITE = 8;
 
         public const string RECIPE_ID = "recipeid";
         public const string POSITION = "position";

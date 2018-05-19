@@ -11,7 +11,7 @@ namespace Recipizer.Presenters
 {
     class ShareBluetoothPresenter : IPresenter
     {
-        public List<string> ShareList;
+        //public List<string> ShareList;
 
         IRecipizerView view;
 

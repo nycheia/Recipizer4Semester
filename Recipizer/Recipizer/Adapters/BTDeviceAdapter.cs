@@ -17,22 +17,22 @@ namespace Recipizer.Adapters
     {
         Activity context;
         List<BluetoothDevice> devices;
-        Dictionary<string, BluetoothDevice> devicesDict;
+        //Dictionary<string, BluetoothDevice> devicesDict;
 
-        public BTDeviceAdapter(Activity context, Dictionary<string, BluetoothDevice> devicesDict)
+        public BTDeviceAdapter(Activity context, List<BluetoothDevice> devices/*Dictionary<string, BluetoothDevice> devicesDict*/)
             : base()
         {
             this.context = context;
-            this.devicesDict = devicesDict;
-            this.devices = devicesDict.Values.ToList();
+            //this.devicesDict = devicesDict;
+            this.devices = devices; //devicesDict.Values.ToList();
         }
 
-        public override void NotifyDataSetChanged()
+        /*public override void NotifyDataSetChanged()
         {
             //devices.Clear();
-            devices = devicesDict.Values.ToList();
+            //devices = devicesDict.Values.ToList();
             base.NotifyDataSetChanged();
-        }
+        }*/
 
         public override int Count
         {
@@ -52,17 +52,27 @@ namespace Recipizer.Adapters
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View view = convertView;
+            string deviceName;
+            string deviceAddress;
 
             if (view == null)
             {
                 view = this.context.LayoutInflater.Inflate(Resource.Layout.item_device, parent, false);
             }
 
+            if (devices[position].Name == null)
+                deviceName = "Undefiend";
+            else
+                deviceName = devices[position].Name;
+
+            deviceAddress = devices[position].Address;
+
+
             view.FindViewById<TextView>(Resource.Id.textViewDeviceName).Text =
-                devices[position].Name;
+                deviceName;
 
             view.FindViewById<TextView>(Resource.Id.textViewDeviceAddress).Text =
-                devices[position].Address;
+                deviceAddress;
 
             return view;
         }

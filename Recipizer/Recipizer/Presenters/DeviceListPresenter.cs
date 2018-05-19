@@ -19,6 +19,7 @@ namespace Recipizer.Presenters
     public class DeviceListPresenter : IPresenter
     {
         IRecipizerView view;
+        public List<BluetoothDevice> devices;
         public Dictionary<string, BluetoothDevice> DeviceDict;
         public BluetoothAdapter thisPhone;
         public bool IsDiscovering = false;
@@ -27,6 +28,7 @@ namespace Recipizer.Presenters
         public DeviceListPresenter(IRecipizerView _view)
         {
             this.view = _view;
+            devices = new List<BluetoothDevice>();
             DeviceDict = new Dictionary<string, BluetoothDevice>();
 
             view.RequestPermission();
@@ -59,7 +61,7 @@ namespace Recipizer.Presenters
 
         public void DeviceList_OnItemClick(int position)
         {
-            
+            Bluetooth.StartConnectThread(devices[position], thisPhone);
             //view.FinishView(Result.Ok, new Intent().PutExtra(Constants.POSITION, position));
         }
 
@@ -131,47 +133,62 @@ namespace Recipizer.Presenters
                 else if (BluetoothAdapter.ActionDiscoveryFinished.Equals(intent.Action))
                 {
                     //discovery finished
-                    presenter.IsDiscovering = false;
-                    view.MakeToast("Discovery finished", ToastLength.Short);
+                    if (presenter.IsDiscovering)
+                    {
+                        presenter.IsDiscovering = false;
+                        view.MakeToast("Discovery finished", ToastLength.Short);
+                    }
                 }
                 else if (BluetoothDevice.ActionFound.Equals(intent.Action))
                 {
-                    //first lets get the name of the device
-                    string remoteDeviceName = intent.GetStringExtra(BluetoothDevice.ExtraName);
+                    //first lets get the device
                     BluetoothDevice remoteDevice = (BluetoothDevice)intent.GetParcelableExtra(BluetoothDevice.ExtraDevice);
 
                     if (remoteDevice != null)
                     {
-                        if (remoteDeviceName == null)
+                        bool addressExists = false;
+
+                        foreach (BluetoothDevice item in presenter.devices)
                         {
-                            remoteDeviceName = "Undefined";
+                            if (item.Address.Equals(remoteDevice.Address))
+                                addressExists = true;
                         }
-                        else
+
+                        if (!addressExists)
                         {
-                            bool addressExists = false;
-                            int i = 1;
+                            presenter.devices.Add(remoteDevice);
+                        }
 
-                            foreach (BluetoothDevice item in presenter.DeviceDict.Values)
+                            /*if (remoteDeviceName == null)
                             {
-                                if (item.Address.Equals(remoteDevice.Address))
-                                    addressExists = true;
+                                remoteDeviceName = "Undefined";
                             }
-
-                            if (!addressExists)
+                            else
                             {
-                                while (presenter.DeviceDict.ContainsKey(remoteDeviceName))
+                                bool addressExists = false;
+                                int i = 1;
+
+                                foreach (BluetoothDevice item in presenter.DeviceDict.Values)
                                 {
-                                    i++;
-                                    remoteDeviceName += " (" + i + ")";
+                                    if (item.Address.Equals(remoteDevice.Address))
+                                        addressExists = true;
                                 }
 
-                                presenter.DeviceDict.Add(remoteDeviceName, remoteDevice);
-                            }
-                            
-                        }
+                                if (!addressExists)
+                                {
+                                    while (presenter.DeviceDict.ContainsKey(remoteDeviceName))
+                                    {
+                                        i++;
+                                        remoteDeviceName += " (" + i + ")";
+                                    }
 
-                        
-                    }
+                                    presenter.DeviceDict.Add(remoteDeviceName, remoteDevice);
+                                }
+
+                            }*/
+
+
+                        }
                 }
                 view.UpdateView();
             }

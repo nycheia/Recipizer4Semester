@@ -54,6 +54,11 @@ namespace Recipizer.Models
                 ct = null;
             }
         }
+        public static void StartConnectedThread(BluetoothSocket socket)
+        {
+            cnt = new ConnectedThread(socket);
+            cnt.Start();
+        }
 
 
         //The thread parent class is from the Java.Lang Library, the .Net Thread class is a sealed class
@@ -160,7 +165,7 @@ namespace Recipizer.Models
                 btSocket = tmp;
             }
 
-            public void run()
+            public override void Run()
             {
                 // Cancel discovery because it otherwise slows down the connection.
                 thisPhone.CancelDiscovery();
@@ -188,7 +193,8 @@ namespace Recipizer.Models
                 }
                 // The connection attempt succeeded. Perform work associated with
                 // the connection in a separate thread.
-                manageMyConnectedSocket(btSocket);
+
+                StartConnectedThread(btSocket);
             }
 
             // Closes the client socket and causes the thread to finish.
@@ -210,6 +216,7 @@ namespace Recipizer.Models
             private readonly BluetoothSocket btSocket;
             private readonly Stream btInStream;
             private readonly Stream btOutStream;
+            private Handler btHandler;
 
 
             public ConnectedThread(BluetoothSocket socket)
@@ -238,11 +245,13 @@ namespace Recipizer.Models
                     e.PrintStackTrace();
                 }
 
+                btHandler = new Handler();
+
                 btInStream = tmpIn;
                 btOutStream = tmpOut;
             }
 
-            public void run()
+            public override void Run()
             {
                 byte[] btBuffer = new byte[1024]; // btBuffer store for the stream
                 int bytes;
@@ -250,58 +259,62 @@ namespace Recipizer.Models
                 // Keep listening to the InputStream while connected
                 while (true)
                 {
-                    Handler handler;
+                    
                     try
                     {
-                        bytes = btInStream.Read(btBuffer, 0, btBuffer.Length);
+                        //Read from the stream
+                        //bytes = btInStream.Read(btBuffer);
+                        bytes = btInStream.Read(btBuffer,  0, btBuffer.Length);
 
-                        /***/
-                        Message readMsg = btHandler.obtainMessage(MESSAGE_READ, numBytes, -1, btBuffer);
+                        //Send the message to the ui
+                        Message readMsg = btHandler.ObtainMessage(Constants.MESSAGE_READ, bytes, -1, btBuffer);
+                        //Message readMsg = btHandler.ObtainMessage(Constants.MESSAGE_READ, -1, -1);
 
                         readMsg.SendToTarget();
                     }
                     catch (Java.IO.IOException e)
                     {
-                        e.printStackTrace();
-                        Log.d("TAG", "run: ");
+                        
+                        e.PrintStackTrace();
                         break;
                     }
                 }
             }
 
-            public void write(byte[] bytes)
+            public void Write(byte[] bytes)
             {
                 try
                 {
-                    btOutStream.write(bytes);
+                    btOutStream.Write(bytes);
 
-                    Message writtenMsg = btHandler.obtainMessage(MESSAGE_WRITE, -1, -1, bytes);
-                    writtenMsg.sendToTarget();
+                    Message writtenMsg = btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes);
+                    writtenMsg.SendToTarget();
 
                 }
                 catch (Java.IO.IOException e)
                 {
-                    Log.e("TAG", "Error occurred when sending data", e);
+                    e.PrintStackTrace();
 
+                    /*
                     // Send a failure message back to the activity.
                     Message writeErrorMsg = btHandler.obtainMessage(MESSAGE_TOAST);
                     Bundle bundle = new Bundle();
                     bundle.putString("toast", "Couldn't send data to the other device");
                     writeErrorMsg.setData(bundle);
-                    btHandler.sendMessage(writeErrorMsg);
+                    btHandler.sendMessage(writeErrorMsg);*/
 
                 }
             }
 
-            public void cancel()
+            public void Cancel()
             {
                 try
                 {
-                    btSocket.close();
+                    btSocket.Close();
                 }
-                catch (IOException e)
+                catch (Java.IO.IOException e)
                 {
-                    Log.e("TAG", "Could not close the connect socket", e);
+                    e.PrintStackTrace();
                 }
             }
         }
