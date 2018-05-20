@@ -13,6 +13,7 @@ using Android.Widget;
 using Java.Lang;
 using Java.IO;
 using System.IO;
+using Recipizer.Presenters;
 
 namespace Recipizer.Models
 {
@@ -24,6 +25,7 @@ namespace Recipizer.Models
         private static ConnectThread ct;
         private static ConnectedThread cnt;
         private delegate void Callback();
+        public static DeviceListPresenter dlp;
 
         public static void StartAcceptThread(BluetoothAdapter btAdpt)
         {
@@ -54,12 +56,30 @@ namespace Recipizer.Models
                 ct = null;
             }
         }
+
         public static void StartConnectedThread(BluetoothSocket socket)
         {
-            cnt = new ConnectedThread(socket);
+            cnt = new ConnectedThread(socket, new BtHandler(dlp.hWrite, dlp.hRead));
             cnt.Start();
         }
 
+        public static void StopConnectedThread()
+        {
+            if (cnt != null)
+            {
+                cnt.Cancel();
+                cnt = null;
+            }
+        }
+
+        public static void Write(string message)
+        {
+            if (cnt != null)
+            {
+                var bytes = Encoding.ASCII.GetBytes(message);
+                cnt.Write(bytes);
+            }
+        }
 
         //The thread parent class is from the Java.Lang Library, the .Net Thread class is a sealed class
         class AcceptThread : Thread
@@ -219,14 +239,15 @@ namespace Recipizer.Models
             private Handler btHandler;
 
 
-            public ConnectedThread(BluetoothSocket socket)
+            public ConnectedThread(BluetoothSocket socket, Handler handler)
             {
+                btHandler = handler;
                 btSocket = socket;
                 Stream tmpIn = null;
                 Stream tmpOut = null;
 
-                //getting the streams, as variables are final we use temps.
-
+                //getting the streams
+                
                 try
                 {
                     tmpIn = socket.InputStream;
@@ -244,9 +265,7 @@ namespace Recipizer.Models
                 {
                     e.PrintStackTrace();
                 }
-
-                btHandler = new Handler();
-
+               
                 btInStream = tmpIn;
                 btOutStream = tmpOut;
             }
@@ -285,7 +304,7 @@ namespace Recipizer.Models
             {
                 try
                 {
-                    btOutStream.Write(bytes);
+                    btOutStream.Write(bytes, 0, bytes.Length);
 
                     Message writtenMsg = btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes);
                     writtenMsg.SendToTarget();

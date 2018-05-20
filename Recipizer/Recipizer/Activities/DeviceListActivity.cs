@@ -50,8 +50,9 @@ namespace Recipizer.Activities
 
             //Get UI components for local use.
             ListView deviceList = FindViewById<ListView>(Resource.Id.listViewDeviceList);
+            Button btn1 = FindViewById<Button>(Resource.Id.button1);
 
-            //TODO VERY IMPORANTE move this switch and all its fundtionality to the main screen
+            //TODO move this switch and all its fundtionality to the main screen
             Switch switchVisible = FindViewById<Switch>(Resource.Id.switchVisible);
 
             //Setup lists.
@@ -59,7 +60,7 @@ namespace Recipizer.Activities
             deviceListAdapter = new BTDeviceAdapter(this, presenter.devices);
             deviceList.Adapter = deviceListAdapter;
 
-            //Setup Button Events.
+            //Setup Click Events.
             btnUpdate.Click += ( sender, e) => 
             {
                 presenter.Update_Click();
@@ -73,6 +74,11 @@ namespace Recipizer.Activities
             switchVisible.CheckedChange += (sender, e) =>
             {
                 presenter.Visible_CheckedChanged(e.IsChecked);
+            };
+
+            btn1.Click += (sender, e) =>
+            {
+                Bluetooth.Write("Hej");
             };
 
             //Bluetooth reciever is in a new class below this class

@@ -61,6 +61,7 @@ namespace Recipizer.Presenters
 
         public void DeviceList_OnItemClick(int position)
         {
+            Bluetooth.dlp = this;
             Bluetooth.StartConnectThread(devices[position], thisPhone);
             //view.FinishView(Result.Ok, new Intent().PutExtra(Constants.POSITION, position));
         }
@@ -193,5 +194,17 @@ namespace Recipizer.Presenters
                 view.UpdateView();
             }
         }
+
+        public void hWrite(string text)
+        {
+
+            view.MakeToast(text, ToastLength.Short);
+        }
+
+        public void hRead(string text)
+        {
+            view.MakeToast(text, ToastLength.Short);
+        }
+
     }
 }

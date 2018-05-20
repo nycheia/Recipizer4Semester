@@ -85,6 +85,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="dbAccess\DatabaseAccess.cs" />
     <Compile Include="Models\Bluetooth.cs" />
+    <Compile Include="Models\BtHandler.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\MealDay.cs" />
     <Compile Include="Models\MealPlan.cs" />

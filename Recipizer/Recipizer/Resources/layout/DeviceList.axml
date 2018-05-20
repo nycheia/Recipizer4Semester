@@ -12,11 +12,16 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp" />
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="400dp"
         android:id="@+id/listViewDeviceList"
         android:splitMotionEvents="false" />
     <LinearLayout
