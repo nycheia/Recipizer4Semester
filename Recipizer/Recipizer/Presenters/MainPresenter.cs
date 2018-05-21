@@ -44,6 +44,7 @@ namespace Recipizer.Presenters
             Constants.Conn.DropTable<MealPlan>();
             Constants.Conn.CreateTable<MealPlan>();
             Constants.Conn.CreateTable<MealDay>();
+            Constants.Conn.CreateTable<MealDayRecipe>();
 
             //TODO DELETE THIS FOR TESTING
             MealPlan mp1 = new MealPlan();

@@ -75,6 +75,7 @@
     <Compile Include="Activities\CreateMealPlanActivity.cs" />
     <Compile Include="Activities\DatePickerFragmentcs.cs" />
     <Compile Include="Activities\IRecipizerView.cs" />
+    <Compile Include="Activities\MealPlanNameFragment.cs" />
     <Compile Include="Activities\MealPlanDateAmountFragment.cs" />
     <Compile Include="Activities\ViewMealPlanActivity.cs" />
     <Compile Include="Activities\ViewRecipeActivity.cs" />
@@ -141,6 +142,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MealPlanDateAmount.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MealPlanName.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -34,7 +34,10 @@ namespace Recipizer.Activities
             SetContentView(Resource.Layout.ViewMealPlan);
 
             //MealPlan mealPlan = Constants.Conn.Get<MealPlan>(Intent.GetIntExtra("mealPlanId", 0));
-            
+
+            presenter = new ViewMealPlanPresenter();
+
+            presenter.populateMealDaysFromStorage(Intent.GetIntExtra("mealPlanId", 1));
 
             ExpandableListView mealPlanListView = FindViewById<ExpandableListView>(Resource.Id.mealPlanExpandableListView);
             mealDayAdapter = new MealDayAdapter(this, recipes, mealDayList);

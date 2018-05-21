@@ -15,6 +15,8 @@ namespace Recipizer.Presenters
     public class ViewMealPlanPresenter : IPresenter
     {
         public List<string> mealDays;
+        public List<Recipe> recipes;
+
         public void onCreate()
         {
             throw new NotImplementedException();
@@ -52,7 +54,11 @@ namespace Recipizer.Presenters
             foreach (MealDay item in query)
             {
                 mealDays.Add(item.day.ToString());
-                //var recipeQuery = from r in Constants.Conn.Table<Recipe>() where r.
+                var recipeQuery = from mdr in Constants.Conn.Table<MealDayRecipe>() where mdr.id == item.id select mdr;
+                foreach (MealDayRecipe i in recipeQuery)
+                {
+                    recipes.Add(Constants.Conn.Get<Recipe>(i.recipeId));
+                }
             }
 
         }

@@ -56,10 +56,14 @@ namespace Recipizer.Activities
             };
 
             startDateEditText.Click += PickDate_OnClick;
+            
+            
 
             addMealDayBtn.Click += (sender, e) => {
                 presenter.OnClickAddMealDay();
             };
+
+            SetNameDialog();
 
             presenter.onCreate();
             
@@ -93,6 +97,10 @@ namespace Recipizer.Activities
             pickedRecipeAdapter.AddAll(presenter.pickedRecipeDictionary.Keys);
             pickedRecipeAdapter.NotifyDataSetChanged();
             amountOfDaysTextView.Text = presenter.counter + "/" + presenter.mp.amountOfDays;
+            if (presenter.counter == presenter.mp.amountOfDays)
+            {
+                addMealDayBtn.Text = "Create MealPlan";
+            }
 
         }
 
@@ -105,16 +113,34 @@ namespace Recipizer.Activities
             DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
             {
                 startDateEditText.Text = time.ToLongDateString();
+                presenter.SetStartDate(time);
             });
             frag.Show(FragmentManager, DatePickerFragment.TAG);
 
             //amountOfDaysTextView.Text = "" + MealPlanDateAmountFragment.current;
+            
         }
 
         public void SetNumberOfDays(int days)
         {
-            //amountOfDaysTextView.Text = days.ToString();
             presenter.MealPlanAmountOfDays(days);
+        }
+
+        public void ChangeAddMealDayButton()
+        {
+            addMealDayBtn.Text = "Create MealPlan";
+        }
+
+        public void SetName(string name)
+        {
+            presenter.SetName(name);
+        }
+
+        public void SetNameDialog()
+        {
+            MealPlanNameFragment mpnf = new MealPlanNameFragment(this, "Name of mealplan:");
+            mpnf.Show(FragmentManager, "nameMealPlan");
+            mpnf.clicked = SetName;
         }
     }
 }

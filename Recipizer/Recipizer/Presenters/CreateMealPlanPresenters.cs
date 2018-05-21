@@ -89,8 +89,6 @@ namespace Recipizer.Presenters
                 MealDay md = new MealDay();
                 md.day = counter;
                 md.recipes = pickedRecipeDictionary.Values.ToList();
-                //md.mealPlanId = 0;
-                //md.id = 0;
                 mp.mealDays.Add(md);
                 pickedRecipeDictionary.Clear();
                 counter++;
@@ -98,9 +96,36 @@ namespace Recipizer.Presenters
             }
             else
             {
-
+                if(mp.startDate != null)
+                {
+                    Constants.Conn.Insert(mp);
+                    foreach  (MealDay item in mp.mealDays)
+                    {
+                        item.mealPlanId = mp.id;
+                        Constants.Conn.Insert(item);
+                        foreach (Recipe i in item.recipes)
+                        {
+                            MealDayRecipe mdr = new MealDayRecipe();
+                            mdr.recipeId = i.id;
+                            mdr.mealDayId = item.id;
+                        }
+                    }   
+                }
             }
             view.UpdateView();
+        }
+
+        public void SetStartDate(DateTime day)
+        {
+            if (day != null)
+            {
+                mp.startDate = day;
+            }
+        }
+
+        public void SetName(string name)
+        {
+            mp.name = name;
         }
     }
 }
