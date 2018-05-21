@@ -26,9 +26,7 @@ namespace Recipizer.Models
         private static ConnectedThread cnt;
 
         public static BtHandler BTHandler;
-
-        private delegate void Callback();
-        public static DeviceListPresenter dlp;
+        
 
         public static void StartAcceptThread(BluetoothAdapter btAdpt)
         {
@@ -240,12 +238,20 @@ namespace Recipizer.Models
             private readonly BluetoothSocket btSocket;
             private readonly Stream btInStream;
             private readonly Stream btOutStream;
-            private BtHandler btHandler;
+            private Handler btHandler;
 
 
             public ConnectedThread(BluetoothSocket socket)
             {
-                btHandler = Bluetooth.BTHandler;
+                if (Bluetooth.BTHandler == null)
+                {
+                    throw new System.Exception();
+                }
+                else
+                {
+                    this.btHandler = Bluetooth.BTHandler;
+                }
+
                 btSocket = socket;
                 Stream tmpIn = null;
                 Stream tmpOut = null;
