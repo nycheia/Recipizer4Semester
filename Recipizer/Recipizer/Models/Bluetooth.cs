@@ -24,6 +24,9 @@ namespace Recipizer.Models
         private static AcceptThread at;
         private static ConnectThread ct;
         private static ConnectedThread cnt;
+
+        public static BtHandler BTHandler;
+
         private delegate void Callback();
         public static DeviceListPresenter dlp;
 
@@ -59,7 +62,7 @@ namespace Recipizer.Models
 
         public static void StartConnectedThread(BluetoothSocket socket)
         {
-            cnt = new ConnectedThread(socket, new BtHandler(dlp.hWrite, dlp.hRead));
+            cnt = new ConnectedThread(socket);
             cnt.Start();
         }
 
@@ -236,12 +239,12 @@ namespace Recipizer.Models
             private readonly BluetoothSocket btSocket;
             private readonly Stream btInStream;
             private readonly Stream btOutStream;
-            private Handler btHandler;
+            private BtHandler btHandler;
 
 
-            public ConnectedThread(BluetoothSocket socket, Handler handler)
+            public ConnectedThread(BluetoothSocket socket)
             {
-                btHandler = handler;
+                btHandler = Bluetooth.BTHandler;
                 btSocket = socket;
                 Stream tmpIn = null;
                 Stream tmpOut = null;
@@ -251,14 +254,6 @@ namespace Recipizer.Models
                 try
                 {
                     tmpIn = socket.InputStream;
-                }
-                catch (Java.IO.IOException e)
-                {
-                    e.PrintStackTrace();
-                }
-
-                try
-                {
                     tmpOut = socket.OutputStream;
                 }
                 catch (Java.IO.IOException e)
@@ -286,10 +281,10 @@ namespace Recipizer.Models
                         bytes = btInStream.Read(btBuffer,  0, btBuffer.Length);
 
                         //Send the message to the ui
-                        Message readMsg = btHandler.ObtainMessage(Constants.MESSAGE_READ, bytes, -1, btBuffer);
-                        //Message readMsg = btHandler.ObtainMessage(Constants.MESSAGE_READ, -1, -1);
+                        btHandler.ObtainMessage(Constants.MESSAGE_READ, bytes, -1, btBuffer).SendToTarget();
+                        //Message readMsg = btHandler.ObtainMessage(Constants.MESSAGE_READ, bytes, -1, btBuffer);
 
-                        readMsg.SendToTarget();
+                        //readMsg.SendToTarget();
                     }
                     catch (Java.IO.IOException e)
                     {
@@ -306,8 +301,10 @@ namespace Recipizer.Models
                 {
                     btOutStream.Write(bytes, 0, bytes.Length);
 
-                    Message writtenMsg = btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes);
-                    writtenMsg.SendToTarget();
+                    btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes).SendToTarget();
+
+                    //Message writtenMsg = btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes);
+                    //writtenMsg.SendToTarget();
 
                 }
                 catch (Java.IO.IOException e)

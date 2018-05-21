@@ -12,38 +12,36 @@ using Android.Widget;
 
 namespace Recipizer.Models
 {
-    class BtHandler : Handler
+    public class BtHandler : Handler
     {
-        public delegate void delAction(string text);
-        private delAction OnWrite;
-        private delAction OnRead;
-
-        public BtHandler(delAction OnWrite, delAction OnRead)
+        Presenters.DeviceListPresenter dlp;
+        public BtHandler(Presenters.DeviceListPresenter dlp)
         {
-            this.OnWrite = OnWrite;
-            this.OnRead = OnRead;
+            this.dlp = dlp;
         }
 
         public override void HandleMessage(Message msg)
         {
-            //base.HandleMessage(msg);
-
             switch (msg.What)
             {
                 case Constants.MESSAGE_WRITE:
-                    var wBuffer = (byte[])msg.Obj;
-                    var wMessage = Encoding.ASCII.GetString(wBuffer);
-                    OnWrite(wMessage);
-                    break;
+                    byte[] writeBuf = (byte[])msg.Obj;
+                    string writeMessage = Encoding.ASCII.GetString(writeBuf);
 
+                    dlp.hWrite(writeMessage);
+
+                    // construct a string from the buffer
+                    //string writeMessage = new string(writeBuf);
+                    //Toast.makeText(this, "Write Message", Toast.LENGTH_SHORT).show();
+                    break;
                 case Constants.MESSAGE_READ:
-                    var rBuffer = (byte[])msg.Obj;
-                    var rMessage = Encoding.ASCII.GetString(rBuffer);
-                    OnWrite(rMessage);
-                    break;
+                    byte[] readBuf = (byte[])msg.Obj;
+                    // construct a string from the valid bytes in the buffer
+                    string readMessage = Encoding.ASCII.GetString(readBuf);
 
-                default:
-
+                    dlp.hRead(readMessage);
+                    //string readMessage = new string(readBuf, 0, msg.Arg1);
+                    //Toast.makeText(this, "Read Message", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

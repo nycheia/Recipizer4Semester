@@ -13,6 +13,7 @@ using Android.Widget;
 using Java.Lang;
 using Java.Util;
 using System.IO;
+using Android.OS;
 
 namespace Recipizer.Presenters
 {
@@ -23,7 +24,7 @@ namespace Recipizer.Presenters
         public Dictionary<string, BluetoothDevice> DeviceDict;
         public BluetoothAdapter thisPhone;
         public bool IsDiscovering = false;
-        
+
 
         public DeviceListPresenter(IRecipizerView _view)
         {
@@ -37,7 +38,7 @@ namespace Recipizer.Presenters
 
             StartDiscoveryProcess();
         }
-        
+
         public object StartDiscoveryProcess()
         {
             /*Enabling Bluetooth the nice way*/
@@ -61,7 +62,7 @@ namespace Recipizer.Presenters
 
         public void DeviceList_OnItemClick(int position)
         {
-            Bluetooth.dlp = this;
+            Bluetooth.BTHandler = new BtHandler(this);
             Bluetooth.StartConnectThread(devices[position], thisPhone);
             //view.FinishView(Result.Ok, new Intent().PutExtra(Constants.POSITION, position));
         }
@@ -71,7 +72,7 @@ namespace Recipizer.Presenters
             if (_checked)
             {
                 //Making the device discoverable
-                view.Navigate(Constants.DISCOVERY_REQUEST, new Intent(BluetoothAdapter.ActionRequestDiscoverable) );
+                view.Navigate(Constants.DISCOVERY_REQUEST, new Intent(BluetoothAdapter.ActionRequestDiscoverable));
 
                 Bluetooth.StartAcceptThread(thisPhone);
             }
@@ -160,40 +161,42 @@ namespace Recipizer.Presenters
                             presenter.devices.Add(remoteDevice);
                         }
 
-                            /*if (remoteDeviceName == null)
-                            {
-                                remoteDeviceName = "Undefined";
-                            }
-                            else
-                            {
-                                bool addressExists = false;
-                                int i = 1;
-
-                                foreach (BluetoothDevice item in presenter.DeviceDict.Values)
-                                {
-                                    if (item.Address.Equals(remoteDevice.Address))
-                                        addressExists = true;
-                                }
-
-                                if (!addressExists)
-                                {
-                                    while (presenter.DeviceDict.ContainsKey(remoteDeviceName))
-                                    {
-                                        i++;
-                                        remoteDeviceName += " (" + i + ")";
-                                    }
-
-                                    presenter.DeviceDict.Add(remoteDeviceName, remoteDevice);
-                                }
-
-                            }*/
-
-
+                        /*if (remoteDeviceName == null)
+                        {
+                            remoteDeviceName = "Undefined";
                         }
+                        else
+                        {
+                            bool addressExists = false;
+                            int i = 1;
+
+                            foreach (BluetoothDevice item in presenter.DeviceDict.Values)
+                            {
+                                if (item.Address.Equals(remoteDevice.Address))
+                                    addressExists = true;
+                            }
+
+                            if (!addressExists)
+                            {
+                                while (presenter.DeviceDict.ContainsKey(remoteDeviceName))
+                                {
+                                    i++;
+                                    remoteDeviceName += " (" + i + ")";
+                                }
+
+                                presenter.DeviceDict.Add(remoteDeviceName, remoteDevice);
+                            }
+
+                        }*/
+
+
+                    }
                 }
                 view.UpdateView();
             }
         }
+
+
 
         public void hWrite(string text)
         {
@@ -205,6 +208,5 @@ namespace Recipizer.Presenters
         {
             view.MakeToast(text, ToastLength.Short);
         }
-
     }
 }
