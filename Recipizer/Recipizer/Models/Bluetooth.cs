@@ -132,6 +132,7 @@ namespace Recipizer.Models
                     {
                         try
                         {
+                            StartConnectedThread(btSocket);
                             btServerSocket.Close();
                             done = true;
                             break;
