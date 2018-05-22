@@ -18,14 +18,14 @@ namespace Recipizer.Activities
     [Activity(Label = "ViewMealPlanActivity")]
     public class ViewMealPlanActivity : Activity, IRecipizerView
     {
-        ExpandableListView mealDayExpList;
+        ListView mealDaysList;
 
-        MealDayAdapter mealDayAdapter;
+        ArrayAdapter<string> mealDayAdapter;
 
         ViewMealPlanPresenter presenter;
 
         List<string> mealDayList;
-        Dictionary<string, List<string>> recipes;
+        //Dictionary<string, List<Recipe>> recipes;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,12 +35,27 @@ namespace Recipizer.Activities
 
             //MealPlan mealPlan = Constants.Conn.Get<MealPlan>(Intent.GetIntExtra("mealPlanId", 0));
 
-            presenter = new ViewMealPlanPresenter();
+            presenter = new ViewMealPlanPresenter(this);
+
+            //ExpandableListView mealPlanListView = FindViewById<ExpandableListView>(Resource.Id.mealPlanExpandableListView);
+            //mealDayAdapter = new MealDayAdapter(this, presenter.recipes, presenter.mealDays);
+            //mealPlanListView.Adapter = mealDayAdapter;
+
+            
+
+            mealDaysList = FindViewById<ListView>(Resource.Id.mealDayListView);
+            mealDayAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.mealDays.Keys.ToList());
+            mealDaysList.Adapter = mealDayAdapter;
+
+            mealDaysList.ItemClick += (sender, e) =>
+            {
+                presenter.MealDay_onClick(mealDayAdapter.GetItem(e.Position));
+            };
+
 
             presenter.populateMealDaysFromStorage(Intent.GetIntExtra("mealPlanId", 1));
 
-            ExpandableListView mealPlanListView = FindViewById<ExpandableListView>(Resource.Id.mealPlanExpandableListView);
-            mealDayAdapter = new MealDayAdapter(this, recipes, mealDayList);
+            
 
         }
 
@@ -56,7 +71,9 @@ namespace Recipizer.Activities
 
         public void Navigate(int code, Intent data)
         {
-            throw new NotImplementedException();
+            Intent intent = new Intent(this, typeof(ViewMealDayActivity));
+            intent.PutExtras(data);
+            StartActivityForResult(intent, 2);
         }
 
         public void ResetText()
@@ -66,9 +83,10 @@ namespace Recipizer.Activities
 
         public void UpdateView()
         {
-            throw new NotImplementedException();
+            mealDayAdapter.Clear();
+            mealDayAdapter.AddAll(presenter.mealDays.Keys.ToList());
+            mealDayAdapter.NotifyDataSetChanged();
         }
-
-
+        
     }
 }

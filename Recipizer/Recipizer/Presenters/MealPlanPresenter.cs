@@ -66,7 +66,7 @@ namespace Recipizer.Presenters
             view.MakeToast("Navigating to: " + mealPlanList[position], ToastLength.Short);
 
             //TODO lav lige noget intents, når enkelt meal day activity er lavet.
-            int id = (Constants.Conn.Get<MealPlan>(position).id);
+            int id = (Constants.Conn.Get<MealPlan>(position+1).id);
 
             view.Navigate(1, new Intent().PutExtra("mealPlanId", id));
         }

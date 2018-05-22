@@ -18,11 +18,11 @@ namespace Recipizer.Adapters
     {
         private readonly Context context;
 
-        private Dictionary<string, List<string>> recipes;
+        private Dictionary<string, List<Recipe>> recipes;
 
         private List<string> mealDaysList;
 
-        public MealDayAdapter(Context context, Dictionary<string, List<string>> recipes, List<string> mealDays)
+        public MealDayAdapter(Context context, Dictionary<string, List<Recipe>> recipes, List<string> mealDays)
         {
             this.context = context;
             this.recipes = recipes;
@@ -38,7 +38,7 @@ namespace Recipizer.Adapters
 
         public override Java.Lang.Object GetChild(int groupPosition, int childPosition)
         {
-            return this.recipes[mealDaysList[groupPosition]][childPosition];
+            return this.recipes[mealDaysList[groupPosition]][childPosition].ToString();
         }
 
         public override long GetChildId(int groupPosition, int childPosition)
@@ -61,7 +61,7 @@ namespace Recipizer.Adapters
                 view = inflater.Inflate(Resource.Layout.item_RecipeChild, null);
             }
 
-            view.FindViewById<TextView>(Resource.Id.recAdapterTextViewRecTitle).Text = this.recipes[this.mealDaysList[groupPosition]][childPosition];
+            view.FindViewById<TextView>(Resource.Id.recAdapterTextViewRecTitle).Text = this.recipes[this.mealDaysList[groupPosition]][childPosition].ToString();
             return view;
         }
 

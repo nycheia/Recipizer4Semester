@@ -78,6 +78,7 @@ namespace Recipizer.Presenters
 
         public void ChooseRecipe_OnList(string key)
         {
+            //TODO lav exception så man ikke vælger 2 af samme recipe (giver exception haHAA)
             pickedRecipeDictionary.Add(key, recipeDictionary.GetValueOrDefault(key));
             view.UpdateView();
         }
@@ -98,6 +99,10 @@ namespace Recipizer.Presenters
             {
                 if(mp.startDate != null)
                 {
+                    MealDay md = new MealDay();
+                    md.day = counter;
+                    md.recipes = pickedRecipeDictionary.Values.ToList();
+                    mp.mealDays.Add(md);
                     Constants.Conn.Insert(mp);
                     foreach  (MealDay item in mp.mealDays)
                     {
@@ -108,6 +113,7 @@ namespace Recipizer.Presenters
                             MealDayRecipe mdr = new MealDayRecipe();
                             mdr.recipeId = i.id;
                             mdr.mealDayId = item.id;
+                            Constants.Conn.Insert(mdr);
                         }
                     }   
                 }

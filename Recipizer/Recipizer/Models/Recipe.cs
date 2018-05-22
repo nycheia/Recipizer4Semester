@@ -38,6 +38,8 @@ namespace Recipizer.Models
             Ingredients = (from i in Constants.Conn.Table<Ingredient>() where i.RecipeId == id select i).ToList();
         }
 
+        
+
         public Recipe(List<Ingredient> _Ingredients, string _Title, string _Description, DateTime _DateCreated)
         {
             Ingredients = _Ingredients;

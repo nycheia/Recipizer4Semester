@@ -40,23 +40,21 @@ namespace Recipizer.Presenters
             Constants.Conn = new SQLiteConnection(DbPath);
             Constants.Conn.CreateTable<Recipe>();
             Constants.Conn.CreateTable<Ingredient>();
-            //TODO DELETE DROP
-            Constants.Conn.DropTable<MealPlan>();
             Constants.Conn.CreateTable<MealPlan>();
             Constants.Conn.CreateTable<MealDay>();
             Constants.Conn.CreateTable<MealDayRecipe>();
 
             //TODO DELETE THIS FOR TESTING
-            MealPlan mp1 = new MealPlan();
-            mp1.name = "1";
-            MealPlan mp2 = new MealPlan();
-            mp2.name = "2";
-            MealPlan mp3 = new MealPlan();
-            mp3.name = "3";
+            //MealPlan mp1 = new MealPlan();
+            //mp1.name = "1";
+            //MealPlan mp2 = new MealPlan();
+            //mp2.name = "2";
+            //MealPlan mp3 = new MealPlan();
+            //mp3.name = "3";
 
-            Constants.Conn.Insert(mp1);
-            Constants.Conn.Insert(mp2);
-            Constants.Conn.Insert(mp3);
+            //Constants.Conn.Insert(mp1);
+            //Constants.Conn.Insert(mp2);
+            //Constants.Conn.Insert(mp3);
         }
 
         public void onDestroy()
