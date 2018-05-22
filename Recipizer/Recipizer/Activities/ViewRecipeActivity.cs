@@ -79,7 +79,7 @@ namespace Recipizer.Activities
             }
             else if (code == Constants.SHARE)
             {
-                Intent intent = new Intent(this, typeof(DeviceListActivity));
+                Intent intent = new Intent(this, typeof(ShareBluetoothActivity));
                 intent.PutExtras(data);
                 //TODO might not need to be ForResult
                 StartActivityForResult(intent, Constants.SHARE);
@@ -107,6 +107,16 @@ namespace Recipizer.Activities
         }
 
         public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeOKButtonDialog()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
         {
             throw new NotImplementedException();
         }

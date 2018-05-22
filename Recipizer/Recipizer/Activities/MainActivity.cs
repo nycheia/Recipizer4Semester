@@ -16,6 +16,16 @@ namespace Recipizer.Activities
             throw new System.NotImplementedException();
         }
 
+        public void MakeDialog(int code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void MakeOKButtonDialog()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void MakeToast(string text, ToastLength length)
         {
             throw new System.NotImplementedException();

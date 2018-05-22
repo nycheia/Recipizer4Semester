@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 
 using Android.App;
 using Android.Content;
@@ -9,67 +10,115 @@ using Recipizer.Models;
 using Recipizer.Activities;
 using Android.Bluetooth;
 using Android.Widget;
+using Java.Lang;
+using Java.Util;
+using System.IO;
+using Android.OS;
 
 namespace Recipizer.Presenters
 {
     public class DeviceListPresenter : IPresenter
     {
         IRecipizerView view;
+        public List<BluetoothDevice> devices;
         public Dictionary<string, BluetoothDevice> DeviceDict;
         public BluetoothAdapter thisPhone;
         public bool IsDiscovering = false;
 
+
         public DeviceListPresenter(IRecipizerView _view)
         {
             this.view = _view;
+            devices = new List<BluetoothDevice>();
             DeviceDict = new Dictionary<string, BluetoothDevice>();
+            
 
             view.RequestPermission();
-            BluetoothAdapter bluetooth = BluetoothAdapter.DefaultAdapter;
 
-            /*Enabling Bluetooth the nice way*/
-            if (!bluetooth.IsEnabled)
-            {
-                String enableBT = BluetoothAdapter.ActionRequestEnable;
-
-                view.Navigate(Constants.ENABLE_BLUETOOTH, new Intent(enableBT));
-            }
-
-            thisPhone = bluetooth;
+            thisPhone = BluetoothAdapter.DefaultAdapter;
 
             StartDiscoveryProcess();
         }
 
-        public Object StartDiscoveryProcess()
+        public object StartDiscoveryProcess()
         {
-            if (!IsDiscovering)
+            /*Enabling Bluetooth the nice way*/
+            if (!thisPhone.IsEnabled)
+            {
+                string enableBT = BluetoothAdapter.ActionRequestEnable;
+
+                view.Navigate(Constants.ENABLE_BLUETOOTH, new Intent(enableBT));
+            }
+            else if (!IsDiscovering)
             {
                 thisPhone.StartDiscovery();
             }
-
             return true;
         }
 
         public void Update_Click()
         {
-            view.UpdateView();
             StartDiscoveryProcess();
         }
 
         public void DeviceList_OnItemClick(int position)
         {
-            view.FinishView(Result.Ok, new Intent().PutExtra(Constants.POSITION, position));
+            Bluetooth.StartConnectThread(devices[position], thisPhone);
         }
 
-        public void onActivityResult(int requestCode, Result resultCode, Intent data) { }
+        public void Visible_CheckedChanged(bool _checked)
+        {
+            if (_checked)
+            {
+                //Making the device discoverable
+                view.Navigate(Constants.DISCOVERY_REQUEST, new Intent(BluetoothAdapter.ActionRequestDiscoverable));
+
+                Bluetooth.StartAcceptThread(thisPhone);
+            }
+            else
+            {
+                Bluetooth.StopAcceptThread();
+            }
+        }
+
+        public void onActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            if (requestCode == Constants.ENABLE_BLUETOOTH)
+            {
+                if (resultCode == Result.Canceled)
+                {
+                    view.MakeDialog(Constants.TMP);
+                }
+                else if (resultCode == Result.Ok)
+                {
+                    StartDiscoveryProcess();
+                }
+            }
+            if (requestCode == Constants.CONN_OK)
+            {
+                if (resultCode == Result.Ok)
+                {
+                    //view.MakeToast(data.GetStringExtra("msg"), ToastLength.Long);
+                    view.FinishView(Result.Ok, new Intent());
+                }
+            }
+        }
 
         public void onBackPressed() { }
 
-        public void onCreate() { }
+        public void onCreate()
+        {
+            Bluetooth.presenter = this;
+        }
 
         public void onDestroy() { }
 
         public void onPause() { }
+
+        public void onStop()
+        {
+            thisPhone.CancelDiscovery();
+        }
 
         public void onResume() { }
 
@@ -96,38 +145,46 @@ namespace Recipizer.Presenters
                 else if (BluetoothAdapter.ActionDiscoveryFinished.Equals(intent.Action))
                 {
                     //discovery finished
-                    presenter.IsDiscovering = false;
-                    view.MakeToast("Discovery started", ToastLength.Short);
+                    if (presenter.IsDiscovering)
+                    {
+                        presenter.IsDiscovering = false;
+                        view.MakeToast("Discovery finished", ToastLength.Short);
+                    }
                 }
                 else if (BluetoothDevice.ActionFound.Equals(intent.Action))
                 {
-                    //first lets get the name of the device
-                    string remoteDeviceName = intent.GetStringExtra(BluetoothDevice.ExtraName);
+                    //first lets get the device
                     BluetoothDevice remoteDevice = (BluetoothDevice)intent.GetParcelableExtra(BluetoothDevice.ExtraDevice);
 
                     if (remoteDevice != null)
                     {
-                        if (remoteDeviceName == null)
-                        {
-                            remoteDeviceName = "Undefined";
-                        }
-                        else if (!presenter.DeviceDict.ContainsValue(remoteDevice))
-                        {
-                            int i = 1;
+                        bool addressExists = false;
 
-                            while (presenter.DeviceDict.ContainsKey(remoteDeviceName))
-                            {
-                                i++;
-                                remoteDeviceName += " (" + i + ")";
-                            }
-
-                            presenter.DeviceDict.Add(remoteDeviceName, remoteDevice);
+                        foreach (BluetoothDevice item in presenter.devices)
+                        {
+                            if (item.Address.Equals(remoteDevice.Address))
+                                addressExists = true;
                         }
 
-                        view.UpdateView();
+                        if (!addressExists)
+                        {
+                            presenter.devices.Add(remoteDevice);
+                        }
                     }
                 }
+                view.UpdateView();
             }
+        }
+
+        public void hWrite(string text)
+        {
+
+            view.MakeToast(text, ToastLength.Short);
+        }
+
+        public void hRead(string text)
+        {
+            view.MakeToast(text, ToastLength.Short);
         }
     }
 }

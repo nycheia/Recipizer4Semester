@@ -21,6 +21,7 @@ namespace Recipizer.Presenters
         public MainPresenter(IRecipizerView _view)
         {
             this.view = _view;
+            Bluetooth.btHandler = new Bluetooth.BtHandler();
 
         }
 

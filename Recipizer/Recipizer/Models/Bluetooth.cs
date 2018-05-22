@@ -4,349 +4,468 @@ using System.Linq;
 using System.Text;
 
 using Android.App;
+using Android.Bluetooth;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-/*
+using Java.Lang;
+using Java.IO;
+using System.IO;
+using Recipizer.Presenters;
+using Newtonsoft.Json;
+
 namespace Recipizer.Models
 {
-    class Bluetooth { 
-        public Bluetooth(Activity ac)
+    class Bluetooth
+    {
+
+        //We can work with static here because the app should only have one instance going of each thread.
+        //It could be done as a singleton for more security and less coupling
+        private static AcceptThread at;
+        private static ConnectThread ct;
+        private static ConnectedThread cnt;
+
+        private static List<Recipe> _ShareList;
+
+        public static List<Recipe> ShareList
         {
-            activity = ac;
-
-
-            BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
-
-            //Enabling Bluetooth the nice way
-            if (!bluetooth.isEnabled())
+            get
             {
-                String enableBT = BluetoothAdapter.ACTION_REQUEST_ENABLE;
-                activity.startActivityForResult(new Intent(enableBT), ENABLE_BLUETOOTH);
-            }
+                if (_ShareList == null)
+                {
+                    _ShareList = new List<Recipe>();
+                }
 
-
-            if (bluetooth.isEnabled())
-            {
-                address = bluetooth.getAddress();
-                name = bluetooth.getName();
+                return _ShareList;
             }
-            else
-            {
-                //TODO if you get here we don goofed
-            }
-
-            thisPhone = bluetooth;
         }
 
-
-        public void makeDiscoverable()
-        {
-            //Making your device discoverable
-            String discoverBT = BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE;
-
-            activity.startActivityForResult(new Intent(discoverBT), DISCOVERY_REQUEST);
-
-            at = new AcceptThread();
-
-            at.start();
+        public static bool IsConnected {
+            get
+            {
+                if (cnt != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-        public void cancelDiscoverable()
+        public static BluetoothDevice connectedDevice;
+        public static IPresenter presenter { get; set; }
+        
+        public static BtHandler btHandler;
+
+        public static void Setup(IPresenter presenter)
+        { 
+            Bluetooth.presenter = presenter;
+        }
+        
+
+        public static void StartAcceptThread(BluetoothAdapter btAdpt)
+        {
+            at = new AcceptThread(btAdpt);
+            at.Start();
+        }
+
+        public static void StopAcceptThread()
         {
             if (at != null)
             {
-                at.cancel();
+                at.Cancel();
                 at = null;
             }
         }
 
-        protected void onActivityResult(int requestCode, int resultCode, Intent data)
+        public static void StartConnectThread(BluetoothDevice bd, BluetoothAdapter adapter)
         {
-            if (requestCode == ENABLE_BLUETOOTH)
+            ConnectThread ct = new ConnectThread(bd, adapter);
+            ct.Start();
+        }
+
+        public static void StopConnectThread()
+        {
+            if (ct != null)
             {
-                if (resultCode == RESULT_OK)
+                ct.Cancel();
+                ct = null;
+            }
+        }
+
+        public static void StartConnectedThread(BluetoothSocket socket)
+        {
+            cnt = new ConnectedThread(socket);
+            presenter.onActivityResult(Constants.CONN_OK, Result.Ok, new Intent().PutExtra("msg", "Connected to " + socket.RemoteDevice.Name));
+            Bluetooth.connectedDevice = socket.RemoteDevice;
+            cnt.Start();
+        }
+
+        public static void StopConnectedThread()
+        {
+            if (cnt != null)
+            {
+                cnt.Cancel();
+                cnt = null;
+            }
+        }
+
+        public static void Write(string message)
+        {
+            if (cnt != null)
+            {
+                var bytes = Encoding.ASCII.GetBytes(message);
+                cnt.Write(bytes);
+            }
+        }
+
+        //The thread parent class is from the Java.Lang Library, the .Net Thread class is a sealed class
+        class AcceptThread : Thread
+        {
+            private readonly BluetoothServerSocket btServerSocket;
+            private readonly BluetoothAdapter btAdpt;
+            private bool done = false;
+
+
+            public AcceptThread(BluetoothAdapter _btAdpt)
+            {
+                BluetoothServerSocket bss = null;
+                btAdpt = _btAdpt;
+
+                try
                 {
-                    //initBluetooth();
-                    //method which handles the initialization of BT, we have to code it
+                    bss = btAdpt.ListenUsingRfcommWithServiceRecord(Constants.APP_NAME, Constants.APP_UUID);
+
                 }
-            }
-            else if (requestCode == DISCOVERY_REQUEST)
-            {
-                if (resultCode == RESULT_CANCELLED)
+                catch (Java.IO.IOException e)
                 {
-                    Log.d("TAG", "Discovery aborted by user");
-                    //here we are logging errors in  discovery. We could also call a method in case of success
+                    e.PrintStackTrace();
                 }
+
+                btServerSocket = bss;
             }
-        }
 
-        public HashMap<String, BluetoothDevice> getDevices()
-        {
-            return btList;
-        }
-
-        public Object startDiscoveryProcess()
-        {
-            activity.registerReceiver(handleDiscoveryResult, new IntentFilter(BluetoothDevice.ACTION_FOUND));
-            activity.registerReceiver(handleDiscoveryResult, new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED));
-            activity.registerReceiver(handleDiscoveryResult, new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED));
-            thisPhone.startDiscovery();
-            return true;
-        }
-
-        public void connectionStuff(BluetoothDevice bd)
-        {
-
-            ConnectThread ct = new ConnectThread(bd);
-            ct.start();
-        }
-
-    };
-
-    public void manageMyConnectedSocket(BluetoothSocket socket)
-    {
-        ct = new ConnectedThread(socket);
-        ct.start();
-    }
-}
-
-private class AcceptThread extends Thread
-        {
-            private final BluetoothServerSocket btServerSocket;
-            private boolean done = false;
-
-        public AcceptThread()
-        {
-            BluetoothServerSocket bss = null;
-            try
+            public override void Run()
             {
-                bss = thisPhone.listenUsingRfcommWithServiceRecord(APP_NAME, MY_UUID);
+                BluetoothSocket btSocket;
+
+                while (!done)
+                {
+                    try
+                    {
+                        btSocket = btServerSocket.Accept();
+                    }
+                    catch (Java.IO.IOException e)
+                    {
+                        e.PrintStackTrace();
+
+                        done = true;
+                        break;
+                    }
+
+                    if (btSocket != null)
+                    {
+                        try
+                        {
+                            StartConnectedThread(btSocket);
+                            btServerSocket.Close();
+                            done = true;
+                            break;
+                        }
+                        catch (Java.IO.IOException e)
+                        {
+                            e.PrintStackTrace();
+
+                            done = true;
+                            break;
+                        }
+                    }
+                }
+
+                btServerSocket.Close();
 
             }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            btServerSocket = bss;
-        }
 
-        @Override
-            public void run()
-        {
-            BluetoothSocket btSocket;
-
-            while (!done)
+            public void Cancel()
             {
                 try
                 {
-                    btSocket = btServerSocket.accept();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
                     done = true;
-                    break;
+                }
+                catch (Java.IO.IOException e)
+                {
+                    e.PrintStackTrace();
+                }
+            }
+        }
+
+        class ConnectThread : Thread
+        {
+            private readonly BluetoothSocket btSocket;
+            private readonly BluetoothDevice btDevice;
+            private readonly BluetoothAdapter thisPhone;
+
+            public ConnectThread(BluetoothDevice device, BluetoothAdapter adapter)
+            {
+                BluetoothSocket tmp = null;
+
+                thisPhone = adapter;
+                btDevice = device;
+
+                try
+                {
+                    tmp = device.CreateRfcommSocketToServiceRecord(Constants.APP_UUID);
+                }
+                catch (Java.IO.IOException e)
+                {
+                    e.PrintStackTrace();
                 }
 
-                if (btSocket != null)
+                btSocket = tmp;
+            }
+
+            public override void Run()
+            {
+                // Cancel discovery because it otherwise slows down the connection.
+                thisPhone.CancelDiscovery();
+
+                try
                 {
-                    Log.e("TAG", " VI er her!!");
+                    // Connect to the remote device through the socket. This call blocks
+                    // until it succeeds or throws an exception.
+                    btSocket.Connect();
+                }
+                catch (Java.IO.IOException connectException)
+                {
+                    // Unable to connect; close the socket and return.
+                    connectException.PrintStackTrace();
                     try
                     {
-                        btServerSocket.close();
-                        done = true;
-                        break;
+                        btSocket.Close();
                     }
-                    catch (IOException e)
+                    catch (Java.IO.IOException closeException)
                     {
-                        e.printStackTrace();
-                        done = true;
-                        break;
+                        closeException.PrintStackTrace();
                     }
+
+                    return;
+                }
+                // The connection attempt succeeded. Perform work associated with
+                // the connection in a separate thread.
+
+                StartConnectedThread(btSocket);
+            }
+
+            // Closes the client socket and causes the thread to finish.
+            public void Cancel()
+            {
+                try
+                {
+                    btSocket.Close();
+                }
+                catch (Java.IO.IOException e)
+                {
+                    e.PrintStackTrace();
                 }
             }
         }
 
-        public void cancel()
+        class ConnectedThread : Thread
         {
-            try
+            private readonly BluetoothSocket btSocket;
+            private readonly Stream btInStream;
+            private readonly Stream btOutStream;
+            private Handler btHandler;
+            private bool done = false;
+
+
+            public ConnectedThread(BluetoothSocket socket)
             {
-                done = true;
-                btServerSocket.close();
+                if (Bluetooth.btHandler == null)
+                {
+                    done = true;
+                }
+                else
+                {
+                    this.btHandler = Bluetooth.btHandler;
+                }
+
+                btSocket = socket;
+                Stream tmpIn = null;
+                Stream tmpOut = null;
+
+                //getting the streams
+                
+                try
+                {
+                    tmpIn = socket.InputStream;
+                    tmpOut = socket.OutputStream;
+                }
+                catch (Java.IO.IOException e)
+                {
+                    e.PrintStackTrace();
+                }
+               
+                btInStream = tmpIn;
+                btOutStream = tmpOut;
             }
-            catch (IOException e)
+
+            public override void Run()
             {
-                Log.e("TAG", "Could not close the connect socket", e);
+                byte[] btBuffer = new byte[1024]; // btBuffer store for the stream
+                int bytes;
+
+                // Keep listening to the InputStream while connected
+                while (!done)
+                {
+                    
+                    try
+                    {
+                        //Read from the stream
+                        bytes = btInStream.Read(btBuffer,  0, btBuffer.Length);
+                        string readMessage = ""+bytes;
+
+                        Java.Lang.String rMessage = new Java.Lang.String(btBuffer, 0, bytes);
+                        readMessage = (string)rMessage;
+
+                        if (readMessage != null)
+                        {
+                            RecieverThread rct = new RecieverThread(readMessage);
+                            rct.Start();
+                        }
+                        
+
+                        //Send the message to the ui
+                        btHandler.ObtainMessage(Constants.MESSAGE_READ, bytes, -1, btBuffer).SendToTarget();
+                        
+                        /*
+                    BufferedReader br = null;
+                    StringBuilder sb = new StringBuilder();
+
+                    String line;
+                    try {
+
+                        br = new BufferedReader(new InputStreamReader(in));
+
+                        while ((line = br.readLine()) != null) {
+                            sb.append(line);
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (br != null) {
+                            try {
+                                br.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }*/
+
+                    }
+                    catch (Java.IO.IOException e)
+                    {
+                        
+                        e.PrintStackTrace();
+                        break;
+                    }
+                }
+            }
+
+            public void Write(byte[] bytes)
+            {
+                try
+                {
+                    btOutStream.Write(bytes, 0, bytes.Length);
+
+                    btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes).SendToTarget();
+
+                    //Message writtenMsg = btHandler.ObtainMessage(Constants.MESSAGE_WRITE, -1, -1, bytes);
+                    //writtenMsg.SendToTarget();
+
+                }
+                catch (Java.IO.IOException e)
+                {
+                    e.PrintStackTrace();
+
+                    /*
+                    // Send a failure message back to the activity.
+                    Message writeErrorMsg = btHandler.obtainMessage(MESSAGE_TOAST);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("toast", "Couldn't send data to the other device");
+                    writeErrorMsg.setData(bundle);
+                    btHandler.sendMessage(writeErrorMsg);*/
+
+                }
+            }
+
+            public void Cancel()
+            {
+                try
+                {
+                    btSocket.Close();
+                }
+                catch (Java.IO.IOException e)
+                {
+                    e.PrintStackTrace();
+                }
+            }
+        }
+
+        class RecieverThread : Thread
+        {
+            string JsonMsg;
+
+            public RecieverThread(string JsonMsg)
+            {
+                this.JsonMsg = JsonMsg;
+            }
+
+            public override void Run()
+            {
+                List<Recipe> tmpList = JsonConvert.DeserializeObject<List<Recipe>>(JsonMsg);
+
+                foreach (Recipe item in tmpList)
+                {
+                    try
+                    {
+                        Constants.Conn.Insert(item);
+                    }
+                    catch (System.Exception)
+                    {
+                    }
+                }
+
+            }
+        }
+
+        public class BtHandler : Handler
+        {
+            public override void HandleMessage(Message msg)
+            {
+                switch (msg.What)
+                {
+                    case Constants.MESSAGE_WRITE:
+                        byte[] writeBuf = (byte[])msg.Obj;
+                        string writeMessage = Encoding.ASCII.GetString(writeBuf);
+                        // construct a string from the buffer
+                        //string writeMessage = new string(writeBuf);
+                        //Toast.makeText(this, "Write Message", Toast.LENGTH_SHORT).show();
+                        break;
+                    case Constants.MESSAGE_READ:
+                        byte[] readBuf = (byte[])msg.Obj;
+                        // construct a string from the valid bytes in the buffer
+                        string readMessage = Encoding.ASCII.GetString(readBuf);
+                        //string readMessage = new string(readBuf, 0, msg.Arg1);
+                        //Toast.makeText(this, "Read Message", Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         }
     }
 }
-
-class ConnectThread extends Thread
-{
-        private final BluetoothSocket btSocket;
-        private final BluetoothDevice btDevice;
-
-        public ConnectThread(BluetoothDevice device)
-{
-    BluetoothSocket tmp = null;
-    btDevice = device;
-
-    try
-    {
-        tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
-    }
-    catch (IOException e)
-    {
-        Log.e("TAG", "Socket's create() method failed", e);
-    }
-    btSocket = tmp;
-}
-
-public void run()
-{
-    // Cancel discovery because it otherwise slows down the connection.
-    thisPhone.cancelDiscovery();
-
-    try
-    {
-        // Connect to the remote device through the socket. This call blocks
-        // until it succeeds or throws an exception.
-        btSocket.connect();
-    }
-    catch (IOException connectException)
-    {
-        // Unable to connect; close the socket and return.
-        connectException.printStackTrace();
-        try
-        {
-            btSocket.close();
-        }
-        catch (IOException closeException)
-        {
-            Log.e("TAG", "Could not close the client socket", closeException);
-        }
-
-        return;
-    }
-    // The connection attempt succeeded. Perform work associated with
-    // the connection in a separate thread.
-    manageMyConnectedSocket(btSocket);
-}
-
-// Closes the client socket and causes the thread to finish.
-public void cancel()
-{
-    try
-    {
-        btSocket.close();
-    }
-    catch (IOException e)
-    {
-        Log.e("TAG", "Could not close the client socket", e);
-    }
-}
-    }
-
-    class ConnectedThread extends Thread
-{
-        private final BluetoothSocket btSocket;
-        private final InputStream btInStream;
-        private final OutputStream btOutStream;
-
-
-        public ConnectedThread(BluetoothSocket socket)
-{
-    btSocket = socket;
-    InputStream tmpIn = null;
-    OutputStream tmpOut = null;
-
-    //getting the streams, as variables are final we use temps.
-
-    try
-    {
-        tmpIn = socket.getInputStream();
-    }
-    catch (IOException e)
-    {
-        e.printStackTrace();
-    }
-
-    try
-    {
-        tmpOut = socket.getOutputStream();
-    }
-    catch (IOException e)
-    {
-        e.printStackTrace();
-    }
-
-    btInStream = tmpIn;
-    btOutStream = tmpOut;
-}
-
-public void run()
-{
-    byte[] btBuffer = new byte[1024]; // btBuffer store for the stream
-    int numBytes;
-
-    while (true)
-    {
-        try
-        {
-            numBytes = btInStream.read(btBuffer);
-
-            Message readMsg = btHandler.obtainMessage(MESSAGE_READ, numBytes, -1, btBuffer);
-
-            readMsg.sendToTarget();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            Log.d("TAG", "run: ");
-            break;
-        }
-    }
-}
-
-public void write(byte[] bytes)
-{
-    try
-    {
-        btOutStream.write(bytes);
-
-        Message writtenMsg = btHandler.obtainMessage(MESSAGE_WRITE, -1, -1, bytes);
-        writtenMsg.sendToTarget();
-
-    }
-    catch (IOException e)
-    {
-        Log.e("TAG", "Error occurred when sending data", e);
-
-        // Send a failure message back to the activity.
-        Message writeErrorMsg = btHandler.obtainMessage(MESSAGE_TOAST);
-        Bundle bundle = new Bundle();
-        bundle.putString("toast", "Couldn't send data to the other device");
-        writeErrorMsg.setData(bundle);
-        btHandler.sendMessage(writeErrorMsg);
-
-    }
-}
-
-public void cancel()
-{
-    try
-    {
-        btSocket.close();
-    }
-    catch (IOException e)
-    {
-        Log.e("TAG", "Could not close the connect socket", e);
-    }
-}
-    }
-    }
-}*/

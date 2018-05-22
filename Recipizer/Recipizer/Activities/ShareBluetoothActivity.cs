@@ -9,7 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Recipizer.Models;
 using Recipizer.Presenters;
+using Recipizer.Adapters;
 
 namespace Recipizer.Activities
 {
@@ -19,9 +21,10 @@ namespace Recipizer.Activities
 
         //UI components
         ListView ShareList;
+        TextView txtConnected;
 
         //Adapters
-        ArrayAdapter<string> ShareAdapter;
+        ShareAdapter shareAdapter;
 
         //Variable to connect to presenter
         ShareBluetoothPresenter presenter;
@@ -33,10 +36,12 @@ namespace Recipizer.Activities
             SetContentView(Resource.Layout.ShareBluetooth);
 
             //Instantiate the presenter
-            presenter = new ShareBluetoothPresenter(this);
+            presenter = new ShareBluetoothPresenter(this, Intent.GetIntExtra(Constants.RECIPE_ID, 0), Intent.GetStringExtra("type"));
+
 
             //Get UI components for global use.
             ShareList = FindViewById<ListView>(Resource.Id.listViewShareItems);
+            txtConnected = FindViewById<TextView>(Resource.Id.textViewConnectedDevice);
 
             //Get UI components for local use.
             Button btnConnect = FindViewById<Button>(Resource.Id.btnConnect);
@@ -44,30 +49,29 @@ namespace Recipizer.Activities
             Button btnClear = FindViewById<Button>(Resource.Id.btnClearItems);
             Button btnShare = FindViewById<Button>(Resource.Id.btnShareItems);
 
-            //Instantiate Spinner (Dropdown).
-
 
             //Setup lists.
-            ShareAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1);
-            ShareList.Adapter = ShareAdapter;
+            shareAdapter = new ShareAdapter(this, Bluetooth.ShareList);
+            ShareList.Adapter = shareAdapter;
 
             //Setup Button Events.
             btnConnect.Click += (object sender, EventArgs e) => {
-                Toast.MakeText(this, "Connect Button Clicked", ToastLength.Short);
+                presenter.Connect_Click();
             };
 
             btnAdd.Click += (object sender, EventArgs e) => {
-                Toast.MakeText(this, "Add More Button Clicked", ToastLength.Short);
+                presenter.Add_Click();
             };
 
             btnClear.Click += (object sender, EventArgs e) => {
-                Toast.MakeText(this, "Clear Button Clicked", ToastLength.Short);
+                presenter.Clear_Click();
             };
 
             btnShare.Click += (object sender, EventArgs e) => {
-                Toast.MakeText(this, "Share Button Clicked", ToastLength.Short);
+                presenter.Share_Click();
             };
 
+            
             //Call the presenters OnCreate Method.
             presenter.onCreate();
 
@@ -75,37 +79,53 @@ namespace Recipizer.Activities
 
         public void FinishView(Result result, Intent intent)
         {
-            throw new NotImplementedException();
+            SetResult(result, intent);
+            Finish();
         }
 
-        public void MakeToast(string text, ToastLength length)
-        {
-            throw new NotImplementedException();
-        }
+        public void MakeToast(string text, ToastLength length) { }
 
         public void Navigate(int code, Intent data)
         {
-            throw new NotImplementedException();
+            if (code == Constants.CONN_REQUEST)
+            {
+                StartActivityForResult(new Intent(this, typeof(DeviceListActivity)), Constants.CONN_REQUEST);
+            }
         }
 
-        public void ResetText()
+        protected override void OnResume()
         {
-            throw new NotImplementedException();
+            base.OnResume();
+            presenter.onResume();
         }
 
-        public void SetupView()
-        {
-            throw new NotImplementedException();
-        }
+        public void ResetText() { }
+
+        public void SetupView() { }
 
         public void UpdateView()
         {
-            throw new NotImplementedException();
+            if (Bluetooth.IsConnected)
+                txtConnected.Text = "Connected to " + Bluetooth.connectedDevice.Name;
+            else
+                txtConnected.Text = "Not connected";
+
+            shareAdapter.NotifyDataSetChanged();
         }
 
-        public void RequestPermission()
+        public void RequestPermission() { }
+
+        public void MakeOKButtonDialog() { }
+
+        public void MakeDialog(int code)
         {
-            throw new NotImplementedException();
+            //TODO Remove magic strings (Move them to strings XML)
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Warning:")
+                .SetMessage("Already connected to " + Bluetooth.connectedDevice.Name +". \n Continue?")
+                .SetNegativeButton("No", (sender, e) => { })
+                .SetPositiveButton("Yes", (sender, e) => { presenter.NavToDeviceList(); });
+            builder.Show();
         }
     }
 }

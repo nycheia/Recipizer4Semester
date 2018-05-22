@@ -10,17 +10,19 @@
         p1:layout_height="wrap_content"
         p1:id="@+id/linearLayout2">
         <Button
-            p1:text="@string/btn_connect"
+            p1:text="@string/btn_newconnect"
             p1:layout_width="wrap_content"
             p1:layout_height="45dp"
             p1:id="@+id/btnConnect"
             p1:layout_marginStart="10dp"
             p1:layout_marginEnd="5dp"
             p1:layout_marginTop="5dp" />
-        <Spinner
-            p1:layout_width="match_parent"
+        <TextView
+            p1:text="Not connected"
+            p1:textAppearance="?android:attr/textAppearanceMedium"
+            p1:layout_width="wrap_content"
             p1:layout_height="45dp"
-            p1:id="@+id/spinnerDevices"
+            p1:id="@+id/textViewConnectedDevice"
             p1:layout_marginEnd="10dp"
             p1:layout_marginStart="5dp"
             p1:layout_marginTop="5dp" />

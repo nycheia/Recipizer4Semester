@@ -12,38 +12,46 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#555555" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="400dp"
         android:id="@+id/listViewDeviceList"
         android:splitMotionEvents="false" />
-    <RelativeLayout
+    <LinearLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout1"
-        android:gravity="center"
-        android:layout_gravity="bottom">
-        <Switch
-            android:id="@+id/switchVisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_margin="10dp"
-            android:checked="false"
-            android:text="Visible "
-            android:textSize="18dp"
-            android:buttonTint="#00000000" />
+        android:layout_gravity="center_vertical|start">
         <Button
             android:text="Update"
             android:id="@+id/btnUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical|start" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressCircleDiscovering"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="60dp" />
+        <Switch
+            android:id="@+id/switchVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Visible "
+            android:textSize="18dp"
+            android:buttonTint="#00000000"
+            android:layout_gravity="center_vertical|end"
             android:layout_margin="10dp" />
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
