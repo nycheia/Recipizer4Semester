@@ -26,6 +26,9 @@ namespace Recipizer
         public const int DISCOVERY_REQUEST = 6;
         public const int MESSAGE_READ = 7;
         public const int MESSAGE_WRITE = 8;
+        public const int TOAST = 9;
+        public const int CONN_OK = 10;
+        public const int CONN_REQUEST = 11;
 
         public const string RECIPE_ID = "recipeid";
         public const string POSITION = "position";

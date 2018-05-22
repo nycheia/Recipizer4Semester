@@ -79,7 +79,7 @@ namespace Recipizer.Activities
             }
             else if (code == Constants.SHARE)
             {
-                Intent intent = new Intent(this, typeof(DeviceListActivity));
+                Intent intent = new Intent(this, typeof(ShareBluetoothActivity));
                 intent.PutExtras(data);
                 //TODO might not need to be ForResult
                 StartActivityForResult(intent, Constants.SHARE);

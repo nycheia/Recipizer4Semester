@@ -27,7 +27,7 @@ namespace Recipizer.Presenters
 
         public void Share_Click()
         {
-            view.Navigate(Constants.SHARE, new Intent().PutExtra(Constants.RECIPE_ID, CurrentRecipe.id));
+            view.Navigate(Constants.SHARE, new Intent().PutExtra(Constants.RECIPE_ID, CurrentRecipe.id).PutExtra("type", "recipe"));
         }
 
         public void Edit_Click()
@@ -45,6 +45,7 @@ namespace Recipizer.Presenters
         public void onDestroy() { }
 
         public void onResume() { }
+
         public void onBackPressed() { }
 
         public void onActivityResult(int requestCode, Result resultCode, Intent data)

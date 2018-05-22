@@ -50,7 +50,6 @@ namespace Recipizer.Activities
 
             //Get UI components for local use.
             ListView deviceList = FindViewById<ListView>(Resource.Id.listViewDeviceList);
-            Button btn1 = FindViewById<Button>(Resource.Id.button1);
 
             //TODO move this switch and all its fundtionality to the main screen
             Switch switchVisible = FindViewById<Switch>(Resource.Id.switchVisible);
@@ -76,11 +75,6 @@ namespace Recipizer.Activities
                 presenter.Visible_CheckedChanged(e.IsChecked);
             };
 
-            btn1.Click += (sender, e) =>
-            {
-                Bluetooth.Write("Hej");
-            };
-
             //Bluetooth reciever is in a new class below this class
             RegisterReceiver(new DeviceListPresenter.BluetoothReciever(this, presenter), new IntentFilter(BluetoothDevice.ActionFound));
             RegisterReceiver(new DeviceListPresenter.BluetoothReciever(this, presenter), new IntentFilter(BluetoothAdapter.ActionDiscoveryStarted));
@@ -104,7 +98,7 @@ namespace Recipizer.Activities
 
         public void FinishView(Result result, Intent intent)
         {
-            //TODO send thr right information
+            //TODO send the right information
             SetResult(result, intent);
             Finish();
         }

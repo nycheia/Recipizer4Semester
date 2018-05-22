@@ -45,5 +45,10 @@ namespace Recipizer.Models
             Description = _Description;
             DateCreated = _DateCreated;
         }
+
+        public string Type()
+        {
+            return "Recipe";
+        }
     }
 }

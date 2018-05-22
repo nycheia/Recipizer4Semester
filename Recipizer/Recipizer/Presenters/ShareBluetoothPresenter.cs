@@ -6,48 +6,90 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Recipizer.Activities;
+using Recipizer.Models;
+using Newtonsoft.Json;
 
 namespace Recipizer.Presenters
 {
     class ShareBluetoothPresenter : IPresenter
     {
-        //public List<string> ShareList;
 
         IRecipizerView view;
 
-        public ShareBluetoothPresenter(IRecipizerView _view)
+        public ShareBluetoothPresenter(IRecipizerView _view, int id, string type)
         {
             this.view = _view;
+
+            switch (type)
+            {
+                case "recipe":
+                    Recipe r = Constants.Conn.Get<Recipe>(id);
+
+                    if (!Bluetooth.ShareList.Contains(r))
+                        Bluetooth.ShareList.Add(r);
+
+                    break;
+
+                //TODO add more
+                default:
+                    break;
+            }
         }
 
-        public void onActivityResult(int requestCode, Result resultCode, Intent data)
+        public void Share_Click()
         {
-            throw new NotImplementedException();
+            if (Bluetooth.IsConnected)
+            {
+                string JsonString = JsonConvert.SerializeObject(Bluetooth.ShareList);
+                Bluetooth.Write(JsonString);
+            }
+            else
+            {
+                //TODO Show Error Dialog
+            }
         }
 
-        public void onBackPressed()
+        public void NavToDeviceList()
         {
-            throw new NotImplementedException();
+            view.Navigate(Constants.CONN_REQUEST, new Intent());
         }
+
+        public void Clear_Click()
+        {
+            Bluetooth.ShareList.Clear();
+            view.UpdateView();
+        }
+
+        public void Add_Click()
+        {
+            view.FinishView(Result.Ok, new Intent());
+        }
+
+        public void Connect_Click()
+        {
+            if (Bluetooth.IsConnected)
+                view.MakeDialog(Constants.CONN_REQUEST);
+            else
+                NavToDeviceList();
+        }
+
+        public void onActivityResult(int requestCode, Result resultCode, Intent data) { }
+
+        public void onBackPressed() { }
 
         public void onCreate()
         {
-            throw new NotImplementedException();
+            Bluetooth.presenter = this;
+            view.UpdateView();
         }
 
-        public void onDestroy()
-        {
-            throw new NotImplementedException();
-        }
+        public void onDestroy() { }
 
-        public void onPause()
-        {
-            throw new NotImplementedException();
-        }
+        public void onPause() { }
 
         public void onResume()
         {
-            throw new NotImplementedException();
+            view.UpdateView();
         }
     }
 }

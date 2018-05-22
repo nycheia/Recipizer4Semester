@@ -17,5 +17,7 @@ namespace Recipizer.Presenters
         void onDestroy();
         void onBackPressed();
         void onActivityResult(int requestCode, Result resultCode, Intent data);
+
+        //void RecieveMessage(int code, string msg);
     }
 }
