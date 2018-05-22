@@ -19,6 +19,8 @@ namespace Recipizer.Presenters
         public int RecipeID;
         public Recipe CurrentRecipe;
 
+        
+
 
         public CreateRecipePresenter(IRecipizerView _view)
         {

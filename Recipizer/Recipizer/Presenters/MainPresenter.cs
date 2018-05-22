@@ -41,6 +41,9 @@ namespace Recipizer.Presenters
             Constants.Conn = new SQLiteConnection(DbPath);
             Constants.Conn.CreateTable<Recipe>();
             Constants.Conn.CreateTable<Ingredient>();
+            Constants.Conn.CreateTable<MealPlan>();
+            Constants.Conn.CreateTable<MealDay>();
+            Constants.Conn.CreateTable<MealDayRecipe>();
             Constants.Conn.CreateTable<ShoppingItem>();
         }
 

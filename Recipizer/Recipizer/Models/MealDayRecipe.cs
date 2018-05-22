@@ -12,15 +12,14 @@ using Android.Widget;
 
 namespace Recipizer.Models
 {
-    [Table("MealDay")]
-    public class MealDay
+    [Table("MealDayRecipe")]
+    public class MealDayRecipe
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement]    
         public int id { get; set; }
-        //public List<string> meals;
-        public List<Recipe> recipes; 
-        public int mealPlanId { get; set; }
-        //public string note { get; set; }
-        public int day { get; set; }
+
+        public int recipeId { get; set; }
+
+        public int mealDayId { get; set; }
     }
 }

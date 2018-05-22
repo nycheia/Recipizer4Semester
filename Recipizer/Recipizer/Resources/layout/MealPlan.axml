@@ -3,12 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ExpandableListView
+    <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="410dp"
-        android:id="@+id/expandableListMealPlan" />
+        android:id="@+id/ListMealPlan" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
