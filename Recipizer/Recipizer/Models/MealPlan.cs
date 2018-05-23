@@ -28,5 +28,6 @@ namespace Recipizer.Models
         {
             mealDays = new List<MealDay>();
         }
+
     }
 }
