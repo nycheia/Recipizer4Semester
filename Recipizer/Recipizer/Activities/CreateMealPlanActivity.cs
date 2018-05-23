@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "CreateMealPlan")]
+    [Activity(Label = "CreateMealPlan", ScreenOrientation =Android.Content.PM.ScreenOrientation.Portrait)]
     public class CreateMealPlanActivity : Activity, IRecipizerView
     {
         ListView recipeList;
@@ -31,15 +31,15 @@ namespace Recipizer.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateMealPlan);
-            
+
             //
             presenter = new CreateMealPlanPresenters(this);
             //
-            recipeList              = FindViewById<ListView>(Resource.Id.CreateMealPlanRecipeListView);
-            pickedRecipeList        = FindViewById<ListView>(Resource.Id.PickedRecipesListView);
-            amountOfDaysTextView    = FindViewById<TextView>(Resource.Id.dayAmountTextView);
-            startDateEditText       = FindViewById<TextView>(Resource.Id.StartDateText);
-            addMealDayBtn           = FindViewById<Button>(Resource.Id.AddMealDayBtn);
+            recipeList = FindViewById<ListView>(Resource.Id.CreateMealPlanRecipeListView);
+            pickedRecipeList = FindViewById<ListView>(Resource.Id.PickedRecipesListView);
+            amountOfDaysTextView = FindViewById<TextView>(Resource.Id.dayAmountTextView);
+            startDateEditText = FindViewById<TextView>(Resource.Id.StartDateText);
+            addMealDayBtn = FindViewById<Button>(Resource.Id.AddMealDayBtn);
 
             //TODO lav adapters til lister
             RecipeAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, presenter.recipeDictionary.Keys.ToList());
@@ -55,7 +55,7 @@ namespace Recipizer.Activities
                 presenter.ChooseRecipe_OnList(dictionaryKey);
             };
 
-            startDateEditText.Click += PickDate_OnClick;
+            startDateEditText.Click += (sender, e) => { PickDate_OnClick(); };
             
             
 
@@ -66,7 +66,8 @@ namespace Recipizer.Activities
             SetNameDialog();
 
             presenter.onCreate();
-            
+
+            PickDate_OnClick();
         }
         public void FinishView(Result result, Intent intent)
         {
@@ -105,17 +106,20 @@ namespace Recipizer.Activities
 
         }
 
-        public void PickDate_OnClick(object sender, EventArgs eventArgs)
+        public void PickDate_OnClick()
         {
 
             MealPlanDateAmountFragment dialog = new MealPlanDateAmountFragment(this, "Number of days in mealplan:");
             dialog.Show(FragmentManager, "hej");
             dialog.clicked = SetNumberOfDays;
+            dialog.Cancelable = false;
+
             DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
             {
                 startDateEditText.Text = time.ToLongDateString();
                 presenter.SetStartDate(time);
             });
+            frag.Cancelable = false;
             frag.Show(FragmentManager, DatePickerFragment.TAG);
 
             //amountOfDaysTextView.Text = "" + MealPlanDateAmountFragment.current;
@@ -140,6 +144,7 @@ namespace Recipizer.Activities
         public void SetNameDialog()
         {
             MealPlanNameFragment mpnf = new MealPlanNameFragment(this, "Name of mealplan:");
+            mpnf.Cancelable = false;
             mpnf.Show(FragmentManager, "nameMealPlan");
             mpnf.clicked = SetName;
         }

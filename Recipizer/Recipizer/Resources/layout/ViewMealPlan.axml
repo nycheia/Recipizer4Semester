@@ -3,17 +3,33 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:text="Days:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_marginStart="10dp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#555555" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="350dp"
         android:id="@+id/mealDayListView" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#555555" />
     <Button
         android:text="Update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/mealPlanUpdateBtn" />
+        android:id="@+id/mealPlanUpdateBtn"
+        android:enabled="false" />
     <Button
         android:text="Share"
         android:layout_width="match_parent"

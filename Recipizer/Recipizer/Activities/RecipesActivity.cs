@@ -15,7 +15,7 @@ using static Android.Widget.AdapterView;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "RecipesActivity")]
+    [Activity(Label = "RecipesActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class RecipesActivity : Activity, IRecipizerView
     {
         //UI components

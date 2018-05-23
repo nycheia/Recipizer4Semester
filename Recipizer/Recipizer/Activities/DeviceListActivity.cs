@@ -22,7 +22,7 @@ using Recipizer.Adapters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "DeviceListActivity")]
+    [Activity(Label = "DeviceListActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class DeviceListActivity : Activity, IRecipizerView
     {
         //UI components

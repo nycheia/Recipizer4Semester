@@ -15,7 +15,7 @@ using Recipizer.Adapters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "ShareBluetoothActivity")]
+    [Activity(Label = "ShareBluetoothActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ShareBluetoothActivity : Activity, IRecipizerView
     {
 

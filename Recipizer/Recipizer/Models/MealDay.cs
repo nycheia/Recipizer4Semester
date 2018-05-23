@@ -22,5 +22,6 @@ namespace Recipizer.Models
         public int mealPlanId { get; set; }
         //public string note { get; set; }
         public int day { get; set; }
+        
     }
 }

@@ -16,7 +16,7 @@ using Recipizer.Presenters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "Recipes")]
+    [Activity(Label = "Recipes", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class CreateRecipeActivity : Activity, IRecipizerView
     {
         //UI components

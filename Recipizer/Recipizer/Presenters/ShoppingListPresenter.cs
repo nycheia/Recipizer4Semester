@@ -39,7 +39,6 @@ namespace Recipizer.Presenters
 
         public void ClearList()
         {
-            //somethingsomethingdatabasedatabase det her er bare for at minde mig om det
             shoppingListList.Clear();
             Constants.Conn.DeleteAll<ShoppingItem>();
             view.UpdateView();

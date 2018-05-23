@@ -6,7 +6,7 @@ using Recipizer.Presenters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "Recipizer", MainLauncher = true)]
+    [Activity(Label = "Recipizer", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity, IRecipizerView
     {
         private MainPresenter presenter;

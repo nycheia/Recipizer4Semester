@@ -15,7 +15,7 @@ using Recipizer.Adapters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "ViewRecipeActivity")]
+    [Activity(Label = "ViewRecipeActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ViewRecipeActivity : Activity, IRecipizerView
     {
 

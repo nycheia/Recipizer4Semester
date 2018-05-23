@@ -15,7 +15,7 @@ using Recipizer.Presenters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "ViewMealPlanActivity")]
+    [Activity(Label = "ViewMealPlanActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ViewMealPlanActivity : Activity, IRecipizerView
     {
         ListView mealDaysList;

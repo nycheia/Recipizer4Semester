@@ -13,7 +13,7 @@ using Recipizer.Presenters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "ShoppingListActivity")]
+    [Activity(Label = "ShoppingListActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ShoppingListActivity : Activity, IRecipizerView
     {
         //UI components

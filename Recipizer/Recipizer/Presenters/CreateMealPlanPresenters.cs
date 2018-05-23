@@ -78,7 +78,7 @@ namespace Recipizer.Presenters
 
         public void ChooseRecipe_OnList(string key)
         {
-            //TODO lav exception så man ikke vælger 2 af samme recipe (giver exception haHAA)
+            //TODO lav exception så man ikke vælger 2 af samme recipe
             try
             {
                 pickedRecipeDictionary.Add(key, recipeDictionary.GetValueOrDefault(key));

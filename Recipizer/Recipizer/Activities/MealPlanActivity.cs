@@ -13,7 +13,7 @@ using Recipizer.Presenters;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "MealPlanActivity")]
+    [Activity(Label = "MealPlanActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MealPlanActivity : Activity, IRecipizerView
     {
         ListView listViewMealPlan;

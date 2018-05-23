@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Recipizer.Activities
 {
-    [Activity(Label = "ViewMealDay")]
+    [Activity(Label = "ViewMealDay", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class ViewMealDayActivity : Activity, IRecipizerView
     {
         ListView listRecipes;
