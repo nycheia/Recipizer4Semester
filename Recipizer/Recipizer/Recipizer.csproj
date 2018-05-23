@@ -75,9 +75,15 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CreateMealPlanActivity.cs" />
+    <Compile Include="Activities\DatePickerFragmentcs.cs" />
     <Compile Include="Activities\DeviceListActivity.cs" />
     <Compile Include="Activities\IRecipizerView.cs" />
+    <Compile Include="Activities\MealPlanDateAmountFragment.cs" />
+    <Compile Include="Activities\MealPlanNameFragment.cs" />
     <Compile Include="Activities\ShareBluetoothActivity.cs" />
+    <Compile Include="Activities\ViewMealDayActivity.cs" />
+    <Compile Include="Activities\ViewMealPlanActivity.cs" />
     <Compile Include="Activities\ViewRecipeActivity.cs" />
     <Compile Include="Adapters\BTDeviceAdapter.cs" />
     <Compile Include="Adapters\IngredientAdapter.cs" />
@@ -91,17 +97,23 @@
     <Compile Include="Models\Bluetooth.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\MealDay.cs" />
+    <Compile Include="Models\MealDayRecipe.cs" />
     <Compile Include="Models\MealPlan.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\ShoppingItem.cs" />
     <Compile Include="Activities\RecipesActivity.cs" />
+    <Compile Include="Models\ShoppingList.cs" />
+    <Compile Include="Presenters\CreateMealPlanPresenters.cs" />
     <Compile Include="Presenters\CreateRecipePresenter.cs" />
     <Compile Include="Presenters\DeviceListPresenter.cs" />
     <Compile Include="Presenters\IPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Presenters\MealPlanPresenter.cs" />
     <Compile Include="Presenters\RecipesPresenter.cs" />
     <Compile Include="Presenters\ShareBluetoothPresenter.cs" />
     <Compile Include="Presenters\ShoppingListPresenter.cs" />
+    <Compile Include="Presenters\ViewMealDayPresenter.cs" />
+    <Compile Include="Presenters\ViewMealPlanPresenter.cs" />
     <Compile Include="Presenters\ViewRecipePresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +158,13 @@
     <AndroidResource Include="Resources\layout\item_share.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\CreateMealPlan.axml" />
+    <AndroidResource Include="Resources\layout\item_MealDayGroup.axml" />
+    <AndroidResource Include="Resources\layout\item_RecipeChild.axml" />
+    <AndroidResource Include="Resources\layout\MealPlanDateAmount.axml" />
+    <AndroidResource Include="Resources\layout\MealPlanName.axml" />
+    <AndroidResource Include="Resources\layout\ViewMealDay.axml" />
+    <AndroidResource Include="Resources\layout\ViewMealPlan.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

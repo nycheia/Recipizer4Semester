@@ -22,7 +22,7 @@ namespace Recipizer.Presenters
 
             //Get the Recipe object
             CurrentRecipe = Constants.Conn.Get<Recipe>(_RecipeID);
-            CurrentRecipe.setIngredients();
+            CurrentRecipe.SetIngredients();
         }
 
         public void Share_Click()
@@ -53,7 +53,7 @@ namespace Recipizer.Presenters
             if (requestCode == Constants.EDIT_RECIPE && resultCode == Result.Ok)
             {
                 CurrentRecipe = CurrentRecipe = Constants.Conn.Get<Recipe>(data.GetIntExtra(Constants.RECIPE_ID, 0));
-                CurrentRecipe.setIngredients();
+                CurrentRecipe.SetIngredients();
                 view.UpdateView();
             }
         }

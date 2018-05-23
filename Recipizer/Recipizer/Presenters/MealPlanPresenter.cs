@@ -29,6 +29,7 @@ namespace Recipizer.Presenters
 
         private void LoadMealPlanFromStorage()
         {
+            mealPlanList.Clear();
             foreach (MealPlan mp in Constants.Conn.Table<MealPlan>().ToList())
             {
                 mealPlanList.Add(mp.name);

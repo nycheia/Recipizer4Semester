@@ -430,11 +430,16 @@ namespace Recipizer.Models
             {
                 List<Recipe> tmpList = JsonConvert.DeserializeObject<List<Recipe>>(JsonMsg);
 
-                foreach (Recipe item in tmpList)
+                foreach (Recipe rItem in tmpList)
                 {
                     try
                     {
-                        Constants.Conn.Insert(item);
+                        Constants.Conn.Insert(rItem);
+                        foreach (Ingredient iItem in rItem.Ingredients)
+                        {
+                            iItem.RecipeId = rItem.id;
+                            Constants.Conn.Insert(iItem);
+                        }
                     }
                     catch (System.Exception)
                     {

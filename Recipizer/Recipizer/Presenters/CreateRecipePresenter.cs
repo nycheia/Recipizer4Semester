@@ -110,7 +110,7 @@ namespace Recipizer.Presenters
             if (RecipeID != -1)
             {
                 CurrentRecipe = Constants.Conn.Get<Recipe>(RecipeID);
-                CurrentRecipe.setIngredients();
+                CurrentRecipe.SetIngredients();
                 ingredientsList.AddRange(CurrentRecipe.Ingredients);
                 view.SetupView();
                 view.UpdateView();

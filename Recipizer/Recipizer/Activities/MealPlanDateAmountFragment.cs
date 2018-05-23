@@ -16,7 +16,6 @@ namespace Recipizer.Activities
     public class MealPlanDateAmountFragment : DialogFragment
     {
         private readonly Context context;
-        private readonly int days;
         private readonly string title;
         public static int current;
         public delegate void clickedOK(int days);

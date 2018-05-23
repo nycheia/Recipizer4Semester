@@ -70,12 +70,13 @@ namespace Recipizer.Activities
         }
         public void FinishView(Result result, Intent intent)
         {
-            throw new NotImplementedException();
+            SetResult(result, intent);
+            Finish();
         }
 
         public void MakeToast(string text, ToastLength length)
         {
-            throw new NotImplementedException();
+            Toast.MakeText(this, text, length);
         }
 
         public void Navigate(int code, Intent data)
@@ -141,6 +142,21 @@ namespace Recipizer.Activities
             MealPlanNameFragment mpnf = new MealPlanNameFragment(this, "Name of mealplan:");
             mpnf.Show(FragmentManager, "nameMealPlan");
             mpnf.clicked = SetName;
+        }
+
+        public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
+        {
+            throw new NotImplementedException();
         }
     }
 }

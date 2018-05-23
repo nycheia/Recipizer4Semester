@@ -23,10 +23,7 @@ namespace Recipizer.Activities
         ArrayAdapter<string> mealDayAdapter;
 
         ViewMealPlanPresenter presenter;
-
-        List<string> mealDayList;
-        //Dictionary<string, List<Recipe>> recipes;
-
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -53,7 +50,7 @@ namespace Recipizer.Activities
             };
 
 
-            presenter.populateMealDaysFromStorage(Intent.GetIntExtra("mealPlanId", 1));
+            presenter.PopulateMealDaysFromStorage(Intent.GetIntExtra("mealPlanId", 1));
 
             
 
@@ -87,6 +84,20 @@ namespace Recipizer.Activities
             mealDayAdapter.AddAll(presenter.mealDays.Keys.ToList());
             mealDayAdapter.NotifyDataSetChanged();
         }
-        
+
+        public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

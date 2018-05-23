@@ -60,167 +60,224 @@ namespace Recipizer
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060013
-			public const int absoluteLayoutMain = 2131099667;
-			
-			// aapt resource value: 0x7f060007
-			public const int btnAddIngredient_CreateRecipe = 2131099655;
-			
-			// aapt resource value: 0x7f06001a
-			public const int btnAddMealList = 2131099674;
-			
-			// aapt resource value: 0x7f060024
-			public const int btnAddMore = 2131099684;
-			
-			// aapt resource value: 0x7f06002a
-			public const int btnAddShopIngredient = 2131099690;
-			
-			// aapt resource value: 0x7f060025
-			public const int btnClearItems = 2131099685;
-			
-			// aapt resource value: 0x7f06001b
-			public const int btnClearMealList = 2131099675;
-			
-			// aapt resource value: 0x7f06002b
-			public const int btnClearShopList = 2131099691;
-			
-			// aapt resource value: 0x7f060020
-			public const int btnConnect = 2131099680;
-			
-			// aapt resource value: 0x7f06000a
-			public const int btnCreateRecipe_CreateRecipe = 2131099658;
-			
-			// aapt resource value: 0x7f060034
-			public const int btnEdit = 2131099700;
-			
-			// aapt resource value: 0x7f060012
-			public const int btnIngredientAdapterDelete = 2131099666;
-			
-			// aapt resource value: 0x7f060015
-			public const int btnMealPlanNav = 2131099669;
-			
-			// aapt resource value: 0x7f06001d
-			public const int btnNewRecipe = 2131099677;
-			
-			// aapt resource value: 0x7f060014
-			public const int btnRecipeNav = 2131099668;
-			
-			// aapt resource value: 0x7f060017
-			public const int btnSettingsNav = 2131099671;
-			
-			// aapt resource value: 0x7f060035
-			public const int btnShare = 2131099701;
-			
-			// aapt resource value: 0x7f060026
-			public const int btnShareItems = 2131099686;
-			
-			// aapt resource value: 0x7f060016
-			public const int btnShopListNav = 2131099670;
-			
-			// aapt resource value: 0x7f06000f
-			public const int btnUpdate = 2131099663;
-			
 			// aapt resource value: 0x7f060005
-			public const int editTextIngredientAmount_CreateRecipe = 2131099653;
-			
-			// aapt resource value: 0x7f060003
-			public const int editTextIngredientName_CreateRecipe = 2131099651;
-			
-			// aapt resource value: 0x7f060009
-			public const int editTextRecipeDescription_CreateRecipe = 2131099657;
-			
-			// aapt resource value: 0x7f060001
-			public const int editTextRecipeName_CreateRecipe = 2131099649;
-			
-			// aapt resource value: 0x7f060028
-			public const int editText_AddToShoppingList = 2131099688;
-			
-			// aapt resource value: 0x7f060018
-			public const int expandableListMealPlan = 2131099672;
-			
-			// aapt resource value: 0x7f060010
-			public const int ingAdapterTextViewIngAmount = 2131099664;
-			
-			// aapt resource value: 0x7f060011
-			public const int ingAdapterTextViewIngName = 2131099665;
-			
-			// aapt resource value: 0x7f06001e
-			public const int linearLayout1 = 2131099678;
-			
-			// aapt resource value: 0x7f06001f
-			public const int linearLayout2 = 2131099679;
-			
-			// aapt resource value: 0x7f060022
-			public const int linearLayout3 = 2131099682;
-			
-			// aapt resource value: 0x7f060004
-			public const int linearLayoutIngredient = 2131099652;
-			
-			// aapt resource value: 0x7f060019
-			public const int linearLayoutMealPlan = 2131099673;
-			
-			// aapt resource value: 0x7f060029
-			public const int linearLayoutShopList = 2131099689;
-			
-			// aapt resource value: 0x7f060033
-			public const int linearLayoutViewRecipe = 2131099699;
-			
-			// aapt resource value: 0x7f060002
-			public const int listIngredients_CreateRecipe = 2131099650;
-			
-			// aapt resource value: 0x7f06000c
-			public const int listViewDeviceList = 2131099660;
-			
-			// aapt resource value: 0x7f060030
-			public const int listViewIngredients = 2131099696;
-			
-			// aapt resource value: 0x7f06001c
-			public const int listViewRecipes = 2131099676;
-			
-			// aapt resource value: 0x7f060023
-			public const int listViewShareItems = 2131099683;
-			
-			// aapt resource value: 0x7f060027
-			public const int listViewShoppingList = 2131099687;
-			
-			// aapt resource value: 0x7f06000d
-			public const int relativeLayout1 = 2131099661;
+			public const int AddMealDayBtn = 2131099653;
 			
 			// aapt resource value: 0x7f060000
-			public const int scrollViewCreateRecipe = 2131099648;
+			public const int CreateMealPlanRecipeListView = 2131099648;
 			
-			// aapt resource value: 0x7f060008
-			public const int scrollViewRecipeDescription = 2131099656;
+			// aapt resource value: 0x7f06002a
+			public const int DateAmountText = 2131099690;
 			
-			// aapt resource value: 0x7f06002c
-			public const int scrollViewViewRecipe = 2131099692;
+			// aapt resource value: 0x7f060026
+			public const int ListMealPlan = 2131099686;
+			
+			// aapt resource value: 0x7f060003
+			public const int MealDayTextView = 2131099651;
+			
+			// aapt resource value: 0x7f060004
+			public const int PickedRecipesListView = 2131099652;
+			
+			// aapt resource value: 0x7f06003c
+			public const int RecipesListMealDay = 2131099708;
+			
+			// aapt resource value: 0x7f060002
+			public const int StartDateText = 2131099650;
 			
 			// aapt resource value: 0x7f060021
-			public const int spinnerDevices = 2131099681;
+			public const int absoluteLayoutMain = 2131099681;
 			
-			// aapt resource value: 0x7f060006
-			public const int spinnerUnits_CreateRecipe = 2131099654;
+			// aapt resource value: 0x7f06000d
+			public const int btnAddIngredient_CreateRecipe = 2131099661;
 			
-			// aapt resource value: 0x7f06000e
-			public const int switchVisible = 2131099662;
+			// aapt resource value: 0x7f060028
+			public const int btnAddMealList = 2131099688;
 			
-			// aapt resource value: 0x7f060032
-			public const int textEditRecipeDescription = 2131099698;
+			// aapt resource value: 0x7f060034
+			public const int btnAddMore = 2131099700;
 			
-			// aapt resource value: 0x7f06002e
-			public const int textRecipeName = 2131099694;
+			// aapt resource value: 0x7f06003a
+			public const int btnAddShopIngredient = 2131099706;
 			
-			// aapt resource value: 0x7f06000b
-			public const int textView1 = 2131099659;
+			// aapt resource value: 0x7f060035
+			public const int btnClearItems = 2131099701;
 			
-			// aapt resource value: 0x7f06002f
-			public const int textViewIngredientList_ViewRecipe = 2131099695;
+			// aapt resource value: 0x7f060029
+			public const int btnClearMealList = 2131099689;
 			
-			// aapt resource value: 0x7f060031
-			public const int textViewRecipeDescription_ViewRecipe = 2131099697;
+			// aapt resource value: 0x7f06003b
+			public const int btnClearShopList = 2131099707;
+			
+			// aapt resource value: 0x7f060030
+			public const int btnConnect = 2131099696;
+			
+			// aapt resource value: 0x7f060010
+			public const int btnCreateRecipe_CreateRecipe = 2131099664;
+			
+			// aapt resource value: 0x7f060047
+			public const int btnEdit = 2131099719;
+			
+			// aapt resource value: 0x7f06001b
+			public const int btnIngredientAdapterDelete = 2131099675;
+			
+			// aapt resource value: 0x7f060023
+			public const int btnMealPlanNav = 2131099683;
 			
 			// aapt resource value: 0x7f06002d
-			public const int textViewRecipeName_ViewRecipe = 2131099693;
+			public const int btnNewRecipe = 2131099693;
+			
+			// aapt resource value: 0x7f060022
+			public const int btnRecipeNav = 2131099682;
+			
+			// aapt resource value: 0x7f060025
+			public const int btnSettingsNav = 2131099685;
+			
+			// aapt resource value: 0x7f060048
+			public const int btnShare = 2131099720;
+			
+			// aapt resource value: 0x7f060036
+			public const int btnShareItems = 2131099702;
+			
+			// aapt resource value: 0x7f060024
+			public const int btnShopListNav = 2131099684;
+			
+			// aapt resource value: 0x7f060014
+			public const int btnUpdate = 2131099668;
+			
+			// aapt resource value: 0x7f060001
+			public const int dayAmountTextView = 2131099649;
+			
+			// aapt resource value: 0x7f06000b
+			public const int editTextIngredientAmount_CreateRecipe = 2131099659;
+			
+			// aapt resource value: 0x7f060009
+			public const int editTextIngredientName_CreateRecipe = 2131099657;
+			
+			// aapt resource value: 0x7f06000f
+			public const int editTextRecipeDescription_CreateRecipe = 2131099663;
+			
+			// aapt resource value: 0x7f060007
+			public const int editTextRecipeName_CreateRecipe = 2131099655;
+			
+			// aapt resource value: 0x7f060038
+			public const int editText_AddToShoppingList = 2131099704;
+			
+			// aapt resource value: 0x7f060019
+			public const int ingAdapterTextViewIngAmount = 2131099673;
+			
+			// aapt resource value: 0x7f06001a
+			public const int ingAdapterTextViewIngName = 2131099674;
+			
+			// aapt resource value: 0x7f06002e
+			public const int linearLayout1 = 2131099694;
+			
+			// aapt resource value: 0x7f06002f
+			public const int linearLayout2 = 2131099695;
+			
+			// aapt resource value: 0x7f060032
+			public const int linearLayout3 = 2131099698;
+			
+			// aapt resource value: 0x7f06000a
+			public const int linearLayoutIngredient = 2131099658;
+			
+			// aapt resource value: 0x7f060027
+			public const int linearLayoutMealPlan = 2131099687;
+			
+			// aapt resource value: 0x7f060039
+			public const int linearLayoutShopList = 2131099705;
+			
+			// aapt resource value: 0x7f060046
+			public const int linearLayoutViewRecipe = 2131099718;
+			
+			// aapt resource value: 0x7f060008
+			public const int listIngredients_CreateRecipe = 2131099656;
+			
+			// aapt resource value: 0x7f060012
+			public const int listViewDeviceList = 2131099666;
+			
+			// aapt resource value: 0x7f060043
+			public const int listViewIngredients = 2131099715;
+			
+			// aapt resource value: 0x7f06002c
+			public const int listViewRecipes = 2131099692;
+			
+			// aapt resource value: 0x7f060033
+			public const int listViewShareItems = 2131099699;
+			
+			// aapt resource value: 0x7f060037
+			public const int listViewShoppingList = 2131099703;
+			
+			// aapt resource value: 0x7f06001c
+			public const int mealDayAdapterTextViewMealDayDate = 2131099676;
+			
+			// aapt resource value: 0x7f06003d
+			public const int mealDayListView = 2131099709;
+			
+			// aapt resource value: 0x7f06003f
+			public const int mealPlanShareBtn = 2131099711;
+			
+			// aapt resource value: 0x7f06003e
+			public const int mealPlanUpdateBtn = 2131099710;
+			
+			// aapt resource value: 0x7f06002b
+			public const int nameText = 2131099691;
+			
+			// aapt resource value: 0x7f060015
+			public const int progressCircleDiscovering = 2131099669;
+			
+			// aapt resource value: 0x7f06001e
+			public const int recAdapterTextViewRecDate = 2131099678;
+			
+			// aapt resource value: 0x7f06001d
+			public const int recAdapterTextViewRecTitle = 2131099677;
+			
+			// aapt resource value: 0x7f060013
+			public const int relativeLayout1 = 2131099667;
+			
+			// aapt resource value: 0x7f060006
+			public const int scrollViewCreateRecipe = 2131099654;
+			
+			// aapt resource value: 0x7f06000e
+			public const int scrollViewRecipeDescription = 2131099662;
+			
+			// aapt resource value: 0x7f060040
+			public const int scrollViewViewRecipe = 2131099712;
+			
+			// aapt resource value: 0x7f06000c
+			public const int spinnerUnits_CreateRecipe = 2131099660;
+			
+			// aapt resource value: 0x7f060016
+			public const int switchVisible = 2131099670;
+			
+			// aapt resource value: 0x7f060045
+			public const int textEditRecipeDescription = 2131099717;
+			
+			// aapt resource value: 0x7f060041
+			public const int textRecipeName = 2131099713;
+			
+			// aapt resource value: 0x7f060011
+			public const int textView1 = 2131099665;
+			
+			// aapt resource value: 0x7f060031
+			public const int textViewConnectedDevice = 2131099697;
+			
+			// aapt resource value: 0x7f060018
+			public const int textViewDeviceAddress = 2131099672;
+			
+			// aapt resource value: 0x7f060017
+			public const int textViewDeviceName = 2131099671;
+			
+			// aapt resource value: 0x7f060042
+			public const int textViewIngredientList_ViewRecipe = 2131099714;
+			
+			// aapt resource value: 0x7f060044
+			public const int textViewRecipeDescription_ViewRecipe = 2131099716;
+			
+			// aapt resource value: 0x7f06001f
+			public const int textViewShareName = 2131099679;
+			
+			// aapt resource value: 0x7f060020
+			public const int textViewShareType = 2131099680;
 			
 			static Id()
 			{
@@ -236,34 +293,61 @@ namespace Recipizer
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int CreateRecipe = 2130837504;
+			public const int CreateMealPlan = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int DeviceList = 2130837505;
+			public const int CreateRecipe = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int item_ingredient = 2130837506;
+			public const int DeviceList = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int item_ingredient_button = 2130837507;
+			public const int item_device = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int Main = 2130837508;
+			public const int item_ingredient = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int MealPlan = 2130837509;
+			public const int item_ingredient_button = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int Recipes = 2130837510;
+			public const int item_MealDayGroup = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int ShareBluetooth = 2130837511;
+			public const int item_RecipeChild = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int ShoppingList = 2130837512;
+			public const int item_share = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int ViewRecipe = 2130837513;
+			public const int Main = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int MealPlan = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int MealPlanDateAmount = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int MealPlanName = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int Recipes = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int ShareBluetooth = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int ShoppingList = 2130837519;
+			
+			// aapt resource value: 0x7f020010
+			public const int ViewMealDay = 2130837520;
+			
+			// aapt resource value: 0x7f020011
+			public const int ViewMealPlan = 2130837521;
+			
+			// aapt resource value: 0x7f020012
+			public const int ViewRecipe = 2130837522;
 			
 			static Layout()
 			{
@@ -290,8 +374,8 @@ namespace Recipizer
 			// aapt resource value: 0x7f03000b
 			public const int btn_clear = 2130903051;
 			
-			// aapt resource value: 0x7f03000c
-			public const int btn_connect = 2130903052;
+			// aapt resource value: 0x7f03000d
+			public const int btn_create = 2130903053;
 			
 			// aapt resource value: 0x7f030006
 			public const int btn_edit = 2130903046;
@@ -301,6 +385,9 @@ namespace Recipizer
 			
 			// aapt resource value: 0x7f030005
 			public const int btn_newRecipe_recipes = 2130903045;
+			
+			// aapt resource value: 0x7f03000c
+			public const int btn_newconnect = 2130903052;
 			
 			// aapt resource value: 0x7f030001
 			public const int btn_recipeNav_main = 2130903041;

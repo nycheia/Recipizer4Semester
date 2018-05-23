@@ -96,5 +96,14 @@ namespace Recipizer.Activities
             shoppingListAdapter.NotifyDataSetChanged();
         }
 
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

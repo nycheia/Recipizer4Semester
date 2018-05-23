@@ -13,6 +13,7 @@
   <string name="btn_addmore">Add more</string>
   <string name="btn_clear">Clear</string>
   <string name="btn_newconnect">New connection</string>
+  <string name="btn_create">Create</string>
 
   <string-array name ="unit_array">
     <item>g</item>
@@ -23,5 +24,6 @@
     <item>tsps</item>
     <item>tbsp</item>
     <item>cup</item>
+    <item>pcs</item>
   </string-array>
 </resources>

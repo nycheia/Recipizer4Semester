@@ -24,6 +24,7 @@ namespace Recipizer.Presenters
             {
                 case "recipe":
                     Recipe r = Constants.Conn.Get<Recipe>(id);
+                    r.SetIngredients();
 
                     if (!Bluetooth.ShareList.Contains(r))
                         Bluetooth.ShareList.Add(r);

@@ -69,7 +69,7 @@ namespace Recipizer.Presenters
         public void Recipe_onClick(string text)
         {
             Intent intent = new Intent();
-            intent.PutExtra("RecipeID", recipes[text].id);
+            intent.PutExtra(Constants.RECIPE_ID, recipes[text].id);
             view.Navigate(1, intent);
         }
     }

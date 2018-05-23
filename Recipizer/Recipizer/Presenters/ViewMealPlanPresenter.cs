@@ -58,7 +58,7 @@ namespace Recipizer.Presenters
             throw new NotImplementedException();
         }
 
-        public void populateMealDaysFromStorage(int mealPlanId)
+        public void PopulateMealDaysFromStorage(int mealPlanId)
         {
             MealPlan mp = Constants.Conn.Get<MealPlan>(mealPlanId);
             var query = (from md in Constants.Conn.Table<MealDay>() where md.mealPlanId == mealPlanId select md).ToList();

@@ -66,5 +66,20 @@ namespace Recipizer.Activities
             recipeAdapter.AddAll(presenter.recipes.Keys);
             recipeAdapter.NotifyDataSetChanged();
         }
+
+        public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -53,6 +53,12 @@ namespace Recipizer.Activities
             //presenter.onCreate();
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            presenter.onResume();
+        }
+
         public void FinishView(Result result, Intent intent)
         {
             throw new NotImplementedException();
@@ -80,8 +86,24 @@ namespace Recipizer.Activities
 
         public void UpdateView()
         {
-           // mealPlanAdapter.NotifyDataSetChanged();
+            mealPlanAdapter.Clear();
+            mealPlanAdapter.AddAll(presenter.mealPlanList);
+            mealPlanAdapter.NotifyDataSetChanged();
         }
 
+        public void SetupView()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeDialog(int code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

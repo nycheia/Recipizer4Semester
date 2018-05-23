@@ -28,7 +28,7 @@ namespace Recipizer.Presenters
             this.view = _view;
             recipeDictionary = new Dictionary<string, Recipe>();
             pickedRecipeDictionary = new Dictionary<string, Recipe>();
-            loadRecipesFromStorage();
+            LoadRecipesFromStorage();
         }
 
         public void onActivityResult(int requestCode, Result resultCode, Intent data)
@@ -61,7 +61,7 @@ namespace Recipizer.Presenters
             throw new NotImplementedException();
         }
 
-        public void loadRecipesFromStorage()
+        public void LoadRecipesFromStorage()
         {
             foreach (Recipe item in Constants.Conn.Table<Recipe>().ToList())
             {
@@ -79,7 +79,15 @@ namespace Recipizer.Presenters
         public void ChooseRecipe_OnList(string key)
         {
             //TODO lav exception så man ikke vælger 2 af samme recipe (giver exception haHAA)
-            pickedRecipeDictionary.Add(key, recipeDictionary.GetValueOrDefault(key));
+            try
+            {
+                pickedRecipeDictionary.Add(key, recipeDictionary.GetValueOrDefault(key));
+            }
+            catch (System.ArgumentException)
+            {
+                view.MakeToast("Recipe is already added to day", ToastLength.Short);
+            }
+
             view.UpdateView();
         }
 
@@ -115,7 +123,8 @@ namespace Recipizer.Presenters
                             mdr.mealDayId = item.id;
                             Constants.Conn.Insert(mdr);
                         }
-                    }   
+                    }
+                    view.FinishView(Result.Ok, new Intent());
                 }
             }
             view.UpdateView();

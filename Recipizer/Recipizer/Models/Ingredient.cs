@@ -24,7 +24,7 @@ namespace Recipizer.Models
         public string amount { get; set; }
         [NotNull]
         public Unit measuringUnit { get; set; }
-        public enum Unit { non, g, kg, l, dl, ml, tsps, tbsp, cup };
+        public enum Unit { non, g, kg, l, dl, ml, tsps, tbsp, cup, pcs};
         public int RecipeId { get; set; }
         public Ingredient()
         {
@@ -73,6 +73,9 @@ namespace Recipizer.Models
 
                 case "cup":
                     res = Unit.cup;
+                    break;
+                case "pcs":
+                    res = Unit.pcs;
                     break;
 
                 default:
